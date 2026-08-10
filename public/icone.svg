@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="roxo" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#7C3AED"/>
+      <stop offset="1" stop-color="#5B21B6"/>
+    </linearGradient>
+    <!-- as duas circunferências pretas viram os recortes laterais do cupom -->
+    <mask id="recorte">
+      <rect width="512" height="512" fill="#000"/>
+      <rect x="118" y="168" width="276" height="176" rx="30" fill="#fff"/>
+      <circle cx="118" cy="256" r="28" fill="#000"/>
+      <circle cx="394" cy="256" r="28" fill="#000"/>
+    </mask>
+  </defs>
+
+  <rect width="512" height="512" rx="112" fill="url(#roxo)"/>
+  <rect x="118" y="168" width="276" height="176" rx="30" fill="#fff" mask="url(#recorte)"/>
+
+  <!-- % em roxo, o traço mais grosso que o normal para aguentar 32px -->
+  <g stroke="#5B21B6" stroke-width="26" fill="none" stroke-linecap="round">
+    <line x1="298" y1="212" x2="214" y2="300"/>
+  </g>
+  <circle cx="214" cy="216" r="20" fill="none" stroke="#5B21B6" stroke-width="24"/>
+  <circle cx="298" cy="296" r="20" fill="none" stroke="#5B21B6" stroke-width="24"/>
+
+  <!-- amarelo ipê: o acento da marca -->
+  <circle cx="394" cy="132" r="34" fill="#F5B301"/>
+</svg>

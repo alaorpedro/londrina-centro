@@ -1,0 +1,109 @@
+@import 'tailwindcss';
+
+/*
+  Identidade provisória. Londrina é a cidade dos ipês, então a marca fica no
+  roxo do ipê-roxo com o amarelo do ipê-amarelo como acento — cor de cidade, não
+  de app genérico de cupom, e distante o suficiente do azul da ONMID para o
+  clube ter cara própria.
+
+  Fica marcado como provisório: a identidade definitiva é pendência do escopo
+  (seção 14) e pode vir da ACIL. Trocar as duas escalas abaixo troca o app todo.
+*/
+
+@theme {
+  --color-roxo-50: #f5f3ff;
+  --color-roxo-100: #ede9fe;
+  --color-roxo-200: #ddd6fe;
+  --color-roxo-300: #c4b5fd;
+  --color-roxo-400: #a78bfa;
+  --color-roxo-500: #8b5cf6;
+  --color-roxo-600: #7c3aed;
+  --color-roxo-700: #6d28d9;
+  --color-roxo-800: #5b21b6;
+  --color-roxo-900: #4c1d95;
+
+  --color-ipe-50: #fffbeb;
+  --color-ipe-100: #fef3c7;
+  --color-ipe-300: #fcd34d;
+  --color-ipe-400: #f5b301;
+  --color-ipe-500: #e5a100;
+  --color-ipe-700: #b45309;
+
+  --font-sans:
+    ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
+    sans-serif;
+}
+
+@layer base {
+  html {
+    -webkit-text-size-adjust: 100%;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    @apply bg-slate-50 text-slate-900 font-sans antialiased;
+    /* respeita o notch e a barra de gestos quando instalado na tela inicial */
+    padding-top: env(safe-area-inset-top);
+  }
+
+  /* o app é lista vertical: rolagem lateral aqui é sempre bug */
+  body {
+    overflow-x: hidden;
+  }
+
+  button {
+    @apply cursor-pointer;
+  }
+
+  /* número de cupom e valores: tabular para não dançar durante a contagem */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  .area-segura-baixo {
+    padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem);
+  }
+
+  .rolagem-sem-barra {
+    scrollbar-width: none;
+  }
+  .rolagem-sem-barra::-webkit-scrollbar {
+    display: none;
+  }
+
+  @keyframes surgir {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+  .surgir {
+    animation: surgir 0.28s ease-out both;
+  }
+
+  @keyframes pulsar-suave {
+    0%,
+    100% {
+      opacity: 1;
+    }
+    50% {
+      opacity: 0.55;
+    }
+  }
+  .pulsar-suave {
+    animation: pulsar-suave 2s ease-in-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .surgir,
+    .pulsar-suave {
+      animation: none;
+    }
+  }
+}
