@@ -1,7 +1,9 @@
 import { useEffect, useMemo, useState } from 'react'
 import { api, ErroApi } from '../api'
 import type { Loja } from '../tipos'
-import { Aviso, BarraTopo, Carregando, Etiqueta } from '../componentes/Ui'
+import { Aviso, BarraTopo, Etiqueta } from '../componentes/Ui'
+import { Esqueleto, Revelar } from '../componentes/Movimento'
+import { CartaoLoja } from './CartaoOferta'
 import { Local, SetaDireita } from '../componentes/Icones'
 import { irPara } from '../rotas'
 
@@ -57,7 +59,19 @@ export function Mapa() {
     }))
   }, [lojas])
 
-  if (carregando) return <Carregando texto="Carregando as lojas do centro…" />
+  if (carregando) {
+    return (
+      <div>
+        <BarraTopo titulo="Lojas no centro" />
+        <div className="space-y-3 p-4">
+          <Esqueleto className="h-72 w-full rounded-3xl" />
+          {[0, 1, 2, 3].map((i) => (
+            <Esqueleto key={i} className="h-[74px] w-full rounded-2xl" />
+          ))}
+        </div>
+      </div>
+    )
+  }
 
   return (
     <div className="pb-4">
@@ -69,7 +83,7 @@ export function Mapa() {
         </div>
       )}
 
-      <div className="relative mx-4 mt-4 overflow-hidden rounded-2xl border border-slate-200 bg-slate-100">
+      <div className="relative mx-4 mt-4 overflow-hidden rounded-3xl bg-gradient-to-br from-slate-100 to-slate-200 shadow-suave">
         {/* grade discreta, só para dar noção de quadra */}
         <svg viewBox="0 0 100 100" className="block h-72 w-full" preserveAspectRatio="none">
           <defs>
@@ -91,15 +105,15 @@ export function Mapa() {
               style={{ left: `${x}%`, top: `${y}%`, zIndex: selecionada ? 20 : 10 }}
             >
               <span
-                className={`flex items-center justify-center rounded-full border-2 border-white shadow-md transition-all ${
-                  selecionada ? 'h-8 w-8' : 'h-6 w-6'
+                className={`flex items-center justify-center rounded-full ring-[3px] ring-white shadow-media transition-all duration-300 ${
+                  selecionada ? 'h-9 w-9 scale-110' : 'h-7 w-7'
                 }`}
                 style={{ backgroundColor: loja.cor }}
               >
                 <Local className={selecionada ? 'h-4 w-4 text-white' : 'h-3.5 w-3.5 text-white'} />
               </span>
               {selecionada && (
-                <span className="surgir absolute bottom-full left-1/2 mb-1 w-max max-w-[9rem] -translate-x-1/2 rounded-lg bg-slate-900 px-2 py-1 text-[11px] font-semibold text-white">
+                <span className="animate-escala absolute bottom-full left-1/2 mb-1.5 w-max max-w-[9rem] -translate-x-1/2 rounded-xl bg-slate-900 px-2.5 py-1.5 text-[11px] font-bold text-white shadow-alta">
                   {loja.nome}
                 </span>
               )}
@@ -112,37 +126,35 @@ export function Mapa() {
         </p>
       </div>
 
-      <div className="mt-5 px-4">
-        <h2 className="mb-2.5 font-bold text-slate-900">
+      <div className="mt-6 px-4">
+        <h2 className="mb-3 px-1 text-lg font-extrabold tracking-tight text-slate-900">
           {lojas.length} lojas participando
         </h2>
-        <div className="space-y-2">
-          {lojas.map((l) => (
-            <button
-              key={l.id}
-              onClick={() => irPara(`/loja/${l.id}`)}
-              onMouseEnter={() => setAtiva(l.id)}
-              className="flex w-full items-center gap-3 rounded-2xl border border-slate-200 bg-white p-3.5 text-left transition hover:border-roxo-300"
-            >
-              <span
-                className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-xs font-bold text-white"
-                style={{ backgroundColor: l.cor }}
-              >
-                {l.nome.slice(0, 2).toUpperCase()}
-              </span>
-              <span className="min-w-0 flex-1">
-                <span className="block truncate font-semibold text-slate-900">{l.nome}</span>
-                <span className="block truncate text-sm text-slate-500">{l.endereco}</span>
-              </span>
-              {(l.ofertas_ativas ?? 0) > 0 ? (
-                <Etiqueta cor="roxo">
-                  {l.ofertas_ativas} {l.ofertas_ativas === 1 ? 'oferta' : 'ofertas'}
-                </Etiqueta>
-              ) : (
-                <Etiqueta cor="cinza">sem oferta</Etiqueta>
-              )}
-              <SetaDireita className="h-4 w-4 shrink-0 text-slate-300" />
-            </button>
+        <div className="space-y-2.5">
+          {lojas.map((l, i) => (
+            <Revelar key={l.id} atraso={i * 45}>
+              <div onMouseEnter={() => setAtiva(l.id)}>
+                <CartaoLoja
+                  nome={l.nome}
+                  categoria={l.categoria}
+                  cor={l.cor}
+                  endereco={l.endereco}
+                  aoAbrir={() => irPara(`/loja/${l.id}`)}
+                  detalhe={
+                    <span className="flex shrink-0 items-center gap-1.5">
+                      {(l.ofertas_ativas ?? 0) > 0 ? (
+                        <Etiqueta cor="roxo">
+                          {l.ofertas_ativas} {l.ofertas_ativas === 1 ? 'oferta' : 'ofertas'}
+                        </Etiqueta>
+                      ) : (
+                        <Etiqueta cor="cinza">sem oferta</Etiqueta>
+                      )}
+                      <SetaDireita className="h-4 w-4 text-slate-300" />
+                    </span>
+                  }
+                />
+              </div>
+            </Revelar>
           ))}
         </div>
       </div>

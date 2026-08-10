@@ -1,53 +1,174 @@
 @import 'tailwindcss';
 
 /*
+  ─────────────────────────────────────────────────────────────
+  SISTEMA DE DESIGN — Londrina Centro
+  ─────────────────────────────────────────────────────────────
+
   Identidade provisória. Londrina é a cidade dos ipês, então a marca fica no
   roxo do ipê-roxo com o amarelo do ipê-amarelo como acento — cor de cidade, não
-  de app genérico de cupom, e distante o suficiente do azul da ONMID para o
-  clube ter cara própria.
+  de app genérico de cupom, e distante do azul da ONMID para o clube ter cara
+  própria. A identidade definitiva é pendência do escopo (seção 14).
 
-  Fica marcado como provisório: a identidade definitiva é pendência do escopo
-  (seção 14) e pode vir da ACIL. Trocar as duas escalas abaixo troca o app todo.
+  Quatro decisões que valem para o app inteiro:
+
+  1. PROFUNDIDADE POR SOMBRA, NÃO POR BORDA. Cartão é objeto que flutua sobre a
+     superfície. Borda cinza em tudo deixa a tela com cara de planilha.
+  2. MOVIMENTO SEMPRE DE SAÍDA RÁPIDA. A curva padrão é expo-out: começa veloz e
+     assenta. É o que faz a interface parecer que responde, e não que processa.
+  3. NADA APARECE DE UMA VEZ. Lista entra escalonada, de baixo para cima. O olho
+     acompanha a ordem em vez de receber um bloco pronto.
+  4. TUDO RESPEITA `prefers-reduced-motion` — o bloco no fim do arquivo desliga
+     as animações inteiras, não só as suaviza.
 */
 
 @theme {
-  --color-roxo-50: #f5f3ff;
-  --color-roxo-100: #ede9fe;
-  --color-roxo-200: #ddd6fe;
-  --color-roxo-300: #c4b5fd;
-  --color-roxo-400: #a78bfa;
-  --color-roxo-500: #8b5cf6;
+  /* ---------- cor ---------- */
+  --color-roxo-50: #f6f4ff;
+  --color-roxo-100: #ece7ff;
+  --color-roxo-200: #dcd2ff;
+  --color-roxo-300: #c2aeff;
+  --color-roxo-400: #a582fc;
+  --color-roxo-500: #8b57f6;
   --color-roxo-600: #7c3aed;
   --color-roxo-700: #6d28d9;
   --color-roxo-800: #5b21b6;
-  --color-roxo-900: #4c1d95;
+  --color-roxo-900: #4a1a94;
+  --color-roxo-950: #2e0f60;
 
   --color-ipe-50: #fffbeb;
   --color-ipe-100: #fef3c7;
+  --color-ipe-200: #fde68a;
   --color-ipe-300: #fcd34d;
   --color-ipe-400: #f5b301;
   --color-ipe-500: #e5a100;
-  --color-ipe-700: #b45309;
+  --color-ipe-600: #c07c02;
+  --color-ipe-700: #9a5f08;
+
+  /* ---------- forma ---------- */
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+  --radius-2xl: 1.5rem;
+  --radius-3xl: 2rem;
+
+  /* ---------- elevação ----------
+     Sombra colorida, não preta: um roxo bem dessaturado no lugar do cinza
+     deixa o cartão pertencendo à paleta em vez de parecer sujo. */
+  --shadow-plano: 0 1px 2px 0 rgb(74 26 148 / 0.04);
+  --shadow-suave: 0 1px 3px 0 rgb(74 26 148 / 0.06), 0 1px 2px -1px rgb(74 26 148 / 0.04);
+  --shadow-media: 0 4px 12px -2px rgb(74 26 148 / 0.08), 0 2px 4px -2px rgb(74 26 148 / 0.05);
+  --shadow-alta: 0 12px 28px -6px rgb(74 26 148 / 0.14), 0 4px 10px -4px rgb(74 26 148 / 0.07);
+  --shadow-flutuante: 0 24px 48px -12px rgb(74 26 148 / 0.22), 0 8px 16px -8px rgb(74 26 148 / 0.1);
+
+  /* ---------- movimento ---------- */
+  --ease-saida: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-suave: cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-elastico: cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  --animate-surgir: surgir 0.5s var(--ease-saida) both;
+  --animate-entrar: entrar 0.4s var(--ease-saida) both;
+  --animate-escala: escala 0.35s var(--ease-elastico) both;
+  --animate-brilho: brilho 1.6s ease-in-out infinite;
+  --animate-pulsar: pulsar 2.2s ease-in-out infinite;
+  --animate-flutuar: flutuar 7s ease-in-out infinite;
+  --animate-girar-lento: girar-lento 22s linear infinite;
 
   --font-sans:
     ui-sans-serif, system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial,
     sans-serif;
 }
 
+/* ---------- quadros de animação ---------- */
+
+@keyframes surgir {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 14px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes entrar {
+  from {
+    opacity: 0;
+    transform: translate3d(0, 8px, 0);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes escala {
+  from {
+    opacity: 0;
+    transform: scale(0.9);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes brilho {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes pulsar {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* deriva lenta das manchas das capas — dá vida sem chamar atenção */
+@keyframes flutuar {
+  0%,
+  100% {
+    transform: translate3d(0, 0, 0) scale(1);
+  }
+  50% {
+    transform: translate3d(0, -6px, 0) scale(1.04);
+  }
+}
+
+@keyframes girar-lento {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes anel {
+  from {
+    stroke-dashoffset: var(--anel-total);
+  }
+}
+
 @layer base {
   html {
     -webkit-text-size-adjust: 100%;
     -webkit-tap-highlight-color: transparent;
+    scroll-behavior: smooth;
   }
 
   body {
     @apply bg-slate-50 text-slate-900 font-sans antialiased;
-    /* respeita o notch e a barra de gestos quando instalado na tela inicial */
     padding-top: env(safe-area-inset-top);
-  }
-
-  /* o app é lista vertical: rolagem lateral aqui é sempre bug */
-  body {
+    /* o app é lista vertical: rolagem lateral aqui é sempre bug */
     overflow-x: hidden;
   }
 
@@ -55,13 +176,26 @@
     @apply cursor-pointer;
   }
 
-  /* número de cupom e valores: tabular para não dançar durante a contagem */
-  .tabular {
-    font-variant-numeric: tabular-nums;
+  ::selection {
+    background: var(--color-roxo-200);
+    color: var(--color-roxo-950);
+  }
+
+  /* foco visível só para quem navega por teclado */
+  :focus-visible {
+    outline: 2px solid var(--color-roxo-600);
+    outline-offset: 2px;
   }
 }
 
 @layer utilities {
+  /* marca de eixo e coluna de tabela: alinhamento vertical importa.
+     Figura grande NÃO usa isto — tabular dá a todo dígito a largura do zero e
+     faz um número em corpo grande parecer frouxo. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+  }
+
   .area-segura-baixo {
     padding-bottom: calc(env(safe-area-inset-bottom) + 0.5rem);
   }
@@ -73,37 +207,97 @@
     display: none;
   }
 
-  @keyframes surgir {
-    from {
-      opacity: 0;
-      transform: translateY(8px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
-    }
+  /* carrossel que para em cada cartão */
+  .trilho {
+    scroll-snap-type: x mandatory;
   }
-  .surgir {
-    animation: surgir 0.28s ease-out both;
+  .trilho > * {
+    scroll-snap-align: start;
   }
 
-  @keyframes pulsar-suave {
-    0%,
-    100% {
-      opacity: 1;
-    }
-    50% {
-      opacity: 0.55;
-    }
+  /* resposta ao toque: o elemento cede um pouco sob o dedo */
+  .pressionavel {
+    transition:
+      transform 0.18s var(--ease-saida),
+      box-shadow 0.18s var(--ease-saida);
   }
-  .pulsar-suave {
-    animation: pulsar-suave 2s ease-in-out infinite;
+  .pressionavel:active {
+    transform: scale(0.975);
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    .surgir,
-    .pulsar-suave {
-      animation: none;
+  .elevavel {
+    transition:
+      transform 0.25s var(--ease-saida),
+      box-shadow 0.25s var(--ease-saida);
+  }
+  @media (hover: hover) {
+    .elevavel:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-alta);
     }
+  }
+
+  /* esqueleto de carregamento */
+  .esqueleto {
+    background: linear-gradient(
+      90deg,
+      var(--color-slate-200) 25%,
+      var(--color-slate-100) 37%,
+      var(--color-slate-200) 63%
+    );
+    background-size: 200% 100%;
+    animation: var(--animate-brilho);
+  }
+
+  /* vidro fosco das barras fixas */
+  .vidro {
+    background: color-mix(in srgb, white 82%, transparent);
+    backdrop-filter: saturate(180%) blur(12px);
+    -webkit-backdrop-filter: saturate(180%) blur(12px);
+  }
+
+  .vidro-escuro {
+    background: color-mix(in srgb, var(--color-roxo-950) 55%, transparent);
+    backdrop-filter: saturate(160%) blur(14px);
+    -webkit-backdrop-filter: saturate(160%) blur(14px);
+  }
+
+  /* texto sobre imagem: sombra em vez de caixa, para não cortar a capa */
+  .texto-sobre-capa {
+    text-shadow: 0 1px 12px rgb(46 15 96 / 0.45);
+  }
+
+  /*
+    Escalonamento de entrada. O filho recebe `--i` (índice) e o atraso sai daí,
+    então uma lista inteira anima em cascata sem uma linha de JS por item.
+    Teto de 10 passos: em lista longa o último item não pode esperar dois
+    segundos para existir.
+  */
+  .cascata > * {
+    animation: var(--animate-entrar);
+    animation-delay: calc(min(var(--i, 0), 10) * 45ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+
+  .cascata > * {
+    animation-delay: 0ms !important;
+  }
+
+  .pressionavel:active,
+  .elevavel:hover {
+    transform: none;
   }
 }

@@ -135,12 +135,23 @@ export function Validar({ aoValidar }: { aoValidar: () => void }) {
 
   if (estado.fase === 'ok') {
     return (
-      <div className="flex min-h-[70vh] flex-col items-center justify-center bg-emerald-600 px-6 py-10 text-center text-white">
-        <div className="surgir w-full max-w-sm">
-          <CheckCirculo className="mx-auto h-20 w-20" />
-          <h1 className="mt-4 text-3xl font-extrabold">Cupom válido</h1>
+      <div className="relative flex min-h-[70vh] flex-col items-center justify-center overflow-hidden bg-emerald-600 px-6 py-10 text-center text-white">
+        <span
+          aria-hidden="true"
+          className="animate-flutuar pointer-events-none absolute -top-24 -left-16 h-72 w-72 rounded-full bg-emerald-400 opacity-40 blur-3xl"
+        />
+        <div className="relative w-full max-w-sm">
+          <div className="animate-escala">
+            <CheckCirculo className="mx-auto h-20 w-20" />
+          </div>
+          <h1 className="animate-surgir mt-4 text-3xl font-extrabold tracking-tight">
+            Cupom válido
+          </h1>
 
-          <div className="mt-6 rounded-2xl bg-white px-5 py-5 text-slate-900">
+          <div
+            className="animate-surgir mt-6 rounded-3xl bg-white px-5 py-5 text-slate-900 shadow-flutuante"
+            style={{ animationDelay: '90ms' }}
+          >
             <p className="text-sm text-slate-500">Cliente</p>
             <p className="text-2xl font-bold">{estado.dados.cliente}</p>
 
@@ -202,9 +213,9 @@ export function Validar({ aoValidar }: { aoValidar: () => void }) {
   if (estado.fase === 'erro') {
     return (
       <div className="flex min-h-[70vh] flex-col items-center justify-center bg-red-600 px-6 text-center text-white">
-        <div className="surgir max-w-sm">
+        <div className="animate-escala max-w-sm">
           <Alerta className="mx-auto h-16 w-16" />
-          <h1 className="mt-4 text-2xl font-extrabold">Não deu certo</h1>
+          <h1 className="mt-4 text-2xl font-extrabold tracking-tight">Não deu certo</h1>
           <p className="mt-2 text-lg leading-relaxed text-red-50">{estado.mensagem}</p>
           <Botao variante="sobreCor" className="mt-8" grande largo onClick={reiniciar}>
             Tentar de novo
@@ -238,9 +249,9 @@ export function Validar({ aoValidar }: { aoValidar: () => void }) {
               maxLength={CASAS}
               aria-label={`Dígito ${i + 1}`}
               disabled={estado.fase === 'validando'}
-              className="tabular h-16 w-12 rounded-xl border-2 border-slate-300 text-center text-2xl
-                font-bold text-slate-900 outline-none transition
-                focus:border-roxo-600 focus:ring-4 focus:ring-roxo-100
+              className="tabular h-16 w-12 rounded-2xl bg-white text-center text-2xl font-extrabold
+                text-slate-900 shadow-media outline-none transition
+                focus:shadow-alta focus:ring-2 focus:ring-roxo-400
                 disabled:bg-slate-100 sm:h-20 sm:w-14 sm:text-3xl"
             />
           ))}

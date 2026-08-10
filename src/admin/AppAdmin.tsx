@@ -47,17 +47,19 @@ export function AppAdmin({ config }: { config: Config | null }) {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <header className="border-b border-slate-200 bg-white print:hidden">
+      <header className="vidro sticky top-0 z-40 shadow-suave print:hidden">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
-          <span className="flex h-9 w-9 items-center justify-center rounded-xl bg-roxo-800 text-white">
+          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-roxo-600 to-roxo-800 text-white shadow-media">
             <Grafico className="h-5 w-5" />
           </span>
           <div className="min-w-0 flex-1">
-            <p className="font-bold text-slate-900">Administração</p>
-            <p className="truncate text-xs text-slate-500">{config?.nome_app ?? 'Londrina Centro'}</p>
+            <p className="font-extrabold tracking-tight text-slate-900">Administração</p>
+            <p className="truncate text-xs text-slate-500">
+              {config?.nome_app ?? 'Londrina Centro'}
+            </p>
           </div>
           {config?.demo && (
-            <span className="hidden rounded-full bg-amber-100 px-2.5 py-1 text-xs font-semibold text-amber-800 sm:inline">
+            <span className="hidden rounded-full bg-ipe-100 px-2.5 py-1 text-xs font-bold text-ipe-700 sm:inline">
               piloto · pagamento em modo demonstração
             </span>
           )}
@@ -67,14 +69,14 @@ export function AppAdmin({ config }: { config: Config | null }) {
               await conferir()
               irPara('/admin')
             }}
-            className="flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm text-slate-500 hover:bg-slate-100"
+            className="pressionavel flex items-center gap-1.5 rounded-xl px-2.5 py-2 text-sm font-semibold text-slate-500 hover:bg-slate-100"
           >
             <Sair className="h-4 w-4" />
             <span className="hidden sm:inline">Sair</span>
           </button>
         </div>
 
-        <nav className="mx-auto max-w-6xl px-2">
+        <nav className="mx-auto max-w-6xl px-2 pb-2">
           <div className="rolagem-sem-barra flex gap-1 overflow-x-auto">
             {ABAS.map(({ rota, rotulo, Icone }) => {
               const ativa = caminho === rota || (rota === '/admin' && caminho === '/admin/')
@@ -83,10 +85,10 @@ export function AppAdmin({ config }: { config: Config | null }) {
                   key={rota}
                   onClick={() => irPara(rota)}
                   aria-current={ativa ? 'page' : undefined}
-                  className={`flex shrink-0 items-center gap-1.5 border-b-2 px-3 py-2.5 text-sm font-semibold whitespace-nowrap transition ${
+                  className={`pressionavel flex shrink-0 items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold whitespace-nowrap transition ${
                     ativa
-                      ? 'border-roxo-700 text-roxo-800'
-                      : 'border-transparent text-slate-500 hover:text-slate-800'
+                      ? 'bg-roxo-700 text-white shadow-media'
+                      : 'text-slate-500 hover:bg-slate-100 hover:text-slate-800'
                   }`}
                 >
                   <Icone className="h-4 w-4" />
@@ -125,15 +127,15 @@ function EntrarAdmin({ aoEntrar }: { aoEntrar: () => Promise<void> }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-100 px-5">
       <div className="w-full max-w-sm">
-        <div className="mb-6 text-center">
-          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-roxo-800 text-white">
-            <Cadeado />
+        <div className="animate-surgir mb-6 text-center">
+          <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-roxo-600 to-roxo-800 text-white shadow-alta">
+            <Cadeado className="h-7 w-7" />
           </div>
-          <h1 className="text-2xl font-extrabold text-slate-900">Administração</h1>
+          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">Administração</h1>
           <p className="mt-1 text-[15px] text-slate-600">Acesso restrito à equipe do clube.</p>
         </div>
 
-        <form onSubmit={enviar} className="space-y-4 rounded-2xl bg-white p-5 shadow-sm">
+        <form onSubmit={enviar} className="animate-surgir space-y-4 rounded-3xl bg-white p-6 shadow-alta">
           <Campo
             rotulo="Senha"
             type="password"

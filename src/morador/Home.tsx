@@ -1,11 +1,23 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import { api, query, ErroApi } from '../api'
 import type { Config, Oferta, SessaoMorador } from '../tipos'
-import { CartaoOferta } from './CartaoOferta'
-import { Aviso, Botao, Carregando, Vazio } from '../componentes/Ui'
-import { Busca, Cupom, Raio, Baixar, Fechar } from '../componentes/Icones'
+import { CartaoVitrine, CartaoGrade, CartaoLista } from './CartaoOferta'
+import { Aviso, Botao, Vazio } from '../componentes/Ui'
+import { EsqueletoHome, Revelar } from '../componentes/Movimento'
+import { Busca, Cupom, Raio, Baixar, Fechar, SetaDireita } from '../componentes/Icones'
 import { reais, primeiroNome } from '../formato'
 import { irPara } from '../rotas'
+
+/*
+  A home tem três ritmos, de propósito:
+
+    carrossel  oportunidades relâmpago — largo, colorido, para o olho parar
+    grade      destaques da semana — duas colunas, leitura rápida
+    lista      todas as ofertas — compacto, para percorrer com o polegar
+
+  Um paredão de cartões idênticos faz o morador rolar sem ler nada. A quebra de
+  formato é o que devolve atenção a cada bloco.
+*/
 
 export function Home({ sessao, config }: { sessao: SessaoMorador; config: Config | null }) {
   const [ofertas, setOfertas] = useState<Oferta[]>([])
@@ -15,8 +27,8 @@ export function Home({ sessao, config }: { sessao: SessaoMorador; config: Config
   const [busca, setBusca] = useState('')
   const [buscaAtiva, setBuscaAtiva] = useState('')
 
-  /* Debounce da busca: o morador digita no 4G do calçadão e uma requisição por
-     tecla derrubaria a lista o tempo todo. */
+  /* Debounce: o morador digita no 4G do calçadão e uma requisição por tecla
+     derrubaria a lista o tempo todo. */
   useEffect(() => {
     const t = setTimeout(() => setBuscaAtiva(busca.trim()), 350)
     return () => clearTimeout(t)
@@ -42,35 +54,41 @@ export function Home({ sessao, config }: { sessao: SessaoMorador; config: Config
     return () => controle.abort()
   }, [categoria, buscaAtiva])
 
-  const { relampagos, destaques, demais } = useMemo(() => {
-    const relampagos = ofertas.filter((o) => o.relampago)
-    const destaques = ofertas.filter((o) => !o.relampago && o.destaque)
-    const demais = ofertas.filter((o) => !o.relampago && !o.destaque)
-    return { relampagos, destaques, demais }
-  }, [ofertas])
+  const { relampagos, destaques, demais } = useMemo(
+    () => ({
+      relampagos: ofertas.filter((o) => o.relampago),
+      destaques: ofertas.filter((o) => !o.relampago && o.destaque),
+      demais: ofertas.filter((o) => !o.relampago && !o.destaque),
+    }),
+    [ofertas],
+  )
 
   const filtrando = Boolean(categoria || buscaAtiva)
+  const economiaAoAlcance = useMemo(
+    () => ofertas.filter((o) => o.disponivel).reduce((s, o) => s + Number(o.economia_estimada), 0),
+    [ofertas],
+  )
 
   return (
-    <div className="pb-4">
-      <Cabecalho sessao={sessao} config={config} />
+    <div className="pb-6">
+      <Cabecalho sessao={sessao} config={config} ofertas={ofertas.length} />
 
-      <div className="px-4">
+      <div className="relative z-10 -mt-6 px-4">
         <label className="relative block">
-          <Busca className="pointer-events-none absolute top-1/2 left-3.5 h-5 w-5 -translate-y-1/2 text-slate-400" />
+          <Busca className="pointer-events-none absolute top-1/2 left-4 h-5 w-5 -translate-y-1/2 text-slate-400" />
           <input
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
             placeholder="Buscar loja ou promoção"
             aria-label="Buscar loja ou promoção"
-            className="w-full rounded-xl border border-slate-300 bg-white py-3 pr-3.5 pl-11 text-base
-              outline-none focus:border-roxo-500 focus:ring-2 focus:ring-roxo-200"
+            className="w-full rounded-2xl bg-white py-3.5 pr-4 pl-12 text-base shadow-alta outline-none
+              transition placeholder:text-slate-400 focus:ring-2 focus:ring-roxo-300"
           />
           {busca && (
             <button
               onClick={() => setBusca('')}
               aria-label="Limpar busca"
-              className="absolute top-1/2 right-2 -translate-y-1/2 rounded-lg p-1.5 text-slate-400 hover:bg-slate-100"
+              className="absolute top-1/2 right-2.5 -translate-y-1/2 rounded-lg p-1.5 text-slate-400 hover:bg-slate-100"
             >
               <Fechar className="h-4 w-4" />
             </button>
@@ -80,7 +98,13 @@ export function Home({ sessao, config }: { sessao: SessaoMorador; config: Config
 
       <Categorias categorias={config?.categorias ?? []} atual={categoria} aoTrocar={setCategoria} />
 
-      {!sessao.assinante && <FaixaAssinatura config={config} logado={sessao.logado} />}
+      {!sessao.assinante && (
+        <FaixaAssinatura
+          config={config}
+          logado={sessao.logado}
+          economiaAoAlcance={economiaAoAlcance}
+        />
+      )}
 
       <InstalarNaTela />
 
@@ -91,7 +115,7 @@ export function Home({ sessao, config }: { sessao: SessaoMorador; config: Config
       )}
 
       {carregando ? (
-        <Carregando texto="Buscando as ofertas do centro…" />
+        <EsqueletoHome />
       ) : ofertas.length === 0 ? (
         <Vazio icone={<Cupom />} titulo="Nenhuma oferta encontrada">
           {filtrando
@@ -99,69 +123,113 @@ export function Home({ sessao, config }: { sessao: SessaoMorador; config: Config
             : 'Assim que as lojas publicarem, as ofertas aparecem aqui.'}
         </Vazio>
       ) : (
-        <div className="space-y-6 px-4 pt-5">
+        <div className="space-y-7 pt-6">
           {relampagos.length > 0 && (
-            <Secao
-              titulo="Oportunidades"
-              legenda="Acabam rápido"
-              icone={<Raio className="h-4 w-4 text-ipe-500" />}
-            >
-              {relampagos.map((o) => (
-                <CartaoOferta key={o.id} oferta={o} aoAbrir={() => irPara(`/oferta/${o.id}`)} />
-              ))}
-            </Secao>
+            <section>
+              <TituloSecao
+                titulo="Oportunidades"
+                legenda="acabam rápido"
+                icone={<Raio className="h-4 w-4 text-ipe-500" />}
+              />
+              {/*
+                Aqui é cascata (atraso por CSS) e não Revelar: o Revelar espera o
+                elemento entrar na tela, e num carrossel horizontal o segundo
+                cartão nasce fora da viewport — ficaria invisível e o carrossel
+                pareceria ter um cartão só, matando a pista de que há mais coisa
+                à direita.
+              */}
+              <div className="rolagem-sem-barra trilho cascata flex gap-3 overflow-x-auto px-4 pb-1">
+                {relampagos.map((o, i) => (
+                  <div key={o.id} className="shrink-0" style={{ '--i': i } as React.CSSProperties}>
+                    <CartaoVitrine oferta={o} aoAbrir={() => irPara(`/oferta/${o.id}`)} />
+                  </div>
+                ))}
+              </div>
+            </section>
           )}
 
           {destaques.length > 0 && (
-            <Secao titulo="Destaques da semana">
-              {destaques.map((o) => (
-                <CartaoOferta key={o.id} oferta={o} aoAbrir={() => irPara(`/oferta/${o.id}`)} />
-              ))}
-            </Secao>
+            <section>
+              <TituloSecao titulo="Destaques da semana" legenda="escolhas do clube" />
+              <div className="cascata grid grid-cols-2 gap-3 px-4">
+                {destaques.map((o, i) => (
+                  <div key={o.id} style={{ '--i': i } as React.CSSProperties}>
+                    <CartaoGrade oferta={o} aoAbrir={() => irPara(`/oferta/${o.id}`)} />
+                  </div>
+                ))}
+              </div>
+            </section>
           )}
 
           {demais.length > 0 && (
-            <Secao
-              titulo={filtrando ? 'Resultados' : 'Todas as ofertas'}
-              legenda={`${demais.length} no centro`}
-            >
-              {demais.map((o) => (
-                <CartaoOferta key={o.id} oferta={o} aoAbrir={() => irPara(`/oferta/${o.id}`)} />
-              ))}
-            </Secao>
+            <section>
+              <TituloSecao
+                titulo={filtrando ? 'Resultados' : 'Todas as ofertas'}
+                legenda={`${demais.length} no centro`}
+              />
+              <div className="cascata space-y-2.5 px-4">
+                {demais.map((o, i) => (
+                  <div key={o.id} style={{ '--i': i } as React.CSSProperties}>
+                    <CartaoLista oferta={o} aoAbrir={() => irPara(`/oferta/${o.id}`)} />
+                  </div>
+                ))}
+              </div>
+            </section>
           )}
+
+          <Revelar>
+            <button
+              onClick={() => irPara('/mapa')}
+              className="pressionavel mx-4 flex w-[calc(100%-2rem)] items-center gap-3 rounded-2xl bg-white p-4 text-left shadow-suave"
+            >
+              <span className="text-sm">
+                <span className="block font-bold text-slate-900">Ver as lojas no mapa</span>
+                <span className="block text-slate-500">
+                  Todas ficam a poucas quadras uma da outra
+                </span>
+              </span>
+              <SetaDireita className="ml-auto h-5 w-5 shrink-0 text-slate-300" />
+            </button>
+          </Revelar>
         </div>
       )}
     </div>
   )
 }
 
-function Secao({
+function TituloSecao({
   titulo,
   legenda,
   icone,
-  children,
 }: {
   titulo: string
   legenda?: string
   icone?: React.ReactNode
-  children: React.ReactNode
 }) {
   return (
-    <section>
-      <div className="mb-2.5 flex items-baseline justify-between gap-2">
-        <h2 className="flex items-center gap-1.5 font-bold text-slate-900">
-          {icone}
-          {titulo}
-        </h2>
-        {legenda && <span className="text-xs text-slate-500">{legenda}</span>}
-      </div>
-      <div className="space-y-2.5">{children}</div>
-    </section>
+    <div className="mb-3 flex items-baseline justify-between gap-2 px-4">
+      <h2 className="flex items-center gap-1.5 text-lg font-extrabold tracking-tight text-slate-900">
+        {icone}
+        {titulo}
+      </h2>
+      {legenda && (
+        <span className="text-xs font-medium tracking-wide text-slate-400 uppercase">{legenda}</span>
+      )}
+    </div>
   )
 }
 
-function Cabecalho({ sessao, config }: { sessao: SessaoMorador; config: Config | null }) {
+/* ---------- cabeçalho ---------- */
+
+function Cabecalho({
+  sessao,
+  config,
+  ofertas,
+}: {
+  sessao: SessaoMorador
+  config: Config | null
+  ofertas: number
+}) {
   const saudacao = useMemo(() => {
     const h = Number(
       new Intl.DateTimeFormat('pt-BR', {
@@ -176,28 +244,52 @@ function Cabecalho({ sessao, config }: { sessao: SessaoMorador; config: Config |
   }, [])
 
   return (
-    <header className="bg-roxo-800 px-4 pt-5 pb-6 text-white">
-      <div className="flex items-start justify-between gap-3">
-        <div className="min-w-0">
-          <p className="text-sm text-roxo-200">
-            {sessao.logado ? `${saudacao}, ${primeiroNome(sessao.morador?.nome)}` : saudacao}
-          </p>
-          <h1 className="mt-0.5 text-2xl leading-tight font-extrabold">
-            {config?.nome_app ?? 'Londrina Centro'}
-          </h1>
-          <p className="mt-1 text-sm text-roxo-100">
-            {config?.chamada ?? 'O centro de Londrina com desconto o ano inteiro.'}
-          </p>
+    <header className="relative overflow-hidden bg-roxo-800 px-4 pt-6 pb-12 text-white">
+      {/* manchas de luz em deriva — o mesmo recurso das capas, para o topo do app
+          pertencer ao mesmo sistema visual */}
+      <span
+        aria-hidden="true"
+        className="animate-flutuar pointer-events-none absolute -top-24 -right-16 h-64 w-64 rounded-full bg-roxo-500 opacity-40 blur-3xl"
+      />
+      <span
+        aria-hidden="true"
+        className="animate-flutuar pointer-events-none absolute -bottom-28 -left-20 h-56 w-56 rounded-full bg-ipe-400 opacity-15 blur-3xl"
+        style={{ animationDelay: '2.5s' }}
+      />
+
+      <div className="relative">
+        <div className="flex items-start justify-between gap-3">
+          <div className="min-w-0">
+            <p className="text-sm text-roxo-200">
+              {sessao.logado ? `${saudacao}, ${primeiroNome(sessao.morador?.nome)}` : saudacao}
+            </p>
+            <h1 className="mt-0.5 text-[1.75rem] leading-tight font-extrabold tracking-tight">
+              {config?.nome_app ?? 'Londrina Centro'}
+            </h1>
+          </div>
+          {sessao.assinante && (
+            <span className="mt-1 shrink-0 rounded-full bg-ipe-400 px-2.5 py-1 text-[11px] font-extrabold tracking-wide text-slate-900 shadow-media">
+              ASSINANTE
+            </span>
+          )}
         </div>
-        {sessao.assinante && (
-          <span className="mt-1 shrink-0 rounded-full bg-ipe-400 px-2.5 py-1 text-[11px] font-bold text-slate-900">
-            ASSINANTE
-          </span>
+
+        <p className="mt-1.5 max-w-[22rem] text-sm leading-relaxed text-roxo-100">
+          {config?.chamada ?? 'O centro de Londrina com desconto o ano inteiro.'}
+        </p>
+
+        {ofertas > 0 && (
+          <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/12 px-3 py-1.5 text-xs font-semibold backdrop-blur">
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            {ofertas} ofertas ativas agora
+          </p>
         )}
       </div>
     </header>
   )
 }
+
+/* ---------- categorias ---------- */
 
 function Categorias({
   categorias,
@@ -235,51 +327,82 @@ function Chip({
   return (
     <button
       onClick={aoClicar}
-      className={`shrink-0 rounded-full border px-3.5 py-2 text-sm font-medium whitespace-nowrap transition
-        ${
-          ativo
-            ? 'border-roxo-700 bg-roxo-700 text-white'
-            : 'border-slate-300 bg-white text-slate-700 hover:border-slate-400'
-        }`}
+      className={`pressionavel shrink-0 rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap transition ${
+        ativo
+          ? 'bg-roxo-700 text-white shadow-media'
+          : 'bg-white text-slate-600 shadow-suave hover:text-slate-900'
+      }`}
     >
       {children}
     </button>
   )
 }
 
-/* R1/R2: a oferta fica visível, o código é que trava. Esta faixa é a conversão
-   — ela precisa dizer o preço e o que ele destrava, sem rodeio. */
-function FaixaAssinatura({ config, logado }: { config: Config | null; logado: boolean }) {
+/* ---------- conversão ----------
+   R1/R2: a oferta fica visível, o código é que trava. Esta faixa mostra o total
+   que está em jogo agora — é mais concreto que "assine o clube". */
+
+function FaixaAssinatura({
+  config,
+  logado,
+  economiaAoAlcance,
+}: {
+  config: Config | null
+  logado: boolean
+  economiaAoAlcance: number
+}) {
+  const preco = config?.preco_anual ?? 99.9
+  const vezes = economiaAoAlcance > 0 ? Math.floor(economiaAoAlcance / preco) : 0
+
   return (
-    <div className="px-4 pt-4">
-      <div className="rounded-2xl bg-gradient-to-br from-roxo-700 to-roxo-900 p-4 text-white shadow-sm">
-        <p className="text-sm leading-relaxed">
-          Você está vendo as ofertas, mas ainda não consegue usá-las.
-        </p>
-        <p className="mt-1 text-lg font-bold">
-          {config ? `${reais(config.preco_anual)} por ano` : 'Assine o clube'}
-          <span className="ml-1 text-sm font-normal text-roxo-200">
-            {config ? `ou ${config.parcelas_max}x sem juros` : ''}
-          </span>
-        </p>
-        <Botao
-          variante="sobreCor"
-          largo
-          className="mt-3"
-          onClick={() => irPara(logado ? '/assinar' : '/entrar')}
-        >
-          Quero assinar
-        </Botao>
+    <div className="px-4 pt-5">
+      <div className="animate-surgir relative overflow-hidden rounded-3xl bg-gradient-to-br from-roxo-700 via-roxo-800 to-roxo-950 p-5 text-white shadow-alta">
+        <span
+          aria-hidden="true"
+          className="animate-flutuar pointer-events-none absolute -top-16 -right-10 h-40 w-40 rounded-full bg-ipe-400 opacity-20 blur-2xl"
+        />
+        <div className="relative">
+          <p className="text-sm leading-relaxed text-roxo-100">
+            Você está vendo as ofertas, mas ainda não consegue usar.
+          </p>
+
+          {economiaAoAlcance > 0 && (
+            <p className="mt-3 text-[15px] leading-snug">
+              Tem{' '}
+              <strong className="text-ipe-300">{reais(economiaAoAlcance)}</strong> em desconto
+              disponível no centro agora
+              {vezes >= 2 && (
+                <span className="text-roxo-200"> — {vezes}× o valor da assinatura</span>
+              )}
+              .
+            </p>
+          )}
+
+          <p className="mt-4 flex items-baseline gap-2">
+            <span className="text-3xl font-extrabold tracking-tight">{reais(preco)}</span>
+            <span className="text-sm text-roxo-200">por ano · ou 3x sem juros</span>
+          </p>
+
+          <Botao
+            variante="sobreCor"
+            largo
+            grande
+            className="mt-4"
+            onClick={() => irPara(logado ? '/assinar' : '/entrar')}
+          >
+            Quero assinar
+          </Botao>
+        </div>
       </div>
     </div>
   )
 }
 
-/*
-  No iPhone o push só funciona depois que o app está na tela inicial, e o gesto
-  não é óbvio. Esta faixa é o que o escopo chama de "onboarding dedicado": ela
-  só aparece para quem está no navegador, e some para sempre quando dispensada.
-*/
+/* ---------- instalação ----------
+   No iPhone o push só funciona depois que o app está na tela inicial, e o gesto
+   não é óbvio. Esta faixa é o "onboarding dedicado" do escopo: só aparece no
+   navegador e some para sempre quando dispensada. */
+
 function InstalarNaTela() {
   const [visivel, setVisivel] = useState(false)
   const eventoRef = useRef<any>(null)
@@ -292,8 +415,7 @@ function InstalarNaTela() {
       (window.navigator as any).standalone === true
     if (jaInstalado) return
 
-    const ios = /iphone|ipad|ipod/i.test(navigator.userAgent)
-    if (ios) {
+    if (/iphone|ipad|ipod/i.test(navigator.userAgent)) {
       setVisivel(true)
       return
     }
@@ -326,11 +448,13 @@ function InstalarNaTela() {
 
   return (
     <div className="px-4 pt-4">
-      <div className="flex items-start gap-3 rounded-2xl border border-roxo-200 bg-roxo-50 p-3.5">
-        <Baixar className="mt-0.5 h-5 w-5 shrink-0 text-roxo-600" />
+      <div className="animate-entrar flex items-start gap-3 rounded-2xl bg-roxo-50 p-3.5 ring-1 ring-roxo-100">
+        <span className="mt-0.5 rounded-lg bg-roxo-100 p-1.5 text-roxo-600">
+          <Baixar className="h-4 w-4" />
+        </span>
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-semibold text-roxo-900">Instale na tela inicial</p>
-          <p className="mt-0.5 text-sm text-roxo-800">
+          <p className="text-sm font-bold text-roxo-900">Instale na tela inicial</p>
+          <p className="mt-0.5 text-sm leading-relaxed text-roxo-800">
             {ios
               ? 'Toque em Compartilhar e depois em “Adicionar à Tela de Início” para receber os avisos de oferta.'
               : 'Fica igual a um aplicativo e você passa a receber os avisos de oferta.'}

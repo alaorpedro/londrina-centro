@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { api, ErroApi } from '../api'
 import type { PainelLojista } from '../tipos'
-import { Aviso, Cartao, Carregando, Etiqueta, Indicador } from '../componentes/Ui'
+import { Aviso, Cartao, Etiqueta, Indicador } from '../componentes/Ui'
+import { EsqueletoPainel, Revelar } from '../componentes/Movimento'
 import { BarrasRanking, Colunas, PorHora, serieDiaria } from '../componentes/Graficos'
 import { Calendario, Cupom, Usuario } from '../componentes/Icones'
 import { dataBr, numero, reais } from '../formato'
@@ -30,7 +31,7 @@ export function Painel({ recarga }: { recarga: number }) {
       .finally(() => setCarregando(false))
   }, [recarga])
 
-  if (carregando) return <Carregando />
+  if (carregando) return <EsqueletoPainel />
   if (erro || !dados) return <Aviso tipo="erro">{erro ?? 'Não consegui carregar o painel.'}</Aviso>
 
   const { resumo, contrato } = dados
@@ -46,7 +47,7 @@ export function Painel({ recarga }: { recarga: number }) {
         </Aviso>
       )}
 
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="cascata grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Indicador rotulo="Hoje" valor={numero(resumo.hoje)} detalhe="cupons validados" />
         <Indicador rotulo="Esta semana" valor={numero(resumo.semana)} detalhe="cupons validados" />
         <Indicador
@@ -63,6 +64,7 @@ export function Painel({ recarga }: { recarga: number }) {
         />
       </div>
 
+      <Revelar>
       <Cartao className="p-4">
         <div className="mb-3 flex items-baseline justify-between gap-2">
           <h2 className="font-bold text-slate-900">Cupons por dia</h2>
@@ -78,6 +80,7 @@ export function Painel({ recarga }: { recarga: number }) {
           </p>
         )}
       </Cartao>
+      </Revelar>
 
       <div className="grid gap-5 lg:grid-cols-2">
         <Cartao className="p-4">

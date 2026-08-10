@@ -6,21 +6,22 @@ import { Alerta, Check, Fechar, Info, Seta } from './Icones'
 type VarianteBotao = 'primario' | 'secundario' | 'fantasma' | 'perigo' | 'claro' | 'sobreCor'
 
 /*
-  `sobreCor` existe para os botões que ficam em cima de um fundo colorido (a
-  tela verde de cupom validado, a vermelha de erro, a faixa roxa de assinatura).
+  `sobreCor` existe para os botões que ficam em cima de um fundo colorido (a tela
+  verde de cupom validado, a vermelha de erro, a faixa roxa de assinatura).
 
   Não dá para resolver isso passando `bg-white text-...` no className: as duas
   classes disputam a mesma propriedade com a da variante, e quem ganha é a que
-  aparece depois no CSS gerado, não a que aparece depois no atributo. O botão
-  sai branco no branco e some. Uma variante fecha a questão.
+  aparece depois no CSS gerado, não a que aparece depois no atributo. O botão sai
+  branco no branco e some. Uma variante fecha a questão.
 */
 const VARIANTES: Record<VarianteBotao, string> = {
-  primario: 'bg-roxo-700 text-white hover:bg-roxo-800 active:bg-roxo-900 shadow-sm',
-  secundario: 'bg-white text-slate-800 border border-slate-300 hover:bg-slate-50',
+  primario:
+    'bg-roxo-700 text-white shadow-media hover:bg-roxo-800 hover:shadow-alta active:bg-roxo-900',
+  secundario: 'bg-white text-slate-800 shadow-suave hover:bg-slate-50 hover:shadow-media',
   fantasma: 'text-roxo-700 hover:bg-roxo-50',
-  perigo: 'bg-white text-red-700 border border-red-200 hover:bg-red-50',
+  perigo: 'bg-white text-red-700 shadow-suave ring-1 ring-red-100 hover:bg-red-50',
   claro: 'bg-roxo-100 text-roxo-800 hover:bg-roxo-200',
-  sobreCor: 'bg-white text-slate-900 hover:bg-slate-100 shadow-sm',
+  sobreCor: 'bg-white text-slate-900 shadow-media hover:bg-slate-50 hover:shadow-alta',
 }
 
 export function Botao({
@@ -42,8 +43,8 @@ export function Botao({
     <button
       {...resto}
       disabled={resto.disabled || carregando}
-      className={`inline-flex items-center justify-center gap-2 rounded-xl font-semibold
-        transition-colors disabled:opacity-50 disabled:cursor-not-allowed
+      className={`pressionavel inline-flex items-center justify-center gap-2 rounded-xl font-bold
+        transition-colors disabled:pointer-events-none disabled:opacity-45
         ${grande ? 'px-6 py-4 text-base' : 'px-4 py-2.5 text-sm'}
         ${largo ? 'w-full' : ''} ${VARIANTES[variante]} ${className}`}
     >
@@ -77,16 +78,15 @@ export function Campo({
 } & React.InputHTMLAttributes<HTMLInputElement>) {
   return (
     <label className={`block ${className}`}>
-      <span className="mb-1.5 block text-sm font-medium text-slate-700">{rotulo}</span>
+      <span className="mb-1.5 block text-sm font-semibold text-slate-700">{rotulo}</span>
       <input
         {...resto}
-        className={`w-full rounded-xl border px-3.5 py-3 text-base outline-none transition
-          placeholder:text-slate-400
-          focus:ring-2 focus:ring-roxo-200
-          ${erro ? 'border-red-400 focus:border-red-500' : 'border-slate-300 focus:border-roxo-500'}`}
+        className={`w-full rounded-xl bg-white px-3.5 py-3 text-base shadow-suave outline-none transition
+          placeholder:text-slate-400 focus:ring-2
+          ${erro ? 'ring-1 ring-red-300 focus:ring-red-400' : 'focus:ring-roxo-300'}`}
       />
       {erro ? (
-        <span className="mt-1.5 block text-sm text-red-600">{erro}</span>
+        <span className="mt-1.5 block text-sm font-medium text-red-600">{erro}</span>
       ) : dica ? (
         <span className="mt-1.5 block text-sm text-slate-500">{dica}</span>
       ) : null}
@@ -102,11 +102,11 @@ export function Selecao({
 }: { rotulo: string; children: ReactNode } & React.SelectHTMLAttributes<HTMLSelectElement>) {
   return (
     <label className={`block ${className}`}>
-      <span className="mb-1.5 block text-sm font-medium text-slate-700">{rotulo}</span>
+      <span className="mb-1.5 block text-sm font-semibold text-slate-700">{rotulo}</span>
       <select
         {...resto}
-        className="w-full rounded-xl border border-slate-300 bg-white px-3.5 py-3 text-base
-          outline-none transition focus:border-roxo-500 focus:ring-2 focus:ring-roxo-200"
+        className="w-full rounded-xl bg-white px-3.5 py-3 text-base shadow-suave outline-none
+          transition focus:ring-2 focus:ring-roxo-300"
       >
         {children}
       </select>
@@ -122,11 +122,11 @@ export function AreaTexto({
 }: { rotulo: string; dica?: string } & React.TextareaHTMLAttributes<HTMLTextAreaElement>) {
   return (
     <label className={`block ${className}`}>
-      <span className="mb-1.5 block text-sm font-medium text-slate-700">{rotulo}</span>
+      <span className="mb-1.5 block text-sm font-semibold text-slate-700">{rotulo}</span>
       <textarea
         {...resto}
-        className="w-full rounded-xl border border-slate-300 px-3.5 py-3 text-base outline-none
-          transition placeholder:text-slate-400 focus:border-roxo-500 focus:ring-2 focus:ring-roxo-200"
+        className="w-full rounded-xl bg-white px-3.5 py-3 text-base shadow-suave outline-none
+          transition placeholder:text-slate-400 focus:ring-2 focus:ring-roxo-300"
       />
       {dica && <span className="mt-1.5 block text-sm text-slate-500">{dica}</span>}
     </label>
@@ -134,27 +134,31 @@ export function AreaTexto({
 }
 
 /* ---------- avisos ----------
-   Nenhuma barreira do sistema chega ao usuário como erro técnico. Toda regra
-   que bloqueia vira uma frase aqui dentro. */
+   Nenhuma barreira do sistema chega ao usuário como erro técnico. Toda regra que
+   bloqueia vira uma frase aqui dentro. */
 
 type TipoAviso = 'erro' | 'sucesso' | 'atencao' | 'info'
 
-const AVISOS: Record<TipoAviso, { caixa: string; icone: ReactNode }> = {
+const AVISOS: Record<TipoAviso, { caixa: string; icone: ReactNode; bolha: string }> = {
   erro: {
-    caixa: 'bg-red-50 text-red-800 border-red-200',
-    icone: <Alerta className="w-5 h-5 shrink-0 text-red-500" />,
+    caixa: 'bg-red-50 text-red-800 ring-red-100',
+    bolha: 'bg-red-100 text-red-600',
+    icone: <Alerta className="w-5 h-5 shrink-0" />,
   },
   sucesso: {
-    caixa: 'bg-emerald-50 text-emerald-800 border-emerald-200',
-    icone: <Check className="w-5 h-5 shrink-0 text-emerald-600" />,
+    caixa: 'bg-emerald-50 text-emerald-900 ring-emerald-100',
+    bolha: 'bg-emerald-100 text-emerald-600',
+    icone: <Check className="w-5 h-5 shrink-0" />,
   },
   atencao: {
-    caixa: 'bg-amber-50 text-amber-900 border-amber-200',
-    icone: <Alerta className="w-5 h-5 shrink-0 text-amber-500" />,
+    caixa: 'bg-amber-50 text-amber-900 ring-amber-100',
+    bolha: 'bg-amber-100 text-amber-600',
+    icone: <Alerta className="w-5 h-5 shrink-0" />,
   },
   info: {
-    caixa: 'bg-roxo-50 text-roxo-900 border-roxo-200',
-    icone: <Info className="w-5 h-5 shrink-0 text-roxo-500" />,
+    caixa: 'bg-roxo-50 text-roxo-900 ring-roxo-100',
+    bolha: 'bg-roxo-100 text-roxo-600',
+    icone: <Info className="w-5 h-5 shrink-0" />,
   },
 }
 
@@ -172,9 +176,9 @@ export function Aviso({
   return (
     <div
       role={tipo === 'erro' ? 'alert' : 'status'}
-      className={`flex items-start gap-2.5 rounded-xl border px-3.5 py-3 text-sm ${v.caixa} ${className}`}
+      className={`animate-entrar flex items-start gap-2.5 rounded-2xl px-3.5 py-3 text-sm leading-relaxed ring-1 ${v.caixa} ${className}`}
     >
-      {v.icone}
+      <span className="mt-px shrink-0">{v.icone}</span>
       <div className="min-w-0 flex-1">{children}</div>
     </div>
   )
@@ -204,21 +208,18 @@ export function Popup({
     const escutar = (e: KeyboardEvent) => e.key === 'Escape' && aoFechar()
     window.addEventListener('keydown', escutar)
     caixaRef.current?.focus()
-    return () => window.removeEventListener('keydown', escutar)
+    document.body.style.overflow = 'hidden'
+    return () => {
+      window.removeEventListener('keydown', escutar)
+      document.body.style.overflow = ''
+    }
   }, [aoFechar])
 
-  const cor =
-    tipo === 'erro'
-      ? 'bg-red-100 text-red-600'
-      : tipo === 'sucesso'
-        ? 'bg-emerald-100 text-emerald-600'
-        : tipo === 'info'
-          ? 'bg-roxo-100 text-roxo-600'
-          : 'bg-amber-100 text-amber-600'
+  const v = AVISOS[tipo]
 
   return (
     <div
-      className="fixed inset-0 z-50 flex items-end justify-center bg-slate-900/50 p-4 sm:items-center"
+      className="animate-entrar fixed inset-0 z-50 flex items-end justify-center bg-roxo-950/55 p-4 backdrop-blur-sm sm:items-center"
       onClick={aoFechar}
     >
       <div
@@ -228,12 +229,14 @@ export function Popup({
         aria-modal="true"
         aria-label={titulo}
         onClick={(e) => e.stopPropagation()}
-        className="surgir w-full max-w-sm rounded-2xl bg-white p-6 shadow-xl outline-none"
+        className="animate-escala w-full max-w-sm rounded-3xl bg-white p-6 shadow-flutuante outline-none"
       >
-        <div className={`mb-4 flex h-12 w-12 items-center justify-center rounded-full ${cor}`}>
-          {AVISOS[tipo].icone}
+        <div
+          className={`mb-4 flex h-12 w-12 items-center justify-center rounded-2xl ${v.bolha}`}
+        >
+          {v.icone}
         </div>
-        <h2 className="text-lg font-bold text-slate-900">{titulo}</h2>
+        <h2 className="text-lg font-extrabold tracking-tight text-slate-900">{titulo}</h2>
         <div className="mt-1.5 text-[15px] leading-relaxed text-slate-600">{children}</div>
         <div className="mt-5 flex gap-2">
           {acao && (
@@ -257,11 +260,10 @@ export function Cartao({
   className = '',
   ...resto
 }: { children: ReactNode; className?: string } & React.HTMLAttributes<HTMLDivElement>) {
+  /* profundidade por sombra, não por borda: cartão é objeto sobre a superfície,
+     e borda cinza em tudo deixa a tela com cara de planilha */
   return (
-    <div
-      {...resto}
-      className={`rounded-2xl border border-slate-200 bg-white shadow-sm ${className}`}
-    >
+    <div {...resto} className={`rounded-2xl bg-white shadow-suave ${className}`}>
       {children}
     </div>
   )
@@ -286,7 +288,7 @@ export function Etiqueta({
   }
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-semibold
+      className={`inline-flex items-center gap-1 rounded-full px-2.5 py-1 text-xs font-bold whitespace-nowrap
         ${cores[cor]} ${className}`}
     >
       {children}
@@ -296,9 +298,9 @@ export function Etiqueta({
 
 export function Carregando({ texto = 'Carregando…' }: { texto?: string }) {
   return (
-    <div className="flex flex-col items-center justify-center gap-3 py-16 text-slate-400">
+    <div className="flex flex-col items-center justify-center gap-3 py-20 text-slate-400">
       <Girando className="w-7 h-7" />
-      <p className="text-sm">{texto}</p>
+      <p className="animate-pulsar text-sm">{texto}</p>
     </div>
   )
 }
@@ -313,14 +315,14 @@ export function Vazio({
   children?: ReactNode
 }) {
   return (
-    <div className="flex flex-col items-center justify-center px-6 py-14 text-center">
+    <div className="animate-surgir flex flex-col items-center justify-center px-6 py-16 text-center">
       {icone && (
-        <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-full bg-slate-100 text-slate-400">
+        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-roxo-50 text-roxo-300">
           {icone}
         </div>
       )}
-      <h3 className="font-semibold text-slate-700">{titulo}</h3>
-      {children && <p className="mt-1 max-w-xs text-sm text-slate-500">{children}</p>}
+      <h3 className="font-bold text-slate-700">{titulo}</h3>
+      {children && <p className="mt-1 max-w-xs text-sm leading-relaxed text-slate-500">{children}</p>}
     </div>
   )
 }
@@ -329,23 +331,37 @@ export function BarraTopo({
   titulo,
   aoVoltar,
   acao,
+  transparente = false,
 }: {
   titulo: string
   aoVoltar?: () => void
   acao?: ReactNode
+  transparente?: boolean
 }) {
   return (
-    <header className="sticky top-0 z-30 flex items-center gap-2 border-b border-slate-200 bg-white/95 px-2 py-3 backdrop-blur">
+    <header
+      className={`sticky top-0 z-30 flex items-center gap-2 px-2 py-3 ${
+        transparente ? '' : 'vidro shadow-plano'
+      }`}
+    >
       {aoVoltar && (
         <button
           onClick={aoVoltar}
           aria-label="Voltar"
-          className="rounded-lg p-2 text-slate-600 hover:bg-slate-100"
+          className={`pressionavel rounded-xl p-2 ${
+            transparente
+              ? 'bg-slate-900/25 text-white backdrop-blur hover:bg-slate-900/40'
+              : 'text-slate-600 hover:bg-slate-100'
+          }`}
         >
           <Seta />
         </button>
       )}
-      <h1 className={`min-w-0 flex-1 truncate font-bold text-slate-900 ${aoVoltar ? '' : 'px-2'}`}>
+      <h1
+        className={`min-w-0 flex-1 truncate font-bold ${aoVoltar ? '' : 'px-2'} ${
+          transparente ? 'sr-only' : 'text-slate-900'
+        }`}
+      >
         {titulo}
       </h1>
       {acao}
@@ -381,20 +397,24 @@ export function Folha({
   if (!aberto) return null
 
   return (
-    <div className="fixed inset-0 z-50 flex justify-end bg-slate-900/50" onClick={aoFechar}>
+    <div
+      className="animate-entrar fixed inset-0 z-50 flex justify-end bg-roxo-950/50 backdrop-blur-sm"
+      onClick={aoFechar}
+    >
       <div
         role="dialog"
         aria-modal="true"
         aria-label={titulo}
         onClick={(e) => e.stopPropagation()}
-        className={`flex h-full w-full ${largura} flex-col bg-white shadow-2xl`}
+        className={`flex h-full w-full ${largura} flex-col bg-slate-50 shadow-flutuante`}
+        style={{ animation: 'entrar 0.35s var(--ease-saida) both' }}
       >
-        <header className="flex items-center justify-between border-b border-slate-200 px-5 py-4">
-          <h2 className="font-bold text-slate-900">{titulo}</h2>
+        <header className="vidro flex items-center justify-between px-5 py-4 shadow-plano">
+          <h2 className="font-extrabold tracking-tight text-slate-900">{titulo}</h2>
           <button
             onClick={aoFechar}
             aria-label="Fechar"
-            className="rounded-lg p-2 text-slate-500 hover:bg-slate-100"
+            className="pressionavel rounded-xl p-2 text-slate-500 hover:bg-slate-100"
           >
             <Fechar />
           </button>
@@ -420,15 +440,15 @@ export function Indicador({
   icone?: ReactNode
 }) {
   return (
-    <Cartao className="p-4">
+    <Cartao className="elevavel p-4">
       <div className="flex items-start justify-between gap-2">
-        <p className="text-xs font-medium tracking-wide text-slate-500 uppercase">{rotulo}</p>
+        <p className="text-[11px] font-bold tracking-wider text-slate-400 uppercase">{rotulo}</p>
         {icone && <span className="text-slate-300">{icone}</span>}
       </div>
       {/* figuras proporcionais de propósito: tabular-nums dá a todo dígito a
           largura do zero e faz um número grande parecer frouxo. Tabular fica
           para coluna de tabela e marca de eixo, onde alinhar importa. */}
-      <p className={`mt-1.5 text-2xl font-bold ${cor}`}>{valor}</p>
+      <p className={`mt-1.5 text-2xl font-extrabold tracking-tight ${cor}`}>{valor}</p>
       {detalhe && <p className="mt-0.5 text-xs text-slate-500">{detalhe}</p>}
     </Cartao>
   )

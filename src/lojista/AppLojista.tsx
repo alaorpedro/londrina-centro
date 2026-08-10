@@ -3,6 +3,7 @@ import { api, ErroApi } from '../api'
 import type { SessaoLojista } from '../tipos'
 import { irPara, useCaminho } from '../rotas'
 import { Aviso, Botao, Campo, Carregando } from '../componentes/Ui'
+import { Monograma } from '../componentes/Capa'
 import { Cupom, Grafico, Etiqueta as IconeEtiqueta, Relogio, Sair } from '../componentes/Icones'
 import { Validar } from './Validar'
 import { Painel } from './Painel'
@@ -59,16 +60,13 @@ export function AppLojista() {
 
   return (
     <div className="min-h-screen bg-slate-50">
-      <header className="border-b border-slate-200 bg-white">
+      <header className="vidro sticky top-0 z-40 shadow-suave">
         <div className="mx-auto flex max-w-5xl items-center gap-3 px-4 py-3">
-          <span
-            className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl text-xs font-bold text-white"
-            style={{ backgroundColor: loja.cor }}
-          >
-            {loja.loja_nome.slice(0, 2).toUpperCase()}
-          </span>
+          <Monograma nome={loja.loja_nome} cor={loja.cor} className="h-10 w-10 text-[11px]" />
           <div className="min-w-0 flex-1">
-            <p className="truncate font-bold text-slate-900">{loja.loja_nome}</p>
+            <p className="truncate font-extrabold tracking-tight text-slate-900">
+              {loja.loja_nome}
+            </p>
             <p className="truncate text-xs text-slate-500">
               {loja.categoria} · {loja.nome}
             </p>
@@ -79,27 +77,26 @@ export function AppLojista() {
               await buscarSessao()
               irPara('/lojista')
             }}
-            className="flex items-center gap-1.5 rounded-lg px-2.5 py-2 text-sm text-slate-500 hover:bg-slate-100"
+            className="pressionavel flex items-center gap-1.5 rounded-xl px-2.5 py-2 text-sm font-semibold text-slate-500 hover:bg-slate-100"
           >
             <Sair className="h-4 w-4" />
             <span className="hidden sm:inline">Sair</span>
           </button>
         </div>
 
-        <nav className="mx-auto max-w-5xl px-2">
+        <nav className="mx-auto max-w-5xl px-2 pb-2">
           <div className="rolagem-sem-barra flex gap-1 overflow-x-auto">
             {ABAS.map(({ rota, rotulo, Icone }) => {
-              const ativa =
-                rota === '/lojista' ? naValidacao : caminho === rota
+              const ativa = rota === '/lojista' ? naValidacao : caminho === rota
               return (
                 <button
                   key={rota}
                   onClick={() => irPara(rota)}
                   aria-current={ativa ? 'page' : undefined}
-                  className={`flex shrink-0 items-center gap-1.5 border-b-2 px-3 py-2.5 text-sm font-semibold whitespace-nowrap transition ${
+                  className={`pressionavel flex shrink-0 items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold whitespace-nowrap transition ${
                     ativa
-                      ? 'border-roxo-700 text-roxo-800'
-                      : 'border-transparent text-slate-500 hover:text-slate-800'
+                      ? 'bg-roxo-700 text-white shadow-media'
+                      : 'text-slate-500 hover:bg-slate-100 hover:text-slate-800'
                   }`}
                 >
                   <Icone className="h-4 w-4" />
@@ -139,17 +136,17 @@ function EntrarLojista({ aoEntrar }: { aoEntrar: () => Promise<void> }) {
   return (
     <div className="flex min-h-screen items-center justify-center bg-slate-100 px-5">
       <div className="w-full max-w-sm">
-        <div className="mb-6 text-center">
-          <div className="mx-auto mb-3 flex h-12 w-12 items-center justify-center rounded-2xl bg-roxo-700 text-white">
-            <Cupom />
+        <div className="animate-surgir mb-6 text-center">
+          <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-roxo-600 to-roxo-800 text-white shadow-alta">
+            <Cupom className="h-7 w-7" />
           </div>
-          <h1 className="text-2xl font-extrabold text-slate-900">Painel da loja</h1>
+          <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">Painel da loja</h1>
           <p className="mt-1 text-[15px] text-slate-600">
             Valide cupons e acompanhe quantos clientes o clube trouxe.
           </p>
         </div>
 
-        <form onSubmit={enviar} className="space-y-4 rounded-2xl bg-white p-5 shadow-sm">
+        <form onSubmit={enviar} className="animate-surgir space-y-4 rounded-3xl bg-white p-6 shadow-alta">
           <Campo
             rotulo="E-mail"
             type="email"

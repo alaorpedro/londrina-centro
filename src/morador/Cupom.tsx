@@ -2,31 +2,33 @@ import { useCallback, useEffect, useRef, useState } from 'react'
 import { api, ErroApi } from '../api'
 import type { EstadoCupom } from '../tipos'
 import { Botao, Carregando, Aviso } from '../componentes/Ui'
+import { AnelProgresso, useContagem } from '../componentes/Movimento'
 import { CheckCirculo, Relogio, Seta } from '../componentes/Icones'
 import { codigoLegivel, reais, relogio } from '../formato'
 import { irPara } from '../rotas'
 
 /*
-  A tela do cupom. É o momento em que o app encosta no balcão: o morador segura
-  o celular na frente do atendente e não vai ficar procurando botão.
+  A tela do cupom. É o momento em que o app encosta no balcão: o morador segura o
+  celular na frente do atendente e não vai ficar procurando botão.
 
   Três estados, e só três:
-    pendente  → o código gigante e o relógio correndo
-    validado  → confirmação verde com a economia
+    pendente  → o código gigante e o anel correndo
+    validado  → confirmação verde com a economia contando
     expirado  → explicação e o caminho de volta
 
-  A tela consulta o servidor a cada 2,5s. Assim que o balconista valida, ela
-  vira sozinha — o morador não precisa fazer nada, e o atendente vê a
-  confirmação acontecendo no celular do cliente. Isso encerra a dúvida de "deu
-  certo?" dos dois lados ao mesmo tempo.
+  A tela consulta o servidor a cada 2,5s. Assim que o balconista valida, ela vira
+  sozinha — o morador não faz nada, e o atendente vê a confirmação acontecendo no
+  celular do cliente. Isso encerra a dúvida de "deu certo?" dos dois lados ao
+  mesmo tempo.
 */
 
 const INTERVALO_MS = 2500
+const VALIDADE_S = 5 * 60
 
 export function Cupom({ id }: { id: string }) {
   const [estado, setEstado] = useState<EstadoCupom | null>(null)
   const [erro, setErro] = useState<string | null>(null)
-  const [restante, setRestante] = useState(0)
+  const [restante, setRestante] = useState(VALIDADE_S)
   const timerRef = useRef<number | null>(null)
 
   const buscar = useCallback(async () => {
@@ -47,16 +49,16 @@ export function Cupom({ id }: { id: string }) {
     buscar()
   }, [buscar])
 
-  /* Consulta enquanto está pendente. Para de consultar assim que resolve —
-     nada de bater no servidor para sempre com a tela aberta no bolso. */
+  /* Consulta enquanto está pendente. Para assim que resolve — nada de bater no
+     servidor para sempre com a tela aberta no bolso. */
   useEffect(() => {
     if (!estado || estado.status !== 'pendente') return
     const t = window.setInterval(buscar, INTERVALO_MS)
     return () => window.clearInterval(t)
   }, [estado, buscar])
 
-  /* Contagem regressiva local, para o relógio ser suave. Quem manda de verdade
-     é o servidor: quando o tempo acaba aqui, forçamos uma última consulta. */
+  /* Contagem local, para o anel ser suave. Quem manda de verdade é o servidor:
+     quando o tempo acaba aqui, forçamos uma última consulta. */
   useEffect(() => {
     if (!estado || estado.status !== 'pendente') return
 
@@ -85,60 +87,69 @@ export function Cupom({ id }: { id: string }) {
   }
 
   if (!estado) return <Carregando texto="Preparando seu cupom…" />
-
   if (estado.status === 'validado') return <Confirmado estado={estado} />
   if (estado.status !== 'pendente') return <Expirado estado={estado} />
 
-  const total = 5 * 60
-  const proporcao = Math.max(0, Math.min(1, restante / total))
+  const proporcao = Math.max(0, Math.min(1, restante / VALIDADE_S))
   const acabando = restante <= 60
 
   return (
-    <div className="flex min-h-screen flex-col bg-roxo-800 text-white">
-      <header className="flex items-center gap-2 px-2 py-3">
+    <div className="relative flex min-h-screen flex-col overflow-hidden bg-roxo-800 text-white">
+      <span
+        aria-hidden="true"
+        className="animate-flutuar pointer-events-none absolute -top-32 -right-24 h-80 w-80 rounded-full bg-roxo-500 opacity-40 blur-3xl"
+      />
+      <span
+        aria-hidden="true"
+        className="animate-flutuar pointer-events-none absolute -bottom-32 -left-24 h-72 w-72 rounded-full bg-roxo-600 opacity-35 blur-3xl"
+        style={{ animationDelay: '3s' }}
+      />
+
+      <header className="relative flex items-center gap-2 px-2 py-3">
         <button
           onClick={() => irPara('/')}
           aria-label="Voltar"
-          className="rounded-lg p-2 text-roxo-200 hover:bg-roxo-700"
+          className="pressionavel rounded-xl p-2 text-roxo-200 hover:bg-white/10"
         >
           <Seta />
         </button>
-        <p className="min-w-0 flex-1 truncate text-sm font-medium text-roxo-100">
+        <p className="min-w-0 flex-1 truncate text-sm font-semibold text-roxo-100">
           {estado.loja_nome}
         </p>
       </header>
 
-      <div className="flex flex-1 flex-col items-center justify-center px-6 pb-10 text-center">
-        <p className="text-sm text-roxo-200">Mostre este código ao atendente</p>
+      <div className="relative flex flex-1 flex-col items-center justify-center px-6 pb-10 text-center">
+        <p className="animate-entrar text-sm text-roxo-200">Mostre este código ao atendente</p>
 
-        <p
-          className="tabular surgir mt-4 text-[3.5rem] leading-none font-extrabold tracking-[0.08em] sm:text-7xl"
-          aria-label={`Código ${estado.codigo.split('').join(' ')}`}
-        >
-          {codigoLegivel(estado.codigo)}
-        </p>
-
-        <h1 className="mt-5 max-w-xs text-lg leading-snug font-bold">{estado.titulo}</h1>
-
-        {/* relógio: barra + número, porque no balcão a leitura é de relance */}
-        <div className="mt-8 w-full max-w-xs">
-          <div className="h-2 overflow-hidden rounded-full bg-roxo-900/60">
-            <div
-              className={`h-full rounded-full transition-[width] duration-250 ease-linear ${
-                acabando ? 'bg-ipe-400' : 'bg-white'
-              }`}
-              style={{ width: `${proporcao * 100}%` }}
-            />
-          </div>
-          <p
-            className={`tabular mt-2.5 flex items-center justify-center gap-1.5 text-sm font-semibold ${
-              acabando ? 'pulsar-suave text-ipe-300' : 'text-roxo-200'
-            }`}
+        <div className="animate-escala mt-6">
+          <AnelProgresso
+            proporcao={proporcao}
+            tamanho={272}
+            espessura={7}
+            cor={acabando ? 'var(--color-ipe-400)' : '#ffffff'}
           >
-            <Relogio className="h-4 w-4" />
-            expira em {relogio(restante)}
-          </p>
+            {/* 2,6rem é o teto: acima disso os seis dígitos encostam no anel
+                num iPhone de 375px, e código apertado é código lido errado */}
+            <span
+              className="tabular text-[2.6rem] leading-none font-extrabold tracking-[0.05em] sm:text-5xl"
+              aria-label={`Código ${estado.codigo.split('').join(' ')}`}
+            >
+              {codigoLegivel(estado.codigo)}
+            </span>
+            <span
+              className={`tabular mt-3 flex items-center gap-1.5 text-sm font-bold ${
+                acabando ? 'animate-pulsar text-ipe-300' : 'text-roxo-200'
+              }`}
+            >
+              <Relogio className="h-4 w-4" />
+              {relogio(restante)}
+            </span>
+          </AnelProgresso>
         </div>
+
+        <h1 className="animate-entrar mt-7 max-w-xs text-lg leading-snug font-bold">
+          {estado.titulo}
+        </h1>
 
         <p className="mt-8 max-w-xs text-xs leading-relaxed text-roxo-300">
           O atendente digita esses números no painel da loja. Não feche esta tela até a confirmação
@@ -150,29 +161,56 @@ export function Cupom({ id }: { id: string }) {
 }
 
 function Confirmado({ estado }: { estado: EstadoCupom }) {
-  return (
-    <div className="flex min-h-screen flex-col items-center justify-center bg-emerald-600 px-6 text-center text-white">
-      <div className="surgir">
-        <CheckCirculo className="mx-auto h-20 w-20" />
-        <h1 className="mt-5 text-2xl font-extrabold">Pronto!</h1>
-        <p className="mt-1 text-emerald-50">Cupom usado em {estado.loja_nome}</p>
+  const economia = useContagem(Number(estado.economia) || 0, 1200)
 
-        {estado.economia > 0 && (
-          <div className="mt-8 rounded-2xl bg-emerald-700/50 px-8 py-5">
-            <p className="text-sm text-emerald-100">Você economizou</p>
-            <p className="tabular mt-0.5 text-4xl font-extrabold">{reais(estado.economia)}</p>
+  return (
+    <div className="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-emerald-600 px-6 text-center text-white">
+      <span
+        aria-hidden="true"
+        className="animate-flutuar pointer-events-none absolute -top-28 -left-20 h-72 w-72 rounded-full bg-emerald-400 opacity-40 blur-3xl"
+      />
+      <span
+        aria-hidden="true"
+        className="animate-flutuar pointer-events-none absolute -right-24 -bottom-24 h-64 w-64 rounded-full bg-emerald-300 opacity-30 blur-3xl"
+        style={{ animationDelay: '2s' }}
+      />
+
+      <div className="relative">
+        <div className="animate-escala">
+          <CheckCirculo className="mx-auto h-24 w-24" />
+        </div>
+        <h1 className="animate-surgir mt-5 text-3xl font-extrabold tracking-tight">Pronto!</h1>
+        <p className="animate-surgir mt-1 text-emerald-50" style={{ animationDelay: '80ms' }}>
+          Cupom usado em {estado.loja_nome}
+        </p>
+
+        {Number(estado.economia) > 0 && (
+          <div
+            className="animate-surgir mt-8 rounded-3xl bg-white/15 px-10 py-6 backdrop-blur"
+            style={{ animationDelay: '160ms' }}
+          >
+            <p className="text-sm text-emerald-50">Você economizou</p>
+            <p className="mt-1 text-5xl font-extrabold tracking-tight">{reais(economia)}</p>
           </div>
         )}
 
-        <p className="mt-6 max-w-xs text-sm text-emerald-50">{estado.titulo}</p>
+        <p
+          className="animate-surgir mt-6 max-w-xs text-sm text-emerald-50"
+          style={{ animationDelay: '240ms' }}
+        >
+          {estado.titulo}
+        </p>
 
-        <div className="mt-10 flex w-full max-w-xs flex-col gap-2">
+        <div
+          className="animate-surgir mt-10 flex w-full max-w-xs flex-col gap-2"
+          style={{ animationDelay: '320ms' }}
+        >
           <Botao variante="sobreCor" largo grande onClick={() => irPara('/')}>
             Ver outras ofertas
           </Botao>
           <button
             onClick={() => irPara('/conta')}
-            className="py-2 text-sm font-semibold text-emerald-100 underline underline-offset-2"
+            className="py-2.5 text-sm font-bold text-emerald-50 underline underline-offset-4"
           >
             Quanto já economizei no total
           </button>
@@ -185,11 +223,11 @@ function Confirmado({ estado }: { estado: EstadoCupom }) {
 function Expirado({ estado }: { estado: EstadoCupom }) {
   return (
     <div className="flex min-h-screen flex-col items-center justify-center bg-slate-100 px-6 text-center">
-      <div className="flex h-16 w-16 items-center justify-center rounded-full bg-slate-200 text-slate-500">
-        <Relogio className="h-8 w-8" />
+      <div className="animate-escala flex h-20 w-20 items-center justify-center rounded-3xl bg-white text-slate-400 shadow-media">
+        <Relogio className="h-9 w-9" />
       </div>
-      <h1 className="mt-5 text-xl font-bold text-slate-900">O código expirou</h1>
-      <p className="mt-2 max-w-xs text-[15px] leading-relaxed text-slate-600">
+      <h1 className="animate-surgir mt-5 text-xl font-extrabold text-slate-900">O código expirou</h1>
+      <p className="animate-surgir mt-2 max-w-xs text-[15px] leading-relaxed text-slate-600">
         Cupons valem 5 minutos por segurança. Você não perdeu nada — é só gerar outro quando estiver
         pronto para usar.
       </p>

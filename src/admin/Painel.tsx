@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import { api, ErroApi } from '../api'
 import type { PainelAdmin } from '../tipos'
-import { Aviso, Cartao, Carregando, Indicador } from '../componentes/Ui'
+import { Aviso, Cartao, Indicador } from '../componentes/Ui'
+import { EsqueletoPainel, Revelar } from '../componentes/Movimento'
 import { Colunas, serieDiaria } from '../componentes/Graficos'
 import { Alerta, Loja, Cupom, Usuario, SetaDireita } from '../componentes/Icones'
 import { numero, reais, somarDias } from '../formato'
@@ -30,7 +31,7 @@ export function AdminPainel() {
       .finally(() => setCarregando(false))
   }, [])
 
-  if (carregando) return <Carregando />
+  if (carregando) return <EsqueletoPainel />
   if (erro || !dados) return <Aviso tipo="erro">{erro ?? 'Não consegui carregar o painel.'}</Aviso>
 
   const { assinantes, resgates, lojas, alertas } = dados
@@ -77,7 +78,7 @@ export function AdminPainel() {
 
   return (
     <div className="space-y-5">
-      <div className="grid grid-cols-2 gap-3 lg:grid-cols-4">
+      <div className="cascata grid grid-cols-2 gap-3 lg:grid-cols-4">
         <Indicador
           rotulo="Assinantes pagantes"
           valor={numero(assinantes.pagantes)}
@@ -104,6 +105,7 @@ export function AdminPainel() {
         />
       </div>
 
+      <Revelar>
       <div className="grid gap-5 lg:grid-cols-3">
         <Cartao className="p-4 lg:col-span-2">
           <div className="mb-3 flex items-baseline justify-between gap-2">
@@ -142,7 +144,9 @@ export function AdminPainel() {
           </p>
         </Cartao>
       </div>
+      </Revelar>
 
+      <Revelar>
       <Cartao className="p-4">
         <h2 className="mb-3 flex items-center gap-2 font-bold text-slate-900">
           <Alerta className="h-4 w-4 text-amber-500" />
@@ -176,6 +180,7 @@ export function AdminPainel() {
           </ul>
         )}
       </Cartao>
+      </Revelar>
 
       <Cartao className="flex items-start gap-3 bg-roxo-50 p-4">
         <Cupom className="mt-0.5 h-5 w-5 shrink-0 text-roxo-600" />
