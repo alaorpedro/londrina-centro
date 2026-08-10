@@ -4,6 +4,7 @@ import type { Config, Oferta, SessaoMorador } from '../tipos'
 import { CartaoVitrine, CartaoGrade, CartaoLista } from './CartaoOferta'
 import { Aviso, Botao, Vazio } from '../componentes/Ui'
 import { EsqueletoHome, Revelar } from '../componentes/Movimento'
+import { PanoramaCentro } from '../componentes/Panorama'
 import { Busca, Cupom, Raio, Baixar, Fechar, SetaDireita } from '../componentes/Icones'
 import { reais, primeiroNome } from '../formato'
 import { irPara } from '../rotas'
@@ -244,7 +245,7 @@ function Cabecalho({
   }, [])
 
   return (
-    <header className="relative overflow-hidden bg-roxo-800 px-4 pt-6 pb-12 text-white">
+    <header className="relative overflow-hidden bg-gradient-to-b from-roxo-700 via-roxo-800 to-roxo-900 px-4 pt-6 pb-24 text-white">
       {/* manchas de luz em deriva — o mesmo recurso das capas, para o topo do app
           pertencer ao mesmo sistema visual */}
       <span
@@ -256,6 +257,11 @@ function Cabecalho({
         className="animate-flutuar pointer-events-none absolute -bottom-28 -left-20 h-56 w-56 rounded-full bg-ipe-400 opacity-15 blur-3xl"
         style={{ animationDelay: '2.5s' }}
       />
+
+      {/* O centro de Londrina ancorado no rodapé do cabeçalho. O `bottom-7` põe
+          a linha da calçada acima da busca, que sobe -mt-6 e cobriria o desenho
+          justamente onde ficam os ipês e a base da catedral. */}
+      <PanoramaCentro className="pointer-events-none absolute inset-x-0 bottom-7 h-[132px] w-full" />
 
       <div className="relative">
         <div className="flex items-start justify-between gap-3">

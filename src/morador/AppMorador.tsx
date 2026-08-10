@@ -3,6 +3,7 @@ import { api } from '../api'
 import type { Config, SessaoMorador } from '../tipos'
 import { casar, irPara, useCaminho } from '../rotas'
 import { Carregando } from '../componentes/Ui'
+import { Dock, type ItemDock } from '../componentes/Dock'
 import { Casa, Mapa as IconeMapa, Usuario } from '../componentes/Icones'
 import { Home } from './Home'
 import { Oferta } from './Oferta'
@@ -59,40 +60,25 @@ export function AppMorador({ config }: { config: Config | null }) {
   const comAbas = ['/', '/mapa', '/conta'].includes(caminho)
 
   return (
-    <div className={`mx-auto min-h-screen max-w-lg bg-white ${comAbas ? 'pb-20' : ''}`}>
+    <div className={`mx-auto min-h-screen max-w-lg bg-white ${comAbas ? 'pb-28' : ''}`}>
       {tela}
-      {comAbas && <Abas caminho={caminho} />}
+      {comAbas && (
+        <Dock
+          itens={ABAS}
+          ativo={caminho}
+          aoTrocar={(rota) => {
+            if (rota !== window.location.pathname) irPara(rota)
+          }}
+        />
+      )}
     </div>
   )
 }
 
-function Abas({ caminho }: { caminho: string }) {
-  const abas = [
-    { rota: '/', rotulo: 'Ofertas', Icone: Casa },
-    { rota: '/mapa', rotulo: 'Mapa', Icone: IconeMapa },
-    { rota: '/conta', rotulo: 'Minha conta', Icone: Usuario },
-  ]
-
-  return (
-    <nav className="area-segura-baixo fixed inset-x-0 bottom-0 z-40 mx-auto max-w-lg border-t border-slate-200 bg-white/95 backdrop-blur">
-      <div className="flex">
-        {abas.map(({ rota, rotulo, Icone }) => {
-          const ativa = caminho === rota
-          return (
-            <button
-              key={rota}
-              onClick={() => irPara(rota)}
-              aria-current={ativa ? 'page' : undefined}
-              className={`flex flex-1 flex-col items-center gap-0.5 pt-2.5 pb-1.5 text-[11px] font-semibold transition-colors ${
-                ativa ? 'text-roxo-700' : 'text-slate-400 hover:text-slate-600'
-              }`}
-            >
-              <Icone className="h-6 w-6" />
-              {rotulo}
-            </button>
-          )
-        })}
-      </div>
-    </nav>
-  )
-}
+/* O `id` da aba É a rota: assim o dock não precisa de tabela de tradução, e a
+   aba ativa sai direto do caminho atual. */
+const ABAS: ItemDock[] = [
+  { id: '/', rotulo: 'Ofertas', Icone: Casa },
+  { id: '/mapa', rotulo: 'Mapa', Icone: IconeMapa },
+  { id: '/conta', rotulo: 'Minha conta', Icone: Usuario },
+]
