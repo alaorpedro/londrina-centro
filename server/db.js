@@ -74,6 +74,7 @@ export async function initDb() {
       email       TEXT,
       senha_hash  TEXT NOT NULL,
       bairro      TEXT,
+      demo        BOOLEAN NOT NULL DEFAULT FALSE,
       criado_em   TIMESTAMPTZ NOT NULL DEFAULT now()
     )
   `)
@@ -247,6 +248,13 @@ export async function initDb() {
       em        TIMESTAMPTZ NOT NULL DEFAULT now()
     )
   `)
+
+  /* A tabela nasceu sem `demo` e já existe em produção — CREATE TABLE IF NOT
+     EXISTS não acrescenta coluna em tabela existente, então o ALTER abaixo é o
+     que leva o marcador para lá. Idempotente. */
+  await pool.query(
+    `ALTER TABLE lc_moradores ADD COLUMN IF NOT EXISTS demo BOOLEAN NOT NULL DEFAULT FALSE`,
+  )
 
   await semearConfig()
   console.log('[db] schema pronto')

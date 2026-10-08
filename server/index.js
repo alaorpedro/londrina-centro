@@ -1349,6 +1349,10 @@ app.use((req, res) => {
 const porta = Number(process.env.PORT) || 3000
 
 initDb()
+  /* A re-ancoragem vem ANTES das vigências: ela conserta as datas, e aí o job
+     de vigência não tem contrato nem oferta velha para derrubar. Ordem trocada
+     daria um ciclo bobo de expirar e desexpirar a cada boot. */
+  .then(() => iniciarManutencaoDemo())
   .then(() => iniciarAgendador())
   .catch((e) => console.error('[db] falha ao preparar o schema:', e))
 

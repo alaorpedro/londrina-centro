@@ -292,7 +292,7 @@ async function limpar() {
   console.log('[seed] apagando dados de demonstração…')
   // a cascata das FKs cuida de ofertas, contratos, lojistas e resgates
   await pool.query('DELETE FROM lc_lojas WHERE demo')
-  await pool.query(`DELETE FROM lc_moradores WHERE whatsapp LIKE '43999%'`)
+  await pool.query(`DELETE FROM lc_moradores WHERE demo`)
 }
 
 async function semear() {
@@ -378,8 +378,8 @@ async function semear() {
   for (const [i, nome] of NOMES.entries()) {
     const whatsapp = `43999${String(100000 + i)}` // sempre 11 dígitos, como celular real
     const m = await pool.query(
-      `INSERT INTO lc_moradores (nome, whatsapp, email, senha_hash, bairro, criado_em)
-       VALUES ($1,$2,$3,$4,$5, now() - ($6 || ' days')::interval) RETURNING id`,
+      `INSERT INTO lc_moradores (nome, whatsapp, email, senha_hash, bairro, demo, criado_em)
+       VALUES ($1,$2,$3,$4,$5, TRUE, now() - ($6 || ' days')::interval) RETURNING id`,
       [
         nome, whatsapp,
         `${apelido(nome.split(' ')[0])}${i}@exemplo.com.br`,
