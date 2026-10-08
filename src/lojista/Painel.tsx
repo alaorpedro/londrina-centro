@@ -60,7 +60,7 @@ export function Painel({ recarga }: { recarga: number }) {
           rotulo="Desconto concedido"
           valor={reais(resumo.economia)}
           detalhe="nos últimos 30 dias"
-          cor="text-roxo-800"
+          cor="text-navy-800"
         />
       </div>
 
@@ -76,7 +76,7 @@ export function Painel({ recarga }: { recarga: number }) {
         />
         {dados.por_dia.length > 0 && (
           <p className="mt-2 text-xs text-slate-500">
-            Coluna em roxo é hoje. Passe o mouse para ver o número de cada dia.
+            Coluna em destaque é hoje. Passe o mouse para ver o número de cada dia.
           </p>
         )}
       </Cartao>
@@ -133,9 +133,9 @@ export function Painel({ recarga }: { recarga: number }) {
         </Cartao>
       )}
 
-      <Cartao className="flex items-start gap-3 bg-roxo-50 p-4">
-        <Cupom className="mt-0.5 h-5 w-5 shrink-0 text-roxo-600" />
-        <p className="text-sm leading-relaxed text-roxo-900">
+      <Cartao className="flex items-start gap-3 bg-navy-50 p-4">
+        <Cupom className="mt-0.5 h-5 w-5 shrink-0 text-navy-600" />
+        <p className="text-sm leading-relaxed text-navy-900">
           <strong>Dica:</strong> lojas que mantêm ao menos duas ofertas ativas recebem mais que o
           dobro de visitas do clube. Crie a próxima na aba <strong>Minhas ofertas</strong>.
         </p>

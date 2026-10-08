@@ -94,7 +94,7 @@ export function Ofertas({ recarga, aoMudar }: { recarga: number; aoMudar: () => 
                     <div className="flex flex-wrap items-center gap-1.5">
                       <h3 className="font-semibold text-slate-900">{o.titulo}</h3>
                       {o.relampago && (
-                        <Etiqueta cor="ipe">
+                        <Etiqueta cor="verde">
                           <Raio className="h-3 w-3" />
                           relâmpago
                         </Etiqueta>
@@ -291,7 +291,7 @@ function FormularioOferta({
                   onClick={() => setDias(ativo ? dias.filter((x) => x !== i) : [...dias, i])}
                   className={`h-10 flex-1 rounded-lg border text-sm font-medium capitalize transition ${
                     ativo
-                      ? 'border-roxo-700 bg-roxo-700 text-white'
+                      ? 'border-navy-700 bg-navy-700 text-white'
                       : 'border-slate-300 text-slate-600'
                   }`}
                 >

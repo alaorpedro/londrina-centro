@@ -270,8 +270,8 @@ const CONFIG_PADRAO = {
   minutos_validade_codigo: 5,
   dias_carencia: 5,
   // enquanto a marca não fecha, é isto que aparece no app
-  nome_app: 'Londrina Centro',
-  chamada: 'O centro de Londrina com desconto o ano inteiro.',
+  nome_app: 'Club43 de Vantagens',
+  chamada: 'Mais para você, mais para Londrina.',
 }
 
 async function semearConfig() {

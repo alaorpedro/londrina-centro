@@ -94,14 +94,14 @@ export function Cupom({ id }: { id: string }) {
   const acabando = restante <= 60
 
   return (
-    <div className="relative flex min-h-screen flex-col overflow-hidden bg-roxo-800 text-white">
+    <div className="relative flex min-h-screen flex-col overflow-hidden bg-navy-800 text-white">
       <span
         aria-hidden="true"
-        className="animate-flutuar pointer-events-none absolute -top-32 -right-24 h-80 w-80 rounded-full bg-roxo-500 opacity-40 blur-3xl"
+        className="animate-flutuar pointer-events-none absolute -top-32 -right-24 h-80 w-80 rounded-full bg-navy-500 opacity-40 blur-3xl"
       />
       <span
         aria-hidden="true"
-        className="animate-flutuar pointer-events-none absolute -bottom-32 -left-24 h-72 w-72 rounded-full bg-roxo-600 opacity-35 blur-3xl"
+        className="animate-flutuar pointer-events-none absolute -bottom-32 -left-24 h-72 w-72 rounded-full bg-navy-600 opacity-35 blur-3xl"
         style={{ animationDelay: '3s' }}
       />
 
@@ -109,24 +109,24 @@ export function Cupom({ id }: { id: string }) {
         <button
           onClick={() => irPara('/')}
           aria-label="Voltar"
-          className="pressionavel rounded-xl p-2 text-roxo-200 hover:bg-white/10"
+          className="pressionavel rounded-xl p-2 text-navy-200 hover:bg-white/10"
         >
           <Seta />
         </button>
-        <p className="min-w-0 flex-1 truncate text-sm font-semibold text-roxo-100">
+        <p className="min-w-0 flex-1 truncate text-sm font-semibold text-navy-100">
           {estado.loja_nome}
         </p>
       </header>
 
       <div className="relative flex flex-1 flex-col items-center justify-center px-6 pb-10 text-center">
-        <p className="animate-entrar text-sm text-roxo-200">Mostre este código ao atendente</p>
+        <p className="animate-entrar text-sm text-navy-200">Mostre este código ao atendente</p>
 
         <div className="animate-escala mt-6">
           <AnelProgresso
             proporcao={proporcao}
             tamanho={272}
             espessura={7}
-            cor={acabando ? 'var(--color-ipe-400)' : '#ffffff'}
+            cor={acabando ? 'var(--color-verde-400)' : '#ffffff'}
           >
             {/* 2,6rem é o teto: acima disso os seis dígitos encostam no anel
                 num iPhone de 375px, e código apertado é código lido errado */}
@@ -138,7 +138,7 @@ export function Cupom({ id }: { id: string }) {
             </span>
             <span
               className={`tabular mt-3 flex items-center gap-1.5 text-sm font-bold ${
-                acabando ? 'animate-pulsar text-ipe-300' : 'text-roxo-200'
+                acabando ? 'animate-pulsar text-verde-300' : 'text-navy-200'
               }`}
             >
               <Relogio className="h-4 w-4" />
@@ -151,7 +151,7 @@ export function Cupom({ id }: { id: string }) {
           {estado.titulo}
         </h1>
 
-        <p className="mt-8 max-w-xs text-xs leading-relaxed text-roxo-300">
+        <p className="mt-8 max-w-xs text-xs leading-relaxed text-navy-300">
           O atendente digita esses números no painel da loja. Não feche esta tela até a confirmação
           aparecer.
         </p>

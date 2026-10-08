@@ -121,11 +121,11 @@ export function Entrar({ aoEntrar }: { aoEntrar: () => Promise<void> }) {
         >
           {modo === 'entrar' ? (
             <>
-              Ainda não tem conta? <span className="font-bold text-roxo-700">Cadastre-se</span>
+              Ainda não tem conta? <span className="font-bold text-navy-700">Cadastre-se</span>
             </>
           ) : (
             <>
-              Já tem conta? <span className="font-bold text-roxo-700">Entrar</span>
+              Já tem conta? <span className="font-bold text-navy-700">Entrar</span>
             </>
           )}
         </button>

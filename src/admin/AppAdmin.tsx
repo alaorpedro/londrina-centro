@@ -3,7 +3,8 @@ import { api, ErroApi } from '../api'
 import type { Config } from '../tipos'
 import { irPara, useCaminho } from '../rotas'
 import { Aviso, Botao, Campo, Carregando } from '../componentes/Ui'
-import { Cadeado, Grafico, Loja, Sair, Usuario, Etiqueta as IconeEtiqueta } from '../componentes/Icones'
+import { Grafico, Loja, Sair, Usuario, Etiqueta as IconeEtiqueta } from '../componentes/Icones'
+import { LogoEscura } from '../componentes/Logo'
 import { AdminPainel } from './Painel'
 import { AdminLojas } from './Lojas'
 import { AdminOfertas } from './Ofertas'
@@ -49,17 +50,15 @@ export function AppAdmin({ config }: { config: Config | null }) {
     <div className="min-h-screen bg-slate-50">
       <header className="vidro sticky top-0 z-40 shadow-suave print:hidden">
         <div className="mx-auto flex max-w-6xl items-center gap-3 px-4 py-3">
-          <span className="flex h-10 w-10 items-center justify-center rounded-xl bg-gradient-to-br from-roxo-600 to-roxo-800 text-white shadow-media">
-            <Grafico className="h-5 w-5" />
-          </span>
+          <LogoEscura className="h-9 w-auto shrink-0" />
           <div className="min-w-0 flex-1">
             <p className="font-extrabold tracking-tight text-slate-900">Administração</p>
             <p className="truncate text-xs text-slate-500">
-              {config?.nome_app ?? 'Londrina Centro'}
+              {config?.nome_app ?? 'Club43 de Vantagens'}
             </p>
           </div>
           {config?.demo && (
-            <span className="hidden rounded-full bg-ipe-100 px-2.5 py-1 text-xs font-bold text-ipe-700 sm:inline">
+            <span className="hidden rounded-full bg-verde-100 px-2.5 py-1 text-xs font-bold text-verde-700 sm:inline">
               piloto · pagamento em modo demonstração
             </span>
           )}
@@ -87,7 +86,7 @@ export function AppAdmin({ config }: { config: Config | null }) {
                   aria-current={ativa ? 'page' : undefined}
                   className={`pressionavel flex shrink-0 items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold whitespace-nowrap transition ${
                     ativa
-                      ? 'bg-roxo-700 text-white shadow-media'
+                      ? 'bg-navy-700 text-white shadow-media'
                       : 'text-slate-500 hover:bg-slate-100 hover:text-slate-800'
                   }`}
                 >
@@ -128,9 +127,7 @@ function EntrarAdmin({ aoEntrar }: { aoEntrar: () => Promise<void> }) {
     <div className="flex min-h-screen items-center justify-center bg-slate-100 px-5">
       <div className="w-full max-w-sm">
         <div className="animate-surgir mb-6 text-center">
-          <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-roxo-600 to-roxo-800 text-white shadow-alta">
-            <Cadeado className="h-7 w-7" />
-          </div>
+          <LogoEscura className="mx-auto mb-4 h-14 w-auto" />
           <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">Administração</h1>
           <p className="mt-1 text-[15px] text-slate-600">Acesso restrito à equipe do clube.</p>
         </div>

@@ -101,7 +101,7 @@ export function AdminPainel() {
           rotulo="Receita do mês"
           valor={reais(assinantes.receita_mes)}
           detalhe={`${reais(assinantes.receita_total)} acumulado`}
-          cor="text-roxo-800"
+          cor="text-navy-800"
         />
       </div>
 
@@ -182,9 +182,9 @@ export function AdminPainel() {
       </Cartao>
       </Revelar>
 
-      <Cartao className="flex items-start gap-3 bg-roxo-50 p-4">
-        <Cupom className="mt-0.5 h-5 w-5 shrink-0 text-roxo-600" />
-        <p className="text-sm leading-relaxed text-roxo-900">
+      <Cartao className="flex items-start gap-3 bg-navy-50 p-4">
+        <Cupom className="mt-0.5 h-5 w-5 shrink-0 text-navy-600" />
+        <p className="text-sm leading-relaxed text-navy-900">
           O <strong>Relatório ACIL</strong> transforma esses números na peça institucional —
           economia total gerada, lojas participantes e de que bairros vem quem visita o centro.
         </p>
@@ -206,7 +206,7 @@ function Linha({
     <div className="flex items-baseline justify-between gap-3">
       <dt className="text-sm text-slate-600">{rotulo}</dt>
       <dd
-        className={`shrink-0 font-bold ${destaque ? 'text-lg text-roxo-800' : 'text-slate-900'}`}
+        className={`shrink-0 font-bold ${destaque ? 'text-lg text-navy-800' : 'text-slate-900'}`}
       >
         {valor}
       </dd>

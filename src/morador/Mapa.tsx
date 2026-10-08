@@ -143,7 +143,7 @@ export function Mapa() {
                   detalhe={
                     <span className="flex shrink-0 items-center gap-1.5">
                       {(l.ofertas_ativas ?? 0) > 0 ? (
-                        <Etiqueta cor="roxo">
+                        <Etiqueta cor="navy">
                           {l.ofertas_ativas} {l.ofertas_ativas === 1 ? 'oferta' : 'ofertas'}
                         </Etiqueta>
                       ) : (

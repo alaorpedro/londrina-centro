@@ -58,7 +58,7 @@ const LOJAS = [
     referencia: 'Em frente à Praça Rocha Pombo',
     lat: -23.3106, lng: -51.1621,
     horario: 'Seg a sex 7h–19h · Sáb 8h–14h',
-    cor: '#B45309',
+    cor: '#8C5A2B',
     vendedor: 'Rafael Meireles',
   },
   {
@@ -69,7 +69,7 @@ const LOJAS = [
     referencia: 'Meio do calçadão, ao lado da banca',
     lat: -23.3114, lng: -51.1607,
     horario: 'Seg a sex 9h–18h · Sáb 9h–13h',
-    cor: '#7C2D12',
+    cor: '#7A4327',
     vendedor: 'Rafael Meireles',
   },
   {
@@ -91,7 +91,7 @@ const LOJAS = [
     referencia: 'Edifício Centro Comercial, 3º andar',
     lat: -23.3122, lng: -51.1615,
     horario: 'Ter a sáb 9h–19h',
-    cor: '#BE185D',
+    cor: '#A3365B',
     vendedor: 'Camila Fontes',
   },
   {
@@ -102,7 +102,7 @@ const LOJAS = [
     referencia: 'Próximo ao Terminal Central',
     lat: -23.3089, lng: -51.1652,
     horario: 'Seg a sáb 8h–20h',
-    cor: '#166534',
+    cor: '#1F6B3A',
     vendedor: 'Rafael Meireles',
   },
   {
@@ -113,7 +113,7 @@ const LOJAS = [
     referencia: 'Ao lado do cinema antigo',
     lat: -23.3131, lng: -51.1596,
     horario: 'Seg a sáb 9h–19h',
-    cor: '#4338CA',
+    cor: '#1E4FA3',
     vendedor: 'Camila Fontes',
   },
   {
@@ -124,7 +124,7 @@ const LOJAS = [
     referencia: 'Perto da esquina com a Av. Paraná',
     lat: -23.3110, lng: -51.1613,
     horario: 'Seg a sex 9h–18h30 · Sáb 9h–14h',
-    cor: '#A21CAF',
+    cor: '#B04A2F',
     vendedor: 'Rafael Meireles',
   },
   {
@@ -135,7 +135,7 @@ const LOJAS = [
     referencia: 'Sobreloja, entrada pela lateral',
     lat: -23.3117, lng: -51.1641,
     horario: 'Seg a sáb 9h–20h',
-    cor: '#1F2937',
+    cor: '#263445',
     vendedor: 'Camila Fontes',
   },
   {
@@ -146,7 +146,7 @@ const LOJAS = [
     referencia: 'Ao lado do posto',
     lat: -23.3082, lng: -51.1668,
     horario: 'Seg a sáb 8h–18h',
-    cor: '#0D9488',
+    cor: '#0F8A7E',
     vendedor: 'Rafael Meireles',
   },
   {
@@ -157,7 +157,7 @@ const LOJAS = [
     referencia: 'Quase esquina com a Av. Higienópolis',
     lat: -23.3094, lng: -51.1645,
     horario: 'Seg a sex 9h–18h · Sáb 9h–13h',
-    cor: '#9A3412',
+    cor: '#8A6D1F',
     vendedor: 'Camila Fontes',
   },
 ]

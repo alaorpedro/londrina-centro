@@ -4,7 +4,7 @@ import type { Config, Oferta, SessaoMorador } from '../tipos'
 import { CartaoVitrine, CartaoGrade, CartaoLista } from './CartaoOferta'
 import { Aviso, Botao, Vazio } from '../componentes/Ui'
 import { EsqueletoHome, Revelar } from '../componentes/Movimento'
-import { PanoramaCentro } from '../componentes/Panorama'
+import { Logo } from '../componentes/Logo'
 import { Busca, Cupom, Raio, Baixar, Fechar, SetaDireita } from '../componentes/Icones'
 import { reais, primeiroNome } from '../formato'
 import { irPara } from '../rotas'
@@ -83,7 +83,7 @@ export function Home({ sessao, config }: { sessao: SessaoMorador; config: Config
             placeholder="Buscar loja ou promoção"
             aria-label="Buscar loja ou promoção"
             className="w-full rounded-2xl bg-white py-3.5 pr-4 pl-12 text-base shadow-alta outline-none
-              transition placeholder:text-slate-400 focus:ring-2 focus:ring-roxo-300"
+              transition placeholder:text-slate-400 focus:ring-2 focus:ring-navy-300"
           />
           {busca && (
             <button
@@ -130,7 +130,7 @@ export function Home({ sessao, config }: { sessao: SessaoMorador; config: Config
               <TituloSecao
                 titulo="Oportunidades"
                 legenda="acabam rápido"
-                icone={<Raio className="h-4 w-4 text-ipe-500" />}
+                icone={<Raio className="h-4 w-4 text-verde-500" />}
               />
               {/*
                 Aqui é cascata (atraso por CSS) e não Revelar: o Revelar espera o
@@ -245,48 +245,42 @@ function Cabecalho({
   }, [])
 
   return (
-    <header className="relative overflow-hidden bg-gradient-to-b from-roxo-700 via-roxo-800 to-roxo-900 px-4 pt-6 pb-24 text-white">
+    <header className="relative overflow-hidden bg-gradient-to-b from-navy-700 via-navy-800 to-navy-900 px-4 pt-6 pb-12 text-white">
       {/* manchas de luz em deriva — o mesmo recurso das capas, para o topo do app
           pertencer ao mesmo sistema visual */}
       <span
         aria-hidden="true"
-        className="animate-flutuar pointer-events-none absolute -top-24 -right-16 h-64 w-64 rounded-full bg-roxo-500 opacity-40 blur-3xl"
+        className="animate-flutuar pointer-events-none absolute -top-24 -right-16 h-64 w-64 rounded-full bg-navy-500 opacity-40 blur-3xl"
       />
       <span
         aria-hidden="true"
-        className="animate-flutuar pointer-events-none absolute -bottom-28 -left-20 h-56 w-56 rounded-full bg-ipe-400 opacity-15 blur-3xl"
+        className="animate-flutuar pointer-events-none absolute -bottom-28 -left-20 h-56 w-56 rounded-full bg-verde-400 opacity-15 blur-3xl"
         style={{ animationDelay: '2.5s' }}
       />
 
-      {/* O centro de Londrina ancorado no rodapé do cabeçalho. O `bottom-7` põe
-          a linha da calçada acima da busca, que sobe -mt-6 e cobriria o desenho
-          justamente onde ficam os ipês e a base da catedral. */}
-      <PanoramaCentro className="pointer-events-none absolute inset-x-0 bottom-7 h-[132px] w-full" />
 
       <div className="relative">
         <div className="flex items-start justify-between gap-3">
-          <div className="min-w-0">
-            <p className="text-sm text-roxo-200">
-              {sessao.logado ? `${saudacao}, ${primeiroNome(sessao.morador?.nome)}` : saudacao}
-            </p>
-            <h1 className="mt-0.5 text-[1.75rem] leading-tight font-extrabold tracking-tight">
-              {config?.nome_app ?? 'Londrina Centro'}
-            </h1>
-          </div>
+          {/* a marca no lugar do nome em texto: o lockup é vetor do arquivo
+              original, então fica nítido em qualquer tela */}
+          <Logo className="h-14 w-auto sm:h-16" />
           {sessao.assinante && (
-            <span className="mt-1 shrink-0 rounded-full bg-ipe-400 px-2.5 py-1 text-[11px] font-extrabold tracking-wide text-slate-900 shadow-media">
+            <span className="mt-1 shrink-0 rounded-full bg-verde-500 px-2.5 py-1 text-[11px] font-extrabold tracking-wide text-navy-950 shadow-media">
               ASSINANTE
             </span>
           )}
         </div>
 
-        <p className="mt-1.5 max-w-[22rem] text-sm leading-relaxed text-roxo-100">
-          {config?.chamada ?? 'O centro de Londrina com desconto o ano inteiro.'}
+        <p className="mt-4 text-[15px] text-navy-100">
+          {sessao.logado ? `${saudacao}, ${primeiroNome(sessao.morador?.nome)}` : saudacao} —{' '}
+          <span className="text-navy-200">
+            {config?.chamada ?? 'Mais para você, mais para Londrina.'}
+          </span>
         </p>
 
         {ofertas > 0 && (
           <p className="mt-3 inline-flex items-center gap-1.5 rounded-full bg-white/12 px-3 py-1.5 text-xs font-semibold backdrop-blur">
-            <span className="h-1.5 w-1.5 rounded-full bg-emerald-400" />
+            <span className="h-1.5 w-1.5 rounded-full bg-verde-400" />
             {ofertas} ofertas ativas agora
           </p>
         )}
@@ -335,7 +329,7 @@ function Chip({
       onClick={aoClicar}
       className={`pressionavel shrink-0 rounded-full px-4 py-2 text-sm font-semibold whitespace-nowrap transition ${
         ativo
-          ? 'bg-roxo-700 text-white shadow-media'
+          ? 'bg-navy-700 text-white shadow-media'
           : 'bg-white text-slate-600 shadow-suave hover:text-slate-900'
       }`}
     >
@@ -362,23 +356,23 @@ function FaixaAssinatura({
 
   return (
     <div className="px-4 pt-5">
-      <div className="animate-surgir relative overflow-hidden rounded-3xl bg-gradient-to-br from-roxo-700 via-roxo-800 to-roxo-950 p-5 text-white shadow-alta">
+      <div className="animate-surgir relative overflow-hidden rounded-3xl bg-gradient-to-br from-navy-700 via-navy-800 to-navy-950 p-5 text-white shadow-alta">
         <span
           aria-hidden="true"
-          className="animate-flutuar pointer-events-none absolute -top-16 -right-10 h-40 w-40 rounded-full bg-ipe-400 opacity-20 blur-2xl"
+          className="animate-flutuar pointer-events-none absolute -top-16 -right-10 h-40 w-40 rounded-full bg-verde-400 opacity-20 blur-2xl"
         />
         <div className="relative">
-          <p className="text-sm leading-relaxed text-roxo-100">
+          <p className="text-sm leading-relaxed text-navy-100">
             Você está vendo as ofertas, mas ainda não consegue usar.
           </p>
 
           {economiaAoAlcance > 0 && (
             <p className="mt-3 text-[15px] leading-snug">
               Tem{' '}
-              <strong className="text-ipe-300">{reais(economiaAoAlcance)}</strong> em desconto
+              <strong className="text-verde-300">{reais(economiaAoAlcance)}</strong> em desconto
               disponível no centro agora
               {vezes >= 2 && (
-                <span className="text-roxo-200"> — {vezes}× o valor da assinatura</span>
+                <span className="text-navy-200"> — {vezes}× o valor da assinatura</span>
               )}
               .
             </p>
@@ -386,7 +380,7 @@ function FaixaAssinatura({
 
           <p className="mt-4 flex items-baseline gap-2">
             <span className="text-3xl font-extrabold tracking-tight">{reais(preco)}</span>
-            <span className="text-sm text-roxo-200">por ano · ou 3x sem juros</span>
+            <span className="text-sm text-navy-200">por ano · ou 3x sem juros</span>
           </p>
 
           <Botao
@@ -454,13 +448,13 @@ function InstalarNaTela() {
 
   return (
     <div className="px-4 pt-4">
-      <div className="animate-entrar flex items-start gap-3 rounded-2xl bg-roxo-50 p-3.5 ring-1 ring-roxo-100">
-        <span className="mt-0.5 rounded-lg bg-roxo-100 p-1.5 text-roxo-600">
+      <div className="animate-entrar flex items-start gap-3 rounded-2xl bg-navy-50 p-3.5 ring-1 ring-navy-100">
+        <span className="mt-0.5 rounded-lg bg-navy-100 p-1.5 text-navy-600">
           <Baixar className="h-4 w-4" />
         </span>
         <div className="min-w-0 flex-1">
-          <p className="text-sm font-bold text-roxo-900">Instale na tela inicial</p>
-          <p className="mt-0.5 text-sm leading-relaxed text-roxo-800">
+          <p className="text-sm font-bold text-navy-900">Instale na tela inicial</p>
+          <p className="mt-0.5 text-sm leading-relaxed text-navy-800">
             {ios
               ? 'Toque em Compartilhar e depois em “Adicionar à Tela de Início” para receber os avisos de oferta.'
               : 'Fica igual a um aplicativo e você passa a receber os avisos de oferta.'}
@@ -468,7 +462,7 @@ function InstalarNaTela() {
           {!ios && (
             <button
               onClick={instalar}
-              className="mt-2 text-sm font-bold text-roxo-700 underline underline-offset-2"
+              className="mt-2 text-sm font-bold text-navy-700 underline underline-offset-2"
             >
               Instalar agora
             </button>
@@ -477,7 +471,7 @@ function InstalarNaTela() {
         <button
           onClick={dispensar}
           aria-label="Dispensar"
-          className="rounded-lg p-1.5 text-roxo-400 hover:bg-roxo-100"
+          className="rounded-lg p-1.5 text-navy-400 hover:bg-navy-100"
         >
           <Fechar className="h-4 w-4" />
         </button>

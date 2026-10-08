@@ -4,6 +4,7 @@ import type { RelatorioAcil } from '../tipos'
 import { Aviso, Botao, Cartao, Carregando } from '../componentes/Ui'
 import { BarrasRanking, Colunas, PorHora } from '../componentes/Graficos'
 import { Baixar } from '../componentes/Icones'
+import { Logo } from '../componentes/Logo'
 import { dataPorExtenso, numero, reais, DIAS_CURTOS } from '../formato'
 
 /*
@@ -59,7 +60,7 @@ export function AdminRelatorio() {
             value={de}
             max={ate}
             onChange={(e) => setDe(e.target.value)}
-            className="rounded-xl border border-slate-300 px-3 py-2 outline-none focus:border-roxo-500"
+            className="rounded-xl border border-slate-300 px-3 py-2 outline-none focus:border-navy-500"
           />
         </label>
         <label className="text-sm">
@@ -70,7 +71,7 @@ export function AdminRelatorio() {
             min={de}
             max={hoje}
             onChange={(e) => setAte(e.target.value)}
-            className="rounded-xl border border-slate-300 px-3 py-2 outline-none focus:border-roxo-500"
+            className="rounded-xl border border-slate-300 px-3 py-2 outline-none focus:border-navy-500"
           />
         </label>
         <Botao variante="secundario" onClick={() => window.print()}>
@@ -81,10 +82,10 @@ export function AdminRelatorio() {
 
       {/* capa */}
       <Cartao className="overflow-hidden">
-        <div className="bg-roxo-800 px-6 py-7 text-white">
-          <p className="text-sm text-roxo-200">Relatório de impacto no comércio central</p>
-          <h1 className="mt-1 text-2xl font-extrabold">Londrina Centro</h1>
-          <p className="mt-1 text-sm text-roxo-100">
+        <div className="bg-navy-800 px-6 py-7 text-white">
+          <Logo className="mb-3 h-12 w-auto" />
+          <p className="text-sm text-navy-200">Relatório de impacto no comércio de Londrina</p>
+          <p className="mt-1 text-sm text-navy-100">
             {dataPorExtenso(dados.de)} a {dataPorExtenso(dados.ate)}
           </p>
         </div>
@@ -227,7 +228,7 @@ export function AdminRelatorio() {
       </Cartao>
 
       <p className="pb-4 text-center text-xs text-slate-400">
-        Relatório gerado pelo Londrina Centro · dados de {dataPorExtenso(dados.de)} a{' '}
+        Relatório gerado pelo Club43 de Vantagens · dados de {dataPorExtenso(dados.de)} a{' '}
         {dataPorExtenso(dados.ate)}
       </p>
     </div>
@@ -251,7 +252,7 @@ function Numero({
       {/* figura herói: proporcional, nunca tabular — em corpo grande tabular
           dá a todo dígito a largura do zero e o número parece frouxo */}
       <p
-        className={`mt-1 font-extrabold ${heroi ? 'text-4xl text-roxo-800' : 'text-3xl text-slate-900'}`}
+        className={`mt-1 font-extrabold ${heroi ? 'text-4xl text-navy-800' : 'text-3xl text-slate-900'}`}
       >
         {valor}
       </p>

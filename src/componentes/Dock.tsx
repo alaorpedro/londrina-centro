@@ -410,7 +410,7 @@ export function Dock({
         <div
           ref={rotuloRef}
           aria-hidden="true"
-          className="pointer-events-none absolute top-0 left-0 rounded-full bg-roxo-700 px-2.5 py-[3px]
+          className="pointer-events-none absolute top-0 left-0 rounded-full bg-navy-700 px-2.5 py-[3px]
             text-[10px] font-bold tracking-[0.14em] whitespace-nowrap text-white uppercase shadow-media"
         />
 
@@ -429,7 +429,7 @@ export function Dock({
               <stop offset="1" stopColor="#f8fafc" />
             </linearGradient>
           </defs>
-          <path ref={pathRef} fill="url(#placaDock)" stroke="#4a1a9414" strokeWidth="1" />
+          <path ref={pathRef} fill="url(#placaDock)" stroke="#052a5214" strokeWidth="1" />
         </svg>
 
         {/* botões reais: clique, teclado e leitor de tela. O ícone deles fica
@@ -448,7 +448,7 @@ export function Dock({
               aria-label={t.rotulo}
               aria-selected={t.id === ativo}
               className="flex-1 cursor-pointer rounded-full opacity-0 focus-visible:opacity-100
-                focus-visible:outline-2 focus-visible:outline-offset-[-6px] focus-visible:outline-roxo-600"
+                focus-visible:outline-2 focus-visible:outline-offset-[-6px] focus-visible:outline-navy-600"
             >
               <span className="sr-only">{t.rotulo}</span>
             </button>
@@ -482,7 +482,7 @@ export function Dock({
             height: RAIO_BOLA * 2,
             touchAction: 'none',
             willChange: 'transform',
-            background: 'radial-gradient(circle at 32% 26%, #a582fc, #6d28d9 58%, #4a1a94 100%)',
+            background: 'radial-gradient(circle at 32% 26%, #5a8abc, #1c5798 58%, #052a52 100%)',
             boxShadow: '0 10px 20px -8px rgba(109,40,217,.6)',
           }}
           role="presentation"

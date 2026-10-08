@@ -6,8 +6,10 @@ import { diaMes, somarDias } from '../formato'
 
   Decisão de leitura: todos são de SÉRIE ÚNICA. O trabalho dos dados aqui é
   sempre magnitude ("quantos resgates neste dia", "quais lojas puxam mais"),
-  nunca identidade — então a cor é sequencial de uma hue só (#6D28D9, o roxo da
-  marca, validado contra a superfície clara) e não existe paleta categórica para
+  nunca identidade — então a cor é sequencial de uma hue só. É o navy-600
+  (#1C5798), e NÃO o navy do logo (#052A52): o do logo tem L 0.285 e cai fora
+  da banda de luminosidade do validador. Cor de marca e cor de dado são
+  escolhas diferentes e não existe paleta categórica para
   dar errado sob daltonismo. Onde um valor precisa se destacar do resto (o dia
   de hoje, a loja campeã), a forma é ênfase: a hue no marco em foco e cinza de
   recuo no contexto — não uma segunda cor.
@@ -22,7 +24,7 @@ import { diaMes, somarDias } from '../formato'
   Sem legenda: com uma série só, o título já diz o que está plotado.
 */
 
-const HUE = '#6D28D9'
+const HUE = '#1C5798'
 const RECUO = '#CBD5E1'
 const GRADE = '#E2E8F0'
 const EIXO = '#94A3B8'
@@ -389,9 +391,9 @@ export function Medidor({
         <span className="text-sm text-slate-600">{rotulo}</span>
         <span className="text-sm font-semibold text-slate-900">{valor}</span>
       </div>
-      <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-roxo-100">
+      <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-navy-100">
         <div
-          className="h-full rounded-full bg-roxo-700 transition-[width] duration-500"
+          className="h-full rounded-full bg-navy-700 transition-[width] duration-500"
           style={{ width: `${p * 100}%` }}
         />
       </div>

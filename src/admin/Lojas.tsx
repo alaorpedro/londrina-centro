@@ -104,7 +104,7 @@ export function AdminLojas() {
                   )}
                   {l.demo && <Etiqueta cor="azul">demonstração</Etiqueta>}
                   {l.ofertas_pendentes > 0 && (
-                    <Etiqueta cor="ipe">{l.ofertas_pendentes} p/ aprovar</Etiqueta>
+                    <Etiqueta cor="verde">{l.ofertas_pendentes} p/ aprovar</Etiqueta>
                   )}
                 </div>
                 <p className="mt-0.5 text-sm text-slate-500">
@@ -297,7 +297,7 @@ function FormularioLoja({
         <Campo
           rotulo="Cor da loja"
           type="color"
-          value={campos.cor ?? '#5B21B6'}
+          value={campos.cor ?? '#052A52'}
           onChange={set('cor')}
           dica="Identifica a loja nos cartões e no mapa."
         />

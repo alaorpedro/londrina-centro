@@ -48,7 +48,7 @@ function formatar(n: number) {
 function Relampago({ compacto = false }: { compacto?: boolean }) {
   return (
     <span
-      className={`inline-flex items-center gap-1 rounded-full bg-ipe-400 font-bold text-slate-900 uppercase shadow-suave ${
+      className={`inline-flex items-center gap-1 rounded-full bg-verde-400 font-bold text-slate-900 uppercase shadow-suave ${
         compacto ? 'px-1.5 py-0.5 text-[9px]' : 'px-2.5 py-1 text-[10px]'
       }`}
     >

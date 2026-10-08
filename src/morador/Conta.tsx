@@ -67,7 +67,7 @@ export function Conta({ sessao, aoSair }: { sessao: SessaoMorador; aoSair: () =>
         <Revelar>
           <Cartao className="p-4">
             <div className="flex items-start gap-3">
-              <Monograma nome={sessao.morador?.nome ?? '?'} cor="#6d28d9" className="h-12 w-12 text-sm" />
+              <Monograma nome={sessao.morador?.nome ?? '?'} cor="#1c5798" className="h-12 w-12 text-sm" />
               <div className="min-w-0 flex-1">
                 <p className="font-bold text-slate-900">{sessao.morador?.nome}</p>
                 <p className="tabular text-sm text-slate-500">{sessao.morador?.whatsapp}</p>
@@ -85,7 +85,7 @@ export function Conta({ sessao, aoSair }: { sessao: SessaoMorador; aoSair: () =>
             {conta.assinatura ? (
               <div className="mt-4 border-t border-slate-100 pt-3.5">
                 <div className="flex items-center gap-2 text-sm text-slate-600">
-                  <Calendario className="h-4 w-4 text-roxo-400" />
+                  <Calendario className="h-4 w-4 text-navy-400" />
                   {conta.assinatura.ativa ? (
                     <>
                       Válida até <strong>{dataBr(conta.assinatura.vence_em)}</strong>
@@ -179,21 +179,21 @@ function Economia({ conta }: { conta: ContaMorador }) {
   const compensou = pago > 0 && saldo > 0
 
   return (
-    <section className="relative overflow-hidden bg-roxo-800 px-5 pt-7 pb-8 text-center text-white">
+    <section className="relative overflow-hidden bg-navy-800 px-5 pt-7 pb-8 text-center text-white">
       <span
         aria-hidden="true"
-        className="animate-flutuar pointer-events-none absolute -top-24 -left-20 h-64 w-64 rounded-full bg-roxo-500 opacity-40 blur-3xl"
+        className="animate-flutuar pointer-events-none absolute -top-24 -left-20 h-64 w-64 rounded-full bg-navy-500 opacity-40 blur-3xl"
       />
       <span
         aria-hidden="true"
-        className="animate-flutuar pointer-events-none absolute -right-16 -bottom-20 h-56 w-56 rounded-full bg-ipe-400 opacity-15 blur-3xl"
+        className="animate-flutuar pointer-events-none absolute -right-16 -bottom-20 h-56 w-56 rounded-full bg-verde-400 opacity-15 blur-3xl"
         style={{ animationDelay: '2s' }}
       />
 
       <div className="relative">
-        <p className="text-sm text-roxo-200">Você já economizou</p>
+        <p className="text-sm text-navy-200">Você já economizou</p>
         <p className="mt-1 text-5xl font-extrabold tracking-tight">{reais(total)}</p>
-        <p className="mt-2 text-sm text-roxo-100">
+        <p className="mt-2 text-sm text-navy-100">
           em {conta.usos} {plural(conta.usos, 'cupom usado', 'cupons usados')}
         </p>
 
@@ -202,11 +202,11 @@ function Economia({ conta }: { conta: ContaMorador }) {
             {compensou ? (
               <>
                 Sua assinatura custou {reais(pago)}. Você já está{' '}
-                <strong className="text-ipe-300">{reais(saldo)} no lucro</strong>.
+                <strong className="text-verde-300">{reais(saldo)} no lucro</strong>.
               </>
             ) : (
               <>
-                Faltam <strong className="text-ipe-300">{reais(Math.abs(saldo))}</strong> de economia
+                Faltam <strong className="text-verde-300">{reais(Math.abs(saldo))}</strong> de economia
                 para a assinatura se pagar.
               </>
             )}

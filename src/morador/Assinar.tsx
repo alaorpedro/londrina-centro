@@ -46,10 +46,10 @@ export function Assinar({ config, aoAssinar }: { config: Config | null; aoAssina
     <div className="pb-10">
       <BarraTopo titulo="Assinar o clube" aoVoltar={voltar} />
 
-      <div className="bg-roxo-800 px-5 pt-6 pb-8 text-white">
-        <p className="text-sm text-roxo-200">Acesso completo por 12 meses</p>
+      <div className="bg-navy-800 px-5 pt-6 pb-8 text-white">
+        <p className="text-sm text-navy-200">Acesso completo por 12 meses</p>
         <p className="mt-1 text-4xl font-extrabold">{reais(precoCartao)}</p>
-        <p className="mt-1 text-sm text-roxo-100">
+        <p className="mt-1 text-sm text-navy-100">
           menos de {reais(precoCartao / 12)} por mês · sem renovação automática
         </p>
       </div>
@@ -102,7 +102,7 @@ export function Assinar({ config, aoAssinar }: { config: Config | null; aoAssina
                   onClick={() => setParcelas(n)}
                   className={`flex-1 rounded-xl border px-2 py-2.5 text-center transition ${
                     parcelas === n
-                      ? 'border-roxo-700 bg-roxo-50 text-roxo-800'
+                      ? 'border-navy-700 bg-navy-50 text-navy-800'
                       : 'border-slate-300 text-slate-600'
                   }`}
                 >
@@ -164,12 +164,12 @@ function Opcao({
       tabIndex={0}
       onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && aoEscolher()}
       className={`flex cursor-pointer items-center gap-3 p-3.5 transition ${
-        escolhida ? 'border-roxo-600 ring-2 ring-roxo-200' : 'hover:border-slate-300'
+        escolhida ? 'border-navy-600 ring-2 ring-navy-200' : 'hover:border-slate-300'
       }`}
     >
       <span
         className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl ${
-          escolhida ? 'bg-roxo-100 text-roxo-700' : 'bg-slate-100 text-slate-500'
+          escolhida ? 'bg-navy-100 text-navy-700' : 'bg-slate-100 text-slate-500'
         }`}
       >
         {icone}

@@ -78,7 +78,7 @@ export function AdminAssinantes() {
               : undefined
           }
         />
-        <Indicador rotulo="Receita acumulada" valor={reais(resumo.receita)} cor="text-roxo-800" />
+        <Indicador rotulo="Receita acumulada" valor={reais(resumo.receita)} cor="text-navy-800" />
         <Indicador
           rotulo="Economia devolvida"
           valor={reais(resumo.economia)}
@@ -94,7 +94,7 @@ export function AdminAssinantes() {
             value={busca}
             onChange={(e) => setBusca(e.target.value)}
             placeholder="Buscar por nome ou WhatsApp"
-            className="w-full rounded-xl border border-slate-300 py-2.5 pr-3 pl-9 text-sm outline-none focus:border-roxo-500 focus:ring-2 focus:ring-roxo-200"
+            className="w-full rounded-xl border border-slate-300 py-2.5 pr-3 pl-9 text-sm outline-none focus:border-navy-500 focus:ring-2 focus:ring-navy-200"
           />
         </label>
         <div className="rolagem-sem-barra flex gap-1 overflow-x-auto rounded-xl bg-slate-100 p-1">

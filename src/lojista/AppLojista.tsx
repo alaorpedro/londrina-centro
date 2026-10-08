@@ -4,6 +4,7 @@ import type { SessaoLojista } from '../tipos'
 import { irPara, useCaminho } from '../rotas'
 import { Aviso, Botao, Campo, Carregando } from '../componentes/Ui'
 import { Monograma } from '../componentes/Capa'
+import { LogoEscura } from '../componentes/Logo'
 import { Cupom, Grafico, Etiqueta as IconeEtiqueta, Relogio, Sair } from '../componentes/Icones'
 import { Validar } from './Validar'
 import { Painel } from './Painel'
@@ -95,7 +96,7 @@ export function AppLojista() {
                   aria-current={ativa ? 'page' : undefined}
                   className={`pressionavel flex shrink-0 items-center gap-1.5 rounded-xl px-3 py-2 text-sm font-bold whitespace-nowrap transition ${
                     ativa
-                      ? 'bg-roxo-700 text-white shadow-media'
+                      ? 'bg-navy-700 text-white shadow-media'
                       : 'text-slate-500 hover:bg-slate-100 hover:text-slate-800'
                   }`}
                 >
@@ -137,9 +138,7 @@ function EntrarLojista({ aoEntrar }: { aoEntrar: () => Promise<void> }) {
     <div className="flex min-h-screen items-center justify-center bg-slate-100 px-5">
       <div className="w-full max-w-sm">
         <div className="animate-surgir mb-6 text-center">
-          <div className="mx-auto mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-roxo-600 to-roxo-800 text-white shadow-alta">
-            <Cupom className="h-7 w-7" />
-          </div>
+          <LogoEscura className="mx-auto mb-4 h-14 w-auto" />
           <h1 className="text-2xl font-extrabold tracking-tight text-slate-900">Painel da loja</h1>
           <p className="mt-1 text-[15px] text-slate-600">
             Valide cupons e acompanhe quantos clientes o clube trouxe.

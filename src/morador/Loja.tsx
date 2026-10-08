@@ -134,21 +134,21 @@ export function Loja({ id, sessao }: { id: string; sessao: SessaoMorador }) {
             href={mapa}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex items-start gap-2.5 text-[15px] text-slate-800 hover:text-roxo-700"
+            className="flex items-start gap-2.5 text-[15px] text-slate-800 hover:text-navy-700"
           >
-            <Local className="mt-0.5 h-5 w-5 shrink-0 text-roxo-400" />
+            <Local className="mt-0.5 h-5 w-5 shrink-0 text-navy-400" />
             <span className="min-w-0 flex-1">
               {loja.endereco}
               {loja.referencia && (
                 <span className="block text-sm text-slate-500">{loja.referencia}</span>
               )}
-              <span className="mt-0.5 block text-sm font-bold text-roxo-700">Como chegar →</span>
+              <span className="mt-0.5 block text-sm font-bold text-navy-700">Como chegar →</span>
             </span>
           </a>
 
           {loja.horario && (
             <div className="flex items-start gap-2.5 text-[15px] text-slate-800">
-              <Relogio className="mt-0.5 h-5 w-5 shrink-0 text-roxo-400" />
+              <Relogio className="mt-0.5 h-5 w-5 shrink-0 text-navy-400" />
               <span>{loja.horario}</span>
             </div>
           )}
@@ -185,7 +185,7 @@ export function Loja({ id, sessao }: { id: string; sessao: SessaoMorador }) {
       <div className="px-4">
         <div className="mb-3 flex items-baseline justify-between px-1">
           <h2 className="text-lg font-extrabold tracking-tight text-slate-900">Ofertas da loja</h2>
-          {ofertas.length > 0 && <Etiqueta cor="roxo">{ofertas.length}</Etiqueta>}
+          {ofertas.length > 0 && <Etiqueta cor="navy">{ofertas.length}</Etiqueta>}
         </div>
 
         {ofertas.length === 0 ? (

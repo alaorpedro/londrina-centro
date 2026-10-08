@@ -2,13 +2,23 @@
 
 /*
   ─────────────────────────────────────────────────────────────
-  SISTEMA DE DESIGN — Londrina Centro
+  SISTEMA DE DESIGN — Club43 de Vantagens
   ─────────────────────────────────────────────────────────────
 
-  Identidade provisória. Londrina é a cidade dos ipês, então a marca fica no
-  roxo do ipê-roxo com o amarelo do ipê-amarelo como acento — cor de cidade, não
-  de app genérico de cupom, e distante do azul da ONMID para o clube ter cara
-  própria. A identidade definitiva é pendência do escopo (seção 14).
+  A paleta sai MEDIDA do logo, não escolhida no olho: amostrei as letras sólidas
+  do arquivo original e as duas cores de marca são
+
+      navy-900  #052A52   o "Club" e "de Vantagens"
+      verde-500 #70C134   o "43" e os riscos do slogan
+
+  O 43 é o DDD de Londrina — a marca inteira é um trocadilho local, e por isso o
+  navy manda e o verde é acento, nunca o contrário.
+
+  ⚠️  COR DE GRÁFICO É OUTRA COISA. Nenhuma das duas cores de marca serve crua
+  numa barra: o navy do logo é escuro demais (L 0.285, fora da banda 0.43–0.77)
+  e o verde do logo não alcança 3:1 contra o fundo claro (2.18). Rodei o
+  validador e as que passam em tudo são navy-600 #1C5798 e verde-600 #559B1F.
+  São essas que pintam dado. Trocar por "a cor do logo" quebra a leitura.
 
   Quatro decisões que valem para o app inteiro:
 
@@ -16,34 +26,36 @@
      superfície. Borda cinza em tudo deixa a tela com cara de planilha.
   2. MOVIMENTO SEMPRE DE SAÍDA RÁPIDA. A curva padrão é expo-out: começa veloz e
      assenta. É o que faz a interface parecer que responde, e não que processa.
-  3. NADA APARECE DE UMA VEZ. Lista entra escalonada, de baixo para cima. O olho
-     acompanha a ordem em vez de receber um bloco pronto.
+  3. NADA APARECE DE UMA VEZ. Lista entra escalonada, de baixo para cima.
   4. TUDO RESPEITA `prefers-reduced-motion` — o bloco no fim do arquivo desliga
      as animações inteiras, não só as suaviza.
 */
 
 @theme {
-  /* ---------- cor ---------- */
-  --color-roxo-50: #f6f4ff;
-  --color-roxo-100: #ece7ff;
-  --color-roxo-200: #dcd2ff;
-  --color-roxo-300: #c2aeff;
-  --color-roxo-400: #a582fc;
-  --color-roxo-500: #8b57f6;
-  --color-roxo-600: #7c3aed;
-  --color-roxo-700: #6d28d9;
-  --color-roxo-800: #5b21b6;
-  --color-roxo-900: #4a1a94;
-  --color-roxo-950: #2e0f60;
+  /* ---------- navy: a cor que manda ---------- */
+  --color-navy-50: #f2f6fb;
+  --color-navy-100: #e1ebf5;
+  --color-navy-200: #c2d5e9;
+  --color-navy-300: #93b4d6;
+  --color-navy-400: #5a8abc;
+  --color-navy-500: #2e6aa6;
+  --color-navy-600: #1c5798;
+  --color-navy-700: #124379;
+  --color-navy-800: #0a3260;
+  --color-navy-900: #052a52;
+  --color-navy-950: #03192f;
 
-  --color-ipe-50: #fffbeb;
-  --color-ipe-100: #fef3c7;
-  --color-ipe-200: #fde68a;
-  --color-ipe-300: #fcd34d;
-  --color-ipe-400: #f5b301;
-  --color-ipe-500: #e5a100;
-  --color-ipe-600: #c07c02;
-  --color-ipe-700: #9a5f08;
+  /* ---------- verde: o acento ---------- */
+  --color-verde-50: #f3faec;
+  --color-verde-100: #e3f4d5;
+  --color-verde-200: #c9e9ae;
+  --color-verde-300: #a6da7e;
+  --color-verde-400: #86cd53;
+  --color-verde-500: #70c134;
+  --color-verde-600: #559b1f;
+  --color-verde-700: #43791a;
+  --color-verde-800: #375f19;
+  --color-verde-900: #2f5019;
 
   /* ---------- forma ---------- */
   --radius-xs: 0.375rem;
@@ -55,13 +67,13 @@
   --radius-3xl: 2rem;
 
   /* ---------- elevação ----------
-     Sombra colorida, não preta: um roxo bem dessaturado no lugar do cinza
+     Sombra colorida, não preta: um navy bem dessaturado no lugar do cinza
      deixa o cartão pertencendo à paleta em vez de parecer sujo. */
-  --shadow-plano: 0 1px 2px 0 rgb(74 26 148 / 0.04);
-  --shadow-suave: 0 1px 3px 0 rgb(74 26 148 / 0.06), 0 1px 2px -1px rgb(74 26 148 / 0.04);
-  --shadow-media: 0 4px 12px -2px rgb(74 26 148 / 0.08), 0 2px 4px -2px rgb(74 26 148 / 0.05);
-  --shadow-alta: 0 12px 28px -6px rgb(74 26 148 / 0.14), 0 4px 10px -4px rgb(74 26 148 / 0.07);
-  --shadow-flutuante: 0 24px 48px -12px rgb(74 26 148 / 0.22), 0 8px 16px -8px rgb(74 26 148 / 0.1);
+  --shadow-plano: 0 1px 2px 0 rgb(5 42 82 / 0.04);
+  --shadow-suave: 0 1px 3px 0 rgb(5 42 82 / 0.06), 0 1px 2px -1px rgb(5 42 82 / 0.04);
+  --shadow-media: 0 4px 12px -2px rgb(5 42 82 / 0.08), 0 2px 4px -2px rgb(5 42 82 / 0.05);
+  --shadow-alta: 0 12px 28px -6px rgb(5 42 82 / 0.14), 0 4px 10px -4px rgb(5 42 82 / 0.07);
+  --shadow-flutuante: 0 24px 48px -12px rgb(5 42 82 / 0.22), 0 8px 16px -8px rgb(5 42 82 / 0.1);
 
   /* ---------- movimento ---------- */
   --ease-saida: cubic-bezier(0.16, 1, 0.3, 1);
@@ -177,13 +189,13 @@
   }
 
   ::selection {
-    background: var(--color-roxo-200);
-    color: var(--color-roxo-950);
+    background: var(--color-navy-200);
+    color: var(--color-navy-950);
   }
 
   /* foco visível só para quem navega por teclado */
   :focus-visible {
-    outline: 2px solid var(--color-roxo-600);
+    outline: 2px solid var(--color-navy-600);
     outline-offset: 2px;
   }
 }
@@ -257,7 +269,7 @@
   }
 
   .vidro-escuro {
-    background: color-mix(in srgb, var(--color-roxo-950) 55%, transparent);
+    background: color-mix(in srgb, var(--color-navy-950) 55%, transparent);
     backdrop-filter: saturate(160%) blur(14px);
     -webkit-backdrop-filter: saturate(160%) blur(14px);
   }

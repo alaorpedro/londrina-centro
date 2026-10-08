@@ -1,28 +1,30 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
   <defs>
-    <linearGradient id="roxo" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0" stop-color="#7C3AED"/>
-      <stop offset="1" stop-color="#5B21B6"/>
+    <linearGradient id="n" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#0E3668"/>
+      <stop offset="1" stop-color="#052A52"/>
     </linearGradient>
-    <!-- as duas circunferências pretas viram os recortes laterais do cupom -->
-    <mask id="recorte">
-      <rect width="512" height="512" fill="#000"/>
-      <rect x="118" y="168" width="276" height="176" rx="30" fill="#fff"/>
-      <circle cx="118" cy="256" r="28" fill="#000"/>
-      <circle cx="394" cy="256" r="28" fill="#000"/>
-    </mask>
   </defs>
-
-  <rect width="512" height="512" rx="112" fill="url(#roxo)"/>
-  <rect x="118" y="168" width="276" height="176" rx="30" fill="#fff" mask="url(#recorte)"/>
-
-  <!-- % em roxo, o traço mais grosso que o normal para aguentar 32px -->
-  <g stroke="#5B21B6" stroke-width="26" fill="none" stroke-linecap="round">
-    <line x1="298" y1="212" x2="214" y2="300"/>
+  <rect width="512" height="512" rx="112" fill="url(#n)"/>
+  <!-- "43" vindo do próprio logo, não redesenhado numa fonte parecida.
+       367x264 na origem; escala 1.05 e centraliza. -->
+  <g transform="translate(63 117) scale(1.05)">
+    <g transform="translate(0,264) scale(0.1,-0.1)" fill="#70C134">
+      <path d="M1148 2623 c-9 -10 -99 -135 -200 -278 -102 -143 -283 -397 -403
+-565 -527 -733 -545 -762 -545 -855 0 -45 63 -337 79 -365 7 -13 86 -16 587
+-20 l579 -5 5 -255 5 -255 300 0 300 0 3 257 2 257 128 3 127 3 3 253 2 252
+-130 0 -130 0 -2 793 -3 792 -346 3 c-320 2 -347 1 -361 -15z m97 -1560 c-3
+-10 -68 -13 -280 -13 -151 0 -275 3 -275 6 0 3 125 188 278 412 l277 407 3
+-400 c1 -220 0 -406 -3 -412z M1995 2618 c-3 -13 -4 -129 -3 -258 l3 -235 457
+-5 c251 -3 459 -8 463 -11 3 -4 -110 -116 -252 -249 -156 -147 -265 -257 -275
+-279 -15 -31 -17 -63 -15 -221 l2 -185 190 -5 c211 -7 249 -15 344 -78 92 -61
+137 -156 128 -267 -6 -77 -32 -128 -95 -187 -147 -138 -432 -109 -624 62 l-55
+49 -5 -107 c-5 -113 -16 -148 -60 -189 -34 -32 -71 -43 -144 -43 l-64 0 0 -84
+0 -84 36 -27 c56 -43 211 -121 296 -149 294 -99 616 -84 858 39 112 57 108 46
+56 155 -58 118 -72 195 -57 287 22 127 73 328 102 403 37 98 68 142 127 181
+26 18 49 33 50 35 6 4 -58 127 -76 147 -8 9 -50 37 -93 62 -77 45 -92 62 -93
+114 -1 21 -10 28 -63 45 -35 11 -63 23 -63 27 0 4 109 108 243 232 294 273
+289 268 324 342 l28 60 0 220 0 220 -832 3 -833 2 -5 -22z"/>
+    </g>
   </g>
-  <circle cx="214" cy="216" r="20" fill="none" stroke="#5B21B6" stroke-width="24"/>
-  <circle cx="298" cy="296" r="20" fill="none" stroke="#5B21B6" stroke-width="24"/>
-
-  <!-- amarelo ipê: o acento da marca -->
-  <circle cx="394" cy="132" r="34" fill="#F5B301"/>
 </svg>

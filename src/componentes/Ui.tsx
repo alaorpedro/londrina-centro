@@ -16,11 +16,11 @@ type VarianteBotao = 'primario' | 'secundario' | 'fantasma' | 'perigo' | 'claro'
 */
 const VARIANTES: Record<VarianteBotao, string> = {
   primario:
-    'bg-roxo-700 text-white shadow-media hover:bg-roxo-800 hover:shadow-alta active:bg-roxo-900',
+    'bg-navy-700 text-white shadow-media hover:bg-navy-800 hover:shadow-alta active:bg-navy-900',
   secundario: 'bg-white text-slate-800 shadow-suave hover:bg-slate-50 hover:shadow-media',
-  fantasma: 'text-roxo-700 hover:bg-roxo-50',
+  fantasma: 'text-navy-700 hover:bg-navy-50',
   perigo: 'bg-white text-red-700 shadow-suave ring-1 ring-red-100 hover:bg-red-50',
-  claro: 'bg-roxo-100 text-roxo-800 hover:bg-roxo-200',
+  claro: 'bg-navy-100 text-navy-800 hover:bg-navy-200',
   sobreCor: 'bg-white text-slate-900 shadow-media hover:bg-slate-50 hover:shadow-alta',
 }
 
@@ -83,7 +83,7 @@ export function Campo({
         {...resto}
         className={`w-full rounded-xl bg-white px-3.5 py-3 text-base shadow-suave outline-none transition
           placeholder:text-slate-400 focus:ring-2
-          ${erro ? 'ring-1 ring-red-300 focus:ring-red-400' : 'focus:ring-roxo-300'}`}
+          ${erro ? 'ring-1 ring-red-300 focus:ring-red-400' : 'focus:ring-navy-300'}`}
       />
       {erro ? (
         <span className="mt-1.5 block text-sm font-medium text-red-600">{erro}</span>
@@ -106,7 +106,7 @@ export function Selecao({
       <select
         {...resto}
         className="w-full rounded-xl bg-white px-3.5 py-3 text-base shadow-suave outline-none
-          transition focus:ring-2 focus:ring-roxo-300"
+          transition focus:ring-2 focus:ring-navy-300"
       >
         {children}
       </select>
@@ -126,7 +126,7 @@ export function AreaTexto({
       <textarea
         {...resto}
         className="w-full rounded-xl bg-white px-3.5 py-3 text-base shadow-suave outline-none
-          transition placeholder:text-slate-400 focus:ring-2 focus:ring-roxo-300"
+          transition placeholder:text-slate-400 focus:ring-2 focus:ring-navy-300"
       />
       {dica && <span className="mt-1.5 block text-sm text-slate-500">{dica}</span>}
     </label>
@@ -156,8 +156,8 @@ const AVISOS: Record<TipoAviso, { caixa: string; icone: ReactNode; bolha: string
     icone: <Alerta className="w-5 h-5 shrink-0" />,
   },
   info: {
-    caixa: 'bg-roxo-50 text-roxo-900 ring-roxo-100',
-    bolha: 'bg-roxo-100 text-roxo-600',
+    caixa: 'bg-navy-50 text-navy-900 ring-navy-100',
+    bolha: 'bg-navy-100 text-navy-600',
     icone: <Info className="w-5 h-5 shrink-0" />,
   },
 }
@@ -219,7 +219,7 @@ export function Popup({
 
   return (
     <div
-      className="animate-entrar fixed inset-0 z-50 flex items-end justify-center bg-roxo-950/55 p-4 backdrop-blur-sm sm:items-center"
+      className="animate-entrar fixed inset-0 z-50 flex items-end justify-center bg-navy-950/55 p-4 backdrop-blur-sm sm:items-center"
       onClick={aoFechar}
     >
       <div
@@ -275,14 +275,13 @@ export function Etiqueta({
   className = '',
 }: {
   children: ReactNode
-  cor?: 'cinza' | 'roxo' | 'ipe' | 'verde' | 'vermelho' | 'azul'
+  cor?: 'cinza' | 'navy' | 'verde' | 'vermelho' | 'azul'
   className?: string
 }) {
   const cores = {
     cinza: 'bg-slate-100 text-slate-700',
-    roxo: 'bg-roxo-100 text-roxo-800',
-    ipe: 'bg-ipe-100 text-ipe-700',
-    verde: 'bg-emerald-100 text-emerald-800',
+    navy: 'bg-navy-100 text-navy-800',
+    verde: 'bg-verde-100 text-verde-700',
     vermelho: 'bg-red-100 text-red-700',
     azul: 'bg-sky-100 text-sky-800',
   }
@@ -317,7 +316,7 @@ export function Vazio({
   return (
     <div className="animate-surgir flex flex-col items-center justify-center px-6 py-16 text-center">
       {icone && (
-        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-roxo-50 text-roxo-300">
+        <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-navy-50 text-navy-300">
           {icone}
         </div>
       )}
@@ -398,7 +397,7 @@ export function Folha({
 
   return (
     <div
-      className="animate-entrar fixed inset-0 z-50 flex justify-end bg-roxo-950/50 backdrop-blur-sm"
+      className="animate-entrar fixed inset-0 z-50 flex justify-end bg-navy-950/50 backdrop-blur-sm"
       onClick={aoFechar}
     >
       <div

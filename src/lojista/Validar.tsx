@@ -251,14 +251,14 @@ export function Validar({ aoValidar }: { aoValidar: () => void }) {
               disabled={estado.fase === 'validando'}
               className="tabular h-16 w-12 rounded-2xl bg-white text-center text-2xl font-extrabold
                 text-slate-900 shadow-media outline-none transition
-                focus:shadow-alta focus:ring-2 focus:ring-roxo-400
+                focus:shadow-alta focus:ring-2 focus:ring-navy-400
                 disabled:bg-slate-100 sm:h-20 sm:w-14 sm:text-3xl"
             />
           ))}
         </div>
 
         {estado.fase === 'validando' ? (
-          <p className="pulsar-suave mt-6 font-semibold text-roxo-700">Conferindo…</p>
+          <p className="pulsar-suave mt-6 font-semibold text-navy-700">Conferindo…</p>
         ) : (
           <p className="mt-6 text-sm text-slate-400">
             O cupom vale 5 minutos. Se expirar, o cliente gera outro na hora.

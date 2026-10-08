@@ -104,12 +104,12 @@ export function AdminOfertas() {
                   <div className="flex flex-wrap items-center gap-1.5">
                     <h3 className="font-semibold text-slate-900">{o.titulo}</h3>
                     {o.relampago && (
-                      <Etiqueta cor="ipe">
+                      <Etiqueta cor="verde">
                         <Raio className="h-3 w-3" />
                         relâmpago
                       </Etiqueta>
                     )}
-                    {o.destaque && <Etiqueta cor="roxo">destaque</Etiqueta>}
+                    {o.destaque && <Etiqueta cor="navy">destaque</Etiqueta>}
                     <Situacao status={o.status} />
                   </div>
 
