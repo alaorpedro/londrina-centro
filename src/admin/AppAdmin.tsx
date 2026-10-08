@@ -58,7 +58,7 @@ export function AppAdmin({ config }: { config: Config | null }) {
             </p>
           </div>
           {config?.demo && (
-            <span className="hidden rounded-full bg-verde-100 px-2.5 py-1 text-xs font-bold text-verde-700 sm:inline">
+            <span className="hidden rounded-full bg-amarelo-100 px-2.5 py-1 text-xs font-bold text-amarelo-700 sm:inline">
               piloto · pagamento em modo demonstração
             </span>
           )}

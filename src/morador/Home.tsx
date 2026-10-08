@@ -130,7 +130,7 @@ export function Home({ sessao, config }: { sessao: SessaoMorador; config: Config
               <TituloSecao
                 titulo="Oportunidades"
                 legenda="acabam rápido"
-                icone={<Raio className="h-4 w-4 text-verde-500" />}
+                icone={<Raio className="h-4 w-4 text-amarelo-500" />}
               />
               {/*
                 Aqui é cascata (atraso por CSS) e não Revelar: o Revelar espera o
@@ -265,7 +265,7 @@ function Cabecalho({
               original, então fica nítido em qualquer tela */}
           <Logo className="h-14 w-auto sm:h-16" />
           {sessao.assinante && (
-            <span className="mt-1 shrink-0 rounded-full bg-verde-500 px-2.5 py-1 text-[11px] font-extrabold tracking-wide text-navy-950 shadow-media">
+            <span className="mt-1 shrink-0 rounded-full bg-amarelo-400 px-2.5 py-1 text-[11px] font-extrabold tracking-wide text-navy-950 shadow-media">
               ASSINANTE
             </span>
           )}
@@ -359,7 +359,7 @@ function FaixaAssinatura({
       <div className="animate-surgir relative overflow-hidden rounded-3xl bg-gradient-to-br from-navy-700 via-navy-800 to-navy-950 p-5 text-white shadow-alta">
         <span
           aria-hidden="true"
-          className="animate-flutuar pointer-events-none absolute -top-16 -right-10 h-40 w-40 rounded-full bg-verde-400 opacity-20 blur-2xl"
+          className="animate-flutuar pointer-events-none absolute -top-16 -right-10 h-40 w-40 rounded-full bg-amarelo-400 opacity-20 blur-2xl"
         />
         <div className="relative">
           <p className="text-sm leading-relaxed text-navy-100">
@@ -369,7 +369,7 @@ function FaixaAssinatura({
           {economiaAoAlcance > 0 && (
             <p className="mt-3 text-[15px] leading-snug">
               Tem{' '}
-              <strong className="text-verde-300">{reais(economiaAoAlcance)}</strong> em desconto
+              <strong className="text-amarelo-300">{reais(economiaAoAlcance)}</strong> em desconto
               disponível no centro agora
               {vezes >= 2 && (
                 <span className="text-navy-200"> — {vezes}× o valor da assinatura</span>

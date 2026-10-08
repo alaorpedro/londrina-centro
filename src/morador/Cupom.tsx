@@ -126,7 +126,7 @@ export function Cupom({ id }: { id: string }) {
             proporcao={proporcao}
             tamanho={272}
             espessura={7}
-            cor={acabando ? 'var(--color-verde-400)' : '#ffffff'}
+            cor={acabando ? 'var(--color-amarelo-400)' : '#ffffff'}
           >
             {/* 2,6rem é o teto: acima disso os seis dígitos encostam no anel
                 num iPhone de 375px, e código apertado é código lido errado */}
@@ -138,7 +138,7 @@ export function Cupom({ id }: { id: string }) {
             </span>
             <span
               className={`tabular mt-3 flex items-center gap-1.5 text-sm font-bold ${
-                acabando ? 'animate-pulsar text-verde-300' : 'text-navy-200'
+                acabando ? 'animate-pulsar text-amarelo-300' : 'text-navy-200'
               }`}
             >
               <Relogio className="h-4 w-4" />

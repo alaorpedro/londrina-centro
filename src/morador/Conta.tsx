@@ -186,7 +186,7 @@ function Economia({ conta }: { conta: ContaMorador }) {
       />
       <span
         aria-hidden="true"
-        className="animate-flutuar pointer-events-none absolute -right-16 -bottom-20 h-56 w-56 rounded-full bg-verde-400 opacity-15 blur-3xl"
+        className="animate-flutuar pointer-events-none absolute -right-16 -bottom-20 h-56 w-56 rounded-full bg-amarelo-400 opacity-15 blur-3xl"
         style={{ animationDelay: '2s' }}
       />
 
@@ -202,11 +202,11 @@ function Economia({ conta }: { conta: ContaMorador }) {
             {compensou ? (
               <>
                 Sua assinatura custou {reais(pago)}. Você já está{' '}
-                <strong className="text-verde-300">{reais(saldo)} no lucro</strong>.
+                <strong className="text-amarelo-300">{reais(saldo)} no lucro</strong>.
               </>
             ) : (
               <>
-                Faltam <strong className="text-verde-300">{reais(Math.abs(saldo))}</strong> de economia
+                Faltam <strong className="text-amarelo-300">{reais(Math.abs(saldo))}</strong> de economia
                 para a assinatura se pagar.
               </>
             )}

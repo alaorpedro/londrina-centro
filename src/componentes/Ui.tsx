@@ -275,13 +275,15 @@ export function Etiqueta({
   className = '',
 }: {
   children: ReactNode
-  cor?: 'cinza' | 'navy' | 'verde' | 'vermelho' | 'azul'
+  cor?: 'cinza' | 'navy' | 'verde' | 'amarelo' | 'vermelho' | 'azul'
   className?: string
 }) {
   const cores = {
     cinza: 'bg-slate-100 text-slate-700',
     navy: 'bg-navy-100 text-navy-800',
     verde: 'bg-verde-100 text-verde-700',
+    /* amarelo-700 no texto: os passos claros não alcançam 3:1 sobre branco */
+    amarelo: 'bg-amarelo-100 text-amarelo-700',
     vermelho: 'bg-red-100 text-red-700',
     azul: 'bg-sky-100 text-sky-800',
   }

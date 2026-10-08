@@ -57,6 +57,26 @@
   --color-verde-800: #375f19;
   --color-verde-900: #2f5019;
 
+  /* ---------- amarelo: a terceira cor ----------
+     Não está no logo — entra como acento de OPORTUNIDADE. A divisão semântica
+     das três é o que impede a tela de virar enfeite colorido:
+
+       navy     estrutura e marca
+       verde    ativo, disponível, deu certo
+       amarelo  urgência e dinheiro — relâmpago, contador acabando, o valor
+                que o morador economizou
+
+     Só vive sobre o navy. Sobre branco não alcança 3:1 em nenhum passo claro,
+     então para texto em fundo claro usa-se amarelo-700. */
+  --color-amarelo-50: #fffbeb;
+  --color-amarelo-100: #fff3c4;
+  --color-amarelo-200: #ffe68a;
+  --color-amarelo-300: #ffd54f;
+  --color-amarelo-400: #ffc21a;
+  --color-amarelo-500: #edaa00;
+  --color-amarelo-600: #c68700;
+  --color-amarelo-700: #9b6800;
+
   /* ---------- forma ---------- */
   --radius-xs: 0.375rem;
   --radius-sm: 0.5rem;

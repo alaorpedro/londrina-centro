@@ -116,7 +116,7 @@ export function Oferta({ id, sessao }: { id: string; sessao: SessaoMorador }) {
 
           <div className="absolute inset-x-0 bottom-0 p-5 text-white">
             {oferta.relampago && (
-              <span className="mb-2 inline-flex items-center gap-1 rounded-full bg-verde-400 px-2.5 py-1 text-[10px] font-extrabold text-slate-900 uppercase shadow-media">
+              <span className="mb-2 inline-flex items-center gap-1 rounded-full bg-amarelo-400 px-2.5 py-1 text-[10px] font-extrabold text-navy-950 uppercase shadow-media">
                 <Raio className="h-3 w-3" />
                 oportunidade relâmpago
               </span>
