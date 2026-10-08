@@ -244,13 +244,12 @@ const OFERTAS = [
     limite_morador: 1, periodo: 'mes', limite_total: 150 },
 
   /* --- oportunidade relâmpago: é o destaque da home e o gancho do push ---
-     A janela vai das 9h às 21h de propósito: é o cartão de visitas da home, e
-     numa apresentação que pode acontecer a qualquer hora ela não pode aparecer
-     como "encerrada". A janela curta de verdade quem demonstra é o happy hour
+     Sem janela de hora, de propósito. Com 09:00-21:00 ela aparecia "encerrada"
+     numa demonstração às 22h — e esta é o cartão de visitas da home. A janela curta de verdade quem demonstra é o happy hour
      abaixo, que fecha às 19h. */
   { loja: 6, titulo: '40% OFF só hoje', tipo: 'percentual', valor: 40,
     estimada: 78, regras: 'Somente hoje, enquanto durar o estoque da arara promocional.',
-    hora: ['09:00', '21:00'], limite_morador: 1, periodo: 'dia', limite_total: 60,
+    limite_morador: 1, periodo: 'dia', limite_total: 60,
     relampago: true, dias_de_vida: 1,
     descricao: 'A arara da frente inteira com 40%. Só até o fim do dia.' },
 
