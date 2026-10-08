@@ -1,6 +1,6 @@
-# Londrina Centro
+# Club43 de Vantagens
 
-Clube de descontos do comércio da região central de Londrina. O morador assina
+Clube de vantagens do comércio de Londrina — "mais para você, mais para Londrina". O morador assina
 por R$ 99,90/ano, abre o app e encontra cupons válidos só em lojas do centro. O
 lojista entra por contrato fechado presencialmente pelo vendedor — não paga
 dentro do app.

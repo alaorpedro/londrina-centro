@@ -1,4 +1,4 @@
-# Londrina Centro — Escopo do Projeto
+# Club43 de Vantagens — Escopo do Projeto
 
 **Domínio (dev):** londrina.onmid.app
 **Data:** 10/08/2026
@@ -414,8 +414,10 @@ Deliberadamente fora do piloto (ver Fase 1):
 1. **Perímetro da região central** — lista de ruas/avenidas ou bairros que definem
    a área elegível. Vira regra de cadastro de loja e recorte do mapa. *Alaor vai
    levantar.*
-2. **Identidade visual** — logo e paleta do "Londrina Centro". Definir se é marca
-   independente ou assinada pela ACIL.
+2. ~~**Identidade visual**~~ — ✅ resolvida em 07/10/2026. Marca **Club43 de
+   Vantagens** (o 43 é o DDD), navy `#052A52` + verde `#70C134`, slogan "mais
+   para você, mais para Londrina". Logo vetorizado em `/public/club43*.svg`.
+   Falta só definir se leva assinatura da ACIL.
 3. **Domínio público** — londrina.onmid.app serve para desenvolvimento. Para o
    público, avaliar domínio próprio.
 4. **Contrato do lojista** — modelo jurídico, valor e vigência padrão.
