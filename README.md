@@ -8,7 +8,7 @@ dentro do app.
 **Este repositório está na Fase 0: o piloto para apresentação à ACIL.**
 
 - Escopo completo: [`docs/ESCOPO.md`](docs/ESCOPO.md)
-- Dev: `londrina.onmid.app`
+- Dev: `club43.onmid.app`
 
 ---
 

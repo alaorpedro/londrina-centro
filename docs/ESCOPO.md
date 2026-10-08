@@ -1,6 +1,6 @@
 # Club43 de Vantagens — Escopo do Projeto
 
-**Domínio (dev):** londrina.onmid.app
+**Domínio (dev):** club43.onmid.app
 **Data:** 10/08/2026
 **Status:** escopo aprovado para desenvolvimento — piloto para apresentação à ACIL
 
@@ -418,7 +418,7 @@ Deliberadamente fora do piloto (ver Fase 1):
    Vantagens** (o 43 é o DDD), navy `#052A52` + verde `#70C134`, slogan "mais
    para você, mais para Londrina". Logo vetorizado em `/public/club43*.svg`.
    Falta só definir se leva assinatura da ACIL.
-3. **Domínio público** — londrina.onmid.app serve para desenvolvimento. Para o
+3. **Domínio público** — club43.onmid.app serve para desenvolvimento. Para o
    público, avaliar domínio próprio.
 4. **Contrato do lojista** — modelo jurídico, valor e vigência padrão.
 5. **Controlador dos dados (LGPD)** — ONMID ou ACIL. Define quem assina a política
