@@ -31,6 +31,7 @@ import {
   ErroDeRegra,
 } from './resgates.js'
 import { hojeBrt, somarDias, dataValida, horaValida, diferencaEmDias } from './datas.js'
+import { iniciarManutencaoDemo } from './demo.js'
 
 const __dirname = dirname(fileURLToPath(import.meta.url))
 const dist = join(__dirname, '..', 'dist')
