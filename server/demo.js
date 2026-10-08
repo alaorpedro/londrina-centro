@@ -32,22 +32,34 @@ import { hojeBrt, diferencaEmDias } from './datas.js'
   nascem com demo = false e esta rotina passa longe delas.
 */
 
-/** Quantos dias faltam para o conjunto de demonstração terminar hoje. */
-async function defasagem() {
+/*
+  A âncora é um MARCADOR GRAVADO, não o resgate mais recente.
+
+  Ancorar no dado foi o primeiro desenho e tinha um furo que apareceu em
+  produção no mesmo dia: bastou alguém validar UM cupom de verdade para o
+  MAX(dia) virar hoje e a rotina concluir que estava tudo em dia — com os 268
+  resgates históricos ainda parados em agosto. Uso ao vivo cegava a rotina.
+
+  Agora a âncora vive em lc_config.demo_ancorada_em e só a própria rotina a
+  move. Para base semeada antes deste marcador existir, o padrão é MIN(dia)+89,
+  porque o seed gera exatamente 90 dias terminando no dia em que rodou.
+*/
+async function ancora() {
   const { rows } = await pool.query(
-    `SELECT MAX(r.dia) AS ultimo
-       FROM lc_resgates r
-       JOIN lc_lojas l ON l.id = r.loja_id
-      WHERE l.demo AND r.status = 'validado'`,
+    `SELECT (SELECT valor #>> '{}' FROM lc_config WHERE chave = 'demo_ancorada_em') AS marcada,
+            (SELECT MIN(r.dia) + 89 FROM lc_resgates r
+               JOIN lc_lojas l ON l.id = r.loja_id
+              WHERE l.demo AND r.status = 'validado')::text AS deduzida`,
   )
-  if (!rows[0]?.ultimo) return 0
-  return diferencaEmDias(rows[0].ultimo, hojeBrt())
+  return rows[0]?.marcada ?? rows[0]?.deduzida ?? null
 }
 
 export async function reancorarDemo({ forcar = false } = {}) {
   if (!pool) return { deslocou: 0, motivo: 'sem banco' }
 
-  const dias = await defasagem()
+  const ancorada = await ancora()
+  if (!ancorada) return { deslocou: 0, motivo: 'nada semeado' }
+  const dias = diferencaEmDias(ancorada, hojeBrt())
 
   /*
     Abaixo de 1 dia não há o que fazer. E sem `forcar` exigimos 2 dias: assim a
@@ -63,7 +75,10 @@ export async function reancorarDemo({ forcar = false } = {}) {
   try {
     await cliente.query('BEGIN')
 
-    /* ---- resgates: o histórico inteiro anda junto ---- */
+    /* ---- resgates ----
+       Só o bloco histórico (até a âncora) anda. Cupom validado DEPOIS da âncora é
+       uso real de quem está demonstrando o app — empurrar isso para a frente
+       jogaria a validação dele no futuro. */
     await cliente.query(
       `UPDATE lc_resgates r
           SET dia         = r.dia + $1::interval,
@@ -71,8 +86,9 @@ export async function reancorarDemo({ forcar = false } = {}) {
               expira_em   = r.expira_em + $1::interval,
               validado_em = r.validado_em + $1::interval
         FROM lc_lojas l
-       WHERE l.id = r.loja_id AND l.demo AND r.status = 'validado'`,
-      [salto],
+       WHERE l.id = r.loja_id AND l.demo AND r.status = 'validado'
+         AND r.dia <= $2::date`,
+      [salto, ancorada],
     )
 
     /* ---- contratos: andam e voltam a valer ---- */
@@ -130,6 +146,12 @@ export async function reancorarDemo({ forcar = false } = {}) {
     await cliente.query(
       `UPDATE lc_moradores SET criado_em = criado_em + $1::interval WHERE demo`,
       [salto],
+    )
+
+    await cliente.query(
+      `INSERT INTO lc_config (chave, valor) VALUES ('demo_ancorada_em', to_jsonb($1::text))
+         ON CONFLICT (chave) DO UPDATE SET valor = EXCLUDED.valor`,
+      [hoje],
     )
 
     await cliente.query('COMMIT')
