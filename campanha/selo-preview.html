@@ -1,0 +1,70 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<style>
+  :root{ --navy:#052A52; --navy2:#0E3668; --verde:#70C134; --amarelo:#FFC21A }
+  *{box-sizing:border-box}
+  body{margin:0;background:#eef2f7;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;padding:26px}
+  .faixa{max-width:1140px;margin:0 auto 10px;font-size:14px;color:#64748b;font-weight:600}
+  .grade{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;max-width:1140px;margin:0 auto 30px}
+  .selo{position:relative;aspect-ratio:1;border-radius:24px;overflow:hidden;
+        background:linear-gradient(155deg,var(--navy2) 0%,var(--navy) 55%,#03192f 100%);
+        color:#fff;padding:32px 30px;display:flex;flex-direction:column}
+  .b{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none}
+  .b1{width:260px;height:260px;background:var(--verde);top:-130px;right:-80px;opacity:.16}
+  .b2{width:280px;height:280px;background:var(--amarelo);bottom:-160px;left:-110px;opacity:.09}
+  .topo{position:relative;font-size:12px;letter-spacing:.2em;text-transform:uppercase;color:#93b4d6;font-weight:700}
+  .frase{position:relative;margin-top:auto;font-size:54px;line-height:1.0;font-weight:800;letter-spacing:-.025em}
+  .frase em{font-style:normal;color:var(--verde)}
+  .sub{position:relative;margin-top:16px;font-size:18px;color:#c2d5e9}
+  .sub b{color:var(--amarelo);font-weight:800}
+  .rodape{position:relative;margin-top:24px;display:flex;align-items:center;justify-content:space-between;gap:16px}
+  .rodape img{height:56px;width:auto}
+  .preco{text-align:right;font-size:12px;color:#93b4d6;line-height:1.25}
+  .preco b{display:block;font-size:20px;color:#fff}
+  /* a peça-mãe: a marca dentro da frase */
+  .mestra{grid-column:1/-1;aspect-ratio:auto;min-height:330px;justify-content:center;align-items:center;text-align:center}
+  .mestra .frase{margin:0;font-size:68px;line-height:1.04}
+  .mestra .sub{font-size:21px;margin-top:18px}
+  .mestra .rodape{justify-content:center;margin-top:26px}
+  .mestra .rodape img{height:48px}
+</style></head><body>
+
+<div class="faixa">A assinatura da campanha — cartaz, busdoor, abertura de vídeo, rádio</div>
+<div class="grade">
+  <div class="selo mestra"><span class="b b1"></span><span class="b b2"></span>
+    <div class="frase">Club43,<br>tem <em>tudo</em> no centro!</div>
+    <div class="sub">E agora tem <b>desconto</b>. R$ 99,90 o ano inteiro.</div>
+  </div>
+</div>
+
+<div class="faixa">Adesivo de vitrine — 150 × 150 mm — a mesma fórmula, uma por loja</div>
+<div class="grade">
+  <div class="selo"><span class="b b1"></span><span class="b b2"></span>
+    <div class="topo">Café Cataratas</div>
+    <div class="frase">Tem <em>café</em><br>no centro.</div>
+    <div class="sub">E agora tem <b>desconto</b>.</div>
+    <div class="rodape"><img src="club43-compacto-branco.svg" alt="Club43">
+      <div class="preco">assine por<b>R$ 99,90/ano</b></div></div>
+  </div>
+  <div class="selo"><span class="b b1"></span><span class="b b2"></span>
+    <div class="topo">Sapataria Bragança</div>
+    <div class="frase">Tem <em>sapato</em><br>no centro.</div>
+    <div class="sub">E agora tem <b>desconto</b>.</div>
+    <div class="rodape"><img src="club43-compacto-branco.svg" alt="Club43">
+      <div class="preco">assine por<b>R$ 99,90/ano</b></div></div>
+  </div>
+  <div class="selo"><span class="b b1"></span><span class="b b2"></span>
+    <div class="topo">Studio Bela Face</div>
+    <div class="frase">Tem <em>beleza</em><br>no centro.</div>
+    <div class="sub">E agora tem <b>desconto</b>.</div>
+    <div class="rodape"><img src="club43-compacto-branco.svg" alt="Club43">
+      <div class="preco">assine por<b>R$ 99,90/ano</b></div></div>
+  </div>
+  <div class="selo"><span class="b b1"></span><span class="b b2"></span>
+    <div class="topo">Pet Amigo Centro</div>
+    <div class="frase">Tem <em>pet</em><br>no centro.</div>
+    <div class="sub">E agora tem <b>desconto</b>.</div>
+    <div class="rodape"><img src="club43-compacto-branco.svg" alt="Club43">
+      <div class="preco">assine por<b>R$ 99,90/ano</b></div></div>
+  </div>
+</div>
+</body></html>
