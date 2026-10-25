@@ -6,13 +6,17 @@
   --verde:#70C134; --verde6:#559B1F; --amarelo:#FFC21A;
   --t1:#0b1a2b; --t2:#475569; --t3:#94a3b8; --linha:#e8edf3; --fundo:#f6f8fb;
   --m:84px;                     /* margem mestra — a mesma em todo slide */
+  /* ---- cores de dado: UMA família azul + amarelo como destaque ----
+     As cores da marca não entram em gráfico: o navy #052A52 é escuro demais
+     para empilhar e o verde #70C134 não alcança contraste sobre branco. */
+  --d1:#1C5798; --d2:#5C8ABB; --d3:#9DB9D6; --d4:#D4DFEB; --dest:#FFC21A;
 }
 *{box-sizing:border-box;margin:0;padding:0}
 body{background:#5b6b7f;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
      -webkit-font-smoothing:antialiased;padding:30px 0}
 .s{width:1280px;height:720px;margin:0 auto 28px;background:#fff;position:relative;overflow:hidden;
    display:flex;flex-direction:column;box-shadow:0 20px 56px -22px rgba(0,0,0,.55)}
-.in{flex:1;display:flex;flex-direction:column;padding:var(--m) var(--m) 0}
+.in{flex:1;display:flex;flex-direction:column;padding:var(--m) var(--m) 0;min-height:0}
 
 /* ---------- superfícies ---------- */
 .esc{background:linear-gradient(145deg,var(--navy2) 0%,var(--navy) 55%,var(--navy-950) 100%);color:#fff}
@@ -34,14 +38,18 @@ body{background:#5b6b7f;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe
 h2{font-size:42px;line-height:1.1;letter-spacing:-.022em;font-weight:800;color:var(--t1);margin-top:16px;max-width:19ch}
 .esc h2{color:#fff}
 h2.larga{max-width:26ch}
+h2.media{font-size:36px;max-width:30ch}
 p.l{font-size:17.5px;line-height:1.55;color:var(--t2);max-width:50ch}
 .esc p.l{color:#c2d5e9}
 .cap{font-size:12.5px;line-height:1.55;color:var(--t3)}
 em{font-style:normal;color:var(--verde6)}
 .esc em{color:var(--verde)}
 b.am{color:var(--amarelo);font-weight:800}
+strong{font-weight:800;color:var(--t1)}
+.esc strong{color:#fff}
 
-.corpo{flex:1;display:flex;align-items:center;padding:40px 0 10px}
+.corpo{flex:1;display:flex;align-items:center;padding:40px 0 10px;min-height:0}
+.corpo.topo{align-items:flex-start;padding-top:30px}
 
 /* ---------- capa ---------- */
 .capa{justify-content:center;align-items:flex-start;padding-bottom:var(--m)}
@@ -56,11 +64,13 @@ b.am{color:var(--amarelo);font-weight:800}
 .div{justify-content:center}
 .div .n{font-size:150px;font-weight:800;line-height:.86;letter-spacing:-.05em;color:rgba(255,255,255,.1)}
 .div h2{font-size:52px;max-width:22ch;margin-top:-26px}
+.div .sub{margin-top:26px;font-size:16px;color:#8fb2d4;max-width:56ch;line-height:1.55}
 
 /* ---------- grade de 12 ---------- */
 .g{display:grid;grid-template-columns:repeat(12,1fr);gap:28px;width:100%;align-items:center}
-.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}
-.c7{grid-column:span 7}.c8{grid-column:span 8}.c12{grid-column:span 12}
+.g.topo{align-items:start}
+.c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}.c6{grid-column:span 6}
+.c7{grid-column:span 7}.c8{grid-column:span 8}.c9{grid-column:span 9}.c12{grid-column:span 12}
 
 /* ---------- aparelho ---------- */
 .fone{width:272px;border-radius:40px;padding:11px;background:#10171f;
@@ -83,14 +93,43 @@ b.am{color:var(--amarelo);font-weight:800}
 .nav:after{content:"";position:absolute;left:0;right:0;bottom:0;height:72px;
            background:linear-gradient(transparent,#fff)}
 
-/* ---------- gráfico ---------- */
-.gr{display:flex;align-items:flex-end;gap:30px;height:252px;width:100%}
+/* ---------- gráfico de colunas ---------- */
+.gr{display:flex;align-items:flex-end;gap:30px;height:232px;width:100%}
 .col{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%}
 .col .v{font-size:17px;font-weight:800;color:var(--t2);margin-bottom:10px;font-variant-numeric:tabular-nums}
-.col .barra{width:100%;max-width:92px;border-radius:4px 4px 0 0;background:#d4dfeb}
+.col .barra{width:100%;max-width:92px;border-radius:4px 4px 0 0;background:var(--d4)}
 .col.f .v{color:#9b6800}
-.col.f .barra{background:var(--amarelo)}
+.col.f .barra{background:var(--dest)}
 .col .a{font-size:12.5px;color:var(--t3);margin-top:13px;font-weight:600;letter-spacing:.04em}
+
+/* ---------- barras horizontais agrupadas ---------- */
+.leg{display:flex;gap:26px;margin-bottom:20px;flex-wrap:wrap}
+.leg span{display:flex;align-items:center;gap:8px;font-size:12.5px;color:var(--t2);font-weight:600}
+.leg i{width:11px;height:11px;border-radius:3px;display:block;flex-shrink:0}
+.leg .forte{color:var(--t1);font-weight:800}
+.bh{width:100%}
+.cat{display:grid;grid-template-columns:184px 1fr;gap:20px;align-items:center;margin-bottom:13px}
+.cat .nome{font-size:15px;font-weight:800;color:var(--t1);line-height:1.2}
+.cat .nome small{display:block;font-size:11.5px;font-weight:600;color:var(--t3);margin-top:3px;letter-spacing:.01em}
+.bars{display:flex;flex-direction:column;gap:4px}
+.b{display:flex;align-items:center;gap:9px;height:12px}
+.b .f{height:12px;border-radius:2px;display:block;flex-shrink:0}
+.b .vl{font-size:11.5px;font-weight:700;color:var(--t2);font-variant-numeric:tabular-nums;white-space:nowrap}
+.b.alvo .vl{color:#9b6800;font-weight:800}
+.esc .cat .nome{color:#fff}
+.esc .b .vl{color:#c2d5e9}
+
+/* ---------- barra empilhada ---------- */
+.pil{width:100%}
+.pil .lin{margin-bottom:26px}
+.pil .tit{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:11px}
+.pil .tit b{font-size:17px;font-weight:800;color:var(--t1)}
+.pil .tit span{font-size:12.5px;color:var(--t3);font-weight:600}
+.pil .trilho{display:flex;height:42px;border-radius:5px;overflow:hidden}
+.pil .seg{display:flex;align-items:center;padding:0 15px;font-size:14px;font-weight:800;
+          font-variant-numeric:tabular-nums;white-space:nowrap}
+.pil .fica{background:var(--d4);color:var(--t2)}
+.pil .migra{background:var(--dest);color:#6b4700}
 
 /* ---------- cartões ---------- */
 .card{background:#fff;border-radius:16px;padding:30px;height:100%;box-shadow:0 2px 14px -6px rgba(5,42,82,.14)}
@@ -101,6 +140,51 @@ b.am{color:var(--amarelo);font-weight:800}
 .esc .card .g2{color:#fff}
 .card .d{font-size:14.5px;line-height:1.5;color:var(--t2)}
 .esc .card .d{color:#c2d5e9}
+
+/* ---------- indicador solto (perfil) ---------- */
+.ind{border-top:3px solid var(--d4);padding-top:17px}
+.ind .n2{font-size:40px;font-weight:800;letter-spacing:-.03em;color:var(--d1);line-height:1;
+         font-variant-numeric:tabular-nums}
+.ind .r{font-size:13.5px;line-height:1.45;color:var(--t2);margin-top:10px}
+.ind.q{border-top-color:var(--dest)}
+.ind.q .n2{color:#9b6800}
+.esc .ind{border-top-color:rgba(255,255,255,.22)}
+.esc .ind .n2{color:#fff}
+.esc .ind .r{color:#c2d5e9}
+
+/* ---------- comparação em duas colunas ---------- */
+.vs{display:grid;grid-template-columns:1fr 1fr;gap:0;width:100%;border-radius:16px;overflow:hidden}
+.vs>div{padding:28px 34px}
+.vs .a1{background:#eef2f7}
+.vs .a2{background:var(--navy);color:#fff}
+.vs .h3{font-size:11.5px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;margin-bottom:20px}
+.vs .a1 .h3{color:var(--t3)}
+.vs .a2 .h3{color:var(--verde)}
+.vs ul li{font-size:15.5px;margin-bottom:11px;color:var(--t2)}
+.vs .a2 ul li{color:#dbe8f5}
+.vs .a1 li:before{background:#cbd5e1}
+.vs .a2 li:before{background:var(--verde)}
+
+/* ---------- manifesto ---------- */
+.manif{justify-content:center}
+.manif .mk{font-size:11.5px;letter-spacing:.3em;text-transform:uppercase;font-weight:800;
+           color:var(--verde);margin-bottom:28px}
+.manif p{font-size:32px;line-height:1.3;font-weight:800;letter-spacing:-.022em;color:#fff;
+         max-width:30ch;margin-bottom:18px}
+.manif p.f2{color:#8fb2d4;font-weight:700;font-size:24px;max-width:38ch}
+.manif .ass{margin-top:22px;display:flex;align-items:center;gap:16px}
+.manif .ass span{width:46px;height:3px;background:var(--amarelo);display:block}
+.manif .mw{position:absolute;right:-64px;bottom:86px;width:470px;opacity:.065;pointer-events:none}
+.manif .ass b{font-size:15px;letter-spacing:.14em;text-transform:uppercase;color:var(--amarelo);font-weight:800}
+
+/* ---------- sumário executivo ---------- */
+.sum{display:grid;grid-template-columns:repeat(4,1fr);gap:26px;width:100%;align-items:start}
+.sum .it{padding-top:20px;border-top:3px solid var(--d4)}
+.sum .it:last-child{border-top-color:var(--verde)}
+.sum .it i{font-style:normal;font-size:12px;font-weight:800;letter-spacing:.2em;color:var(--t3)}
+.sum .it h4{font-size:20px;font-weight:800;line-height:1.25;color:var(--t1);margin:11px 0 10px;letter-spacing:-.015em}
+.sum .it p{font-size:13.5px;line-height:1.5;color:var(--t2)}
+.sum .it:last-child h4{color:var(--verde6)}
 
 /* ---------- passos ---------- */
 .passo{position:relative;padding-top:46px}
@@ -118,6 +202,8 @@ li{font-size:16.5px;line-height:1.5;color:var(--t2);padding-left:26px;position:r
 .esc li{color:#c2d5e9}
 li:before{content:"";position:absolute;left:0;top:8px;width:8px;height:8px;border-radius:2px;background:var(--verde)}
 li.x:before{background:#cbd5e1}
+li.mini{font-size:14.5px;margin-bottom:11px;padding-left:22px}
+li.mini:before{top:7px;width:6px;height:6px}
 .rot{font-size:11px;letter-spacing:.2em;text-transform:uppercase;font-weight:800;color:var(--t3);margin-bottom:18px}
 .esc .rot{color:#93b4d6}
 
@@ -149,13 +235,34 @@ td:first-child{font-weight:800;color:#fff}
   <span class="skyline"></span>
 </section>
 
-<!-- 02 DIVISOR -->
-<section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
-  <div class="in div"><div class="n">01</div><h2>O centro perdeu lojas —<br>e <em>ninguém mede</em> por quê.</h2></div>
+<!-- 02 SUMÁRIO EXECUTIVO -->
+<section class="s">
+  <div class="in">
+    <div class="olho">O argumento em uma página</div>
+    <h2 class="larga">O centro não perdeu o consumidor. Perdeu o <em>motivo</em>.</h2>
+    <div class="corpo"><div class="sum">
+      <div class="it"><i>01</i><h4>O presencial continua de pé</h4>
+        <p>93,5% do londrinense compra pessoalmente. O comércio de rua não foi derrubado pela internet.</p></div>
+      <div class="it"><i>02</i><h4>Mas a cidade não sai do bairro</h4>
+        <p>Na zona norte, 85,4% consomem dentro da própria região. Só 14,6% se deslocam para comprar.</p></div>
+      <div class="it"><i>03</i><h4>E na categoria do centro, o shopping ganha</h4>
+        <p>Em vestuário, 62% compram no shopping e 34,7% no comércio de rua do centro. São 27 pontos de diferença.</p></div>
+      <div class="it"><i>04</i><h4>O Club43 ataca exatamente isso</h4>
+        <p>Um benefício permanente que só vale no centro — e que mede, cupom a cupom, quem veio, de onde e quanto gastou.</p></div>
+    </div></div>
+    <p class="cap" style="padding-bottom:30px">Fontes nos slides seguintes. Pesquisas ACIL / Sebrae-PR executadas pela Litz (2025) e Perfil de Londrina 2024.</p>
+  </div>
   <div class="rod"><span class="d">club43.com.br</span><span class="p">02</span></div>
 </section>
 
-<!-- 03 O PROBLEMA -->
+<!-- 03 DIVISOR 01 -->
+<section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
+  <div class="in div"><div class="n">01</div><h2>O que os dados dizem<br>sobre o <em>centro</em>.</h2>
+    <p class="sub">Quatro leituras, todas de pesquisa pública e recente, que juntas explicam por que o calçadão esvaziou — e por que isso tem conserto.</p></div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">03</span></div>
+</section>
+
+<!-- 04 O PROBLEMA -->
 <section class="s">
   <div class="in">
     <div class="olho">O problema</div>
@@ -172,10 +279,241 @@ td:first-child{font-weight:800;color:#fff}
       O levantamento de 2023 registra 10.518 unidades, mas o salto aparece em todas as atividades e o total do município sobe 15% no mesmo ano, o que indica atualização cadastral — por isso a série vai até 2022.</p>
     </div></div>
   </div>
-  <div class="rod"><span class="d">club43.com.br</span><span class="p">03</span></div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">04</span></div>
 </section>
 
-<!-- 04 A PAUTA -->
+<!-- 05 ONDE O LONDRINENSE COMPRA -->
+<section class="s">
+  <div class="in">
+    <div class="olho">Índice de consumo por canal</div>
+    <h2 class="larga">O centro não perdeu para a internet. Perdeu para o <em>shopping</em>.</h2>
+    <div class="corpo topo"><div style="width:100%">
+      <div class="leg">
+        <span><i style="background:var(--d2)"></i>Shopping</span>
+        <span><i style="background:var(--d3)"></i>Internet</span>
+        <span class="forte"><i style="background:var(--dest)"></i>Comércio de rua do CENTRO</span>
+        <span><i style="background:var(--d4)"></i>Comércio de rua dos bairros</span>
+      </div>
+      <div class="bh">
+        <div class="cat"><div class="nome">Vestuário<small>97,3% da cidade consome</small></div>
+          <div class="bars">
+            <div class="b"><span class="f" style="width:62.0%;background:var(--d2)"></span><span class="vl">62,0%</span></div>
+            <div class="b"><span class="f" style="width:44.2%;background:var(--d3)"></span><span class="vl">44,2%</span></div>
+            <div class="b alvo"><span class="f" style="width:34.7%;background:var(--dest)"></span><span class="vl">34,7%</span></div>
+            <div class="b"><span class="f" style="width:11.6%;background:var(--d4)"></span><span class="vl">11,6%</span></div>
+          </div></div>
+        <div class="cat"><div class="nome">Calçados<small>96,5% da cidade consome</small></div>
+          <div class="bars">
+            <div class="b"><span class="f" style="width:51.0%;background:var(--d2)"></span><span class="vl">51,0%</span></div>
+            <div class="b"><span class="f" style="width:35.8%;background:var(--d3)"></span><span class="vl">35,8%</span></div>
+            <div class="b alvo"><span class="f" style="width:33.7%;background:var(--dest)"></span><span class="vl">33,7%</span></div>
+          </div></div>
+        <div class="cat"><div class="nome">Eletrodomésticos<small>79,3% da cidade consome</small></div>
+          <div class="bars">
+            <div class="b"><span class="f" style="width:54.3%;background:var(--d3)"></span><span class="vl">54,3%</span></div>
+            <div class="b alvo"><span class="f" style="width:29.0%;background:var(--dest)"></span><span class="vl">29,0%</span></div>
+            <div class="b"><span class="f" style="width:24.0%;background:var(--d2)"></span><span class="vl">24,0%</span></div>
+          </div></div>
+        <div class="cat"><div class="nome">Farmácia<small>94,3% da cidade consome</small></div>
+          <div class="bars">
+            <div class="b"><span class="f" style="width:63.1%;background:var(--d4)"></span><span class="vl">63,1%</span></div>
+            <div class="b"><span class="f" style="width:16.4%;background:var(--d3)"></span><span class="vl">16,4%</span></div>
+            <div class="b"><span class="f" style="width:14.1%;background:var(--d2)"></span><span class="vl">14,1%</span></div>
+          </div></div>
+        <div class="cat"><div class="nome">Material de construção<small>45,0% da cidade consome</small></div>
+          <div class="bars">
+            <div class="b"><span class="f" style="width:70.0%;background:var(--d4)"></span><span class="vl">70,0%</span></div>
+          </div></div>
+      </div>
+      <p class="cap" style="margin-top:16px">Pesquisa <strong>Comportamento de Consumo no Varejo</strong> — ACIL e Sebrae/PR, executada pela Litz Estratégia e Marketing. 400 entrevistados de 18 a 60 anos, coleta de 7 a 28 de abril de 2025, apresentada no Mercado em Foco em 13/06/2025.<br>
+      O entrevistado podia marcar mais de um canal por segmento, por isso a soma de cada linha passa de 100%. A pesquisa divulga os canais de maior participação; linhas mais curtas não significam ausência dos demais.</p>
+    </div></div>
+  </div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">05</span></div>
+</section>
+
+<!-- 06 LEITURA DO GRÁFICO -->
+<section class="s cinza">
+  <div class="in">
+    <div class="olho">A leitura</div>
+    <h2 class="larga">O centro é forte onde o cliente <em>compara</em>. E é aí que ele é atacado.</h2>
+    <div class="corpo"><div class="g topo">
+      <div class="c4"><div class="ind q"><div class="n2">27 pts</div>
+        <div class="r">É a distância entre o shopping (62,0%) e o comércio de rua do centro (34,7%) em <strong>vestuário</strong> — a categoria mais consumida da cidade e a maior fatia de lojas do Centro.</div></div></div>
+      <div class="c4"><div class="ind"><div class="n2">29,0%</div>
+        <div class="r">Em <strong>eletrodomésticos</strong>, o centro já <strong>passa o shopping</strong> (24,0%). Onde o cliente vai comparar preço, o centro continua vencendo — o problema não é o endereço.</div></div></div>
+      <div class="c4"><div class="ind"><div class="n2">63 a 70%</div>
+        <div class="r">Farmácia, supermercado e material de construção ficam no <strong>bairro</strong>. São compras de reposição: ninguém atravessa a cidade por elas — e nem deveria.</div></div></div>
+      <div class="c12" style="margin-top:8px">
+        <p class="l" style="max-width:none;font-size:18.5px">Some as três leituras e sobra uma conclusão só: <strong>o centro é o polo da compra comparada</strong> — vestuário, calçado, ótica, eletro, joalheria. É a compra que exige deslocamento, e deslocamento exige um motivo. O shopping dá esse motivo o ano inteiro. O centro dá em data comemorativa.</p>
+      </div>
+    </div></div>
+  </div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">06</span></div>
+</section>
+
+<!-- 07 A CIDADE NÃO SAI DO BAIRRO -->
+<section class="s">
+  <div class="in">
+    <div class="olho">Deslocamento de consumo</div>
+    <h2 class="larga">A cidade consome dentro do próprio bairro — e a <em>maior região</em> é a que menos se move.</h2>
+    <div class="corpo"><div class="g">
+      <div class="c7"><div class="pil">
+        <div class="lin"><div class="tit"><b>Zona norte</b><span>a região mais populosa da cidade</span></div>
+          <div class="trilho">
+            <span class="seg fica" style="width:85.4%">85,4% consomem na própria região</span>
+            <span class="seg migra" style="width:14.6%">14,6%</span>
+          </div></div>
+        <div class="lin"><div class="tit"><b>Zona sul</b><span>onde o deslocamento já é hábito</span></div>
+          <div class="trilho">
+            <span class="seg fica" style="width:42.2%">42,2% ficam</span>
+            <span class="seg migra" style="width:57.8%">57,8% se deslocam para outras regiões</span>
+          </div></div>
+      </div></div>
+      <div class="c5">
+        <p class="l">Esses <b style="color:#9b6800">14,6%</b> são o tamanho exato do problema. A zona norte concentra população e não desce ao centro para comprar — não por distância, mas por falta de razão.</p>
+        <p class="l" style="margin-top:18px">A zona sul prova que o londrinense <strong>se desloca</strong> quando tem motivo: 57,8% já compram fora da própria região.</p>
+        <p class="l" style="margin-top:18px">O clube existe para dar esse motivo — e, pela primeira vez, para <strong>medir de que bairro veio quem comprou</strong>.</p>
+      </div>
+    </div></div>
+    <p class="cap" style="padding-bottom:30px">Pesquisa Comportamento de Consumo no Varejo — ACIL e Sebrae/PR, executada pela Litz. 400 entrevistados, coleta de 7 a 28 de abril de 2025. A pesquisa divulgou o recorte das zonas norte e sul; leste, oeste e centro não foram publicados.</p>
+  </div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">07</span></div>
+</section>
+
+<!-- 08 DIVISOR 02 -->
+<section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
+  <div class="in div"><div class="n">02</div><h2>Quem compra<br>e o que o <em>centro</em> vende.</h2>
+    <p class="sub">O perfil do consumidor londrinense, a composição do comércio central e o gargalo que a loja pequena não resolve sozinha.</p></div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">08</span></div>
+</section>
+
+<!-- 09 PERFIL DO CONSUMIDOR -->
+<section class="s">
+  <div class="in">
+    <div class="olho">Perfil do público</div>
+    <h2 class="larga">Quem é o consumidor que o centro precisa <em>trazer de volta</em>.</h2>
+    <div class="corpo"><div style="width:100%">
+      <div class="g" style="gap:26px">
+        <div class="c3"><div class="ind"><div class="n2">51,8%</div><div class="r">São <strong>mulheres</strong>. É ela quem decide a compra comparada da família.</div></div></div>
+        <div class="c3"><div class="ind q"><div class="n2">59,1%</div><div class="r">Têm entre <strong>25 e 59 anos</strong> (Geração Y 30,3% + Geração X 28,8%). Idade de renda ativa e de filho em casa.</div></div></div>
+        <div class="c3"><div class="ind"><div class="n2">53,5%</div><div class="r">Têm <strong>filhos</strong>. Compra de vestuário e calçado se multiplica por pessoa da casa.</div></div></div>
+        <div class="c3"><div class="ind"><div class="n2">25,3%</div><div class="r">Concentram renda entre <strong>R$ 3.036 e R$ 5.313</strong>, a maior faixa. É o público para quem R$ 40 de desconto decide a loja.</div></div></div>
+      </div>
+      <div class="g" style="gap:26px;margin-top:34px">
+        <div class="c7">
+          <p class="l" style="max-width:none">É classe média que ainda compra no balcão: <strong>93,5% consomem presencialmente</strong> e 72,5% recomendaram um lugar por causa da experiência na loja. Esse consumidor não precisa ser convencido a sair de casa — precisa saber que vale a pena sair <strong>para cá</strong>.</p>
+        </div>
+        <div class="c5">
+          <div class="card" style="background:var(--navy);color:#fff;padding:26px 28px">
+            <div class="k" style="color:#93b4d6">O que isso significa</div>
+            <p style="font-size:18.5px;font-weight:800;line-height:1.4;margin-top:12px;color:#fff">
+              R$ 99,90 por ano é <span style="color:var(--verde)">R$ 8,32 por mês</span>. Um único cupom de vestuário já paga a assinatura do ano inteiro.</p>
+          </div>
+        </div>
+      </div>
+      <p class="cap" style="margin-top:22px">Pesquisa Comportamento de Consumo no Varejo — ACIL e Sebrae/PR, executada pela Litz. 400 entrevistados de 18 a 60 anos, coleta de 7 a 28 de abril de 2025. Faixa de escolaridade predominante: 48% com ensino médio completo.</p>
+    </div></div>
+  </div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">09</span></div>
+</section>
+
+<!-- 10 O QUE O CENTRO VENDE -->
+<section class="s cinza">
+  <div class="in">
+    <div class="olho">Composição do varejo</div>
+    <h2 class="larga">O que o centro vende é exatamente o que a cidade <em>mais consome</em>.</h2>
+    <div class="corpo" style="padding:32px 0 6px"><div class="g topo">
+      <div class="c7">
+        <div class="rot">Penetração do segmento na cidade</div>
+        <div class="bh" style="padding-right:64px">
+          <div class="cat" style="grid-template-columns:168px 1fr;margin-bottom:11px"><div class="nome">Vestuário</div>
+            <div class="bars"><div class="b alvo"><span class="f" style="width:97.3%;background:var(--dest)"></span><span class="vl">97,3%</span></div></div></div>
+          <div class="cat" style="grid-template-columns:168px 1fr;margin-bottom:11px"><div class="nome">Calçados</div>
+            <div class="bars"><div class="b alvo"><span class="f" style="width:96.5%;background:var(--dest)"></span><span class="vl">96,5%</span></div></div></div>
+          <div class="cat" style="grid-template-columns:168px 1fr;margin-bottom:11px"><div class="nome">Farmácia</div>
+            <div class="bars"><div class="b"><span class="f" style="width:94.3%;background:var(--d3)"></span><span class="vl">94,3%</span></div></div></div>
+          <div class="cat" style="grid-template-columns:168px 1fr;margin-bottom:11px"><div class="nome">Lanches e refeições</div>
+            <div class="bars"><div class="b alvo"><span class="f" style="width:90.0%;background:var(--dest)"></span><span class="vl">90,0%</span></div></div></div>
+          <div class="cat" style="grid-template-columns:168px 1fr;margin-bottom:11px"><div class="nome">Supermercado</div>
+            <div class="bars"><div class="b"><span class="f" style="width:87.0%;background:var(--d3)"></span><span class="vl">87,0%</span></div></div></div>
+          <div class="cat" style="grid-template-columns:168px 1fr;margin-bottom:11px"><div class="nome">Eletrodomésticos</div>
+            <div class="bars"><div class="b alvo"><span class="f" style="width:79.3%;background:var(--dest)"></span><span class="vl">79,3%</span></div></div></div>
+          <div class="cat" style="grid-template-columns:168px 1fr;margin-bottom:0"><div class="nome">Material de construção</div>
+            <div class="bars"><div class="b"><span class="f" style="width:45.0%;background:var(--d3)"></span><span class="vl">45,0%</span></div></div></div>
+        </div>
+        <p class="cap" style="margin-top:16px">Em amarelo, os segmentos de vocação do centro. Fonte: Comportamento de Consumo no Varejo — ACIL / Sebrae-PR / Litz, 2025.</p>
+        <p class="l" style="max-width:none;margin-top:30px;font-size:18px">Seis dos sete segmentos passam de 79% de penetração, e os de maior <strong>vocação do centro</strong> lideram a lista. O sortimento nunca foi o problema — o problema é o motivo da ida.</p>
+      </div>
+      <div class="c5">
+        <div class="rot">O comércio que está lá</div>
+        <div class="ind q" style="margin-bottom:16px"><div class="n2">52,2%</div>
+          <div class="r">Das empresas ouvidas pela ACIL estão <strong>no Centro</strong>. Nenhuma outra região chega perto.</div></div>
+        <div class="ind" style="margin-bottom:16px"><div class="n2">25,8%</div>
+          <div class="r"><strong>Vestuário e calçados</strong> é o maior ramo. Depois vêm móveis e eletrodomésticos (14,6%), material de construção (12,4%) e ótica e joalheria (6,7%).</div></div>
+        <div class="ind"><div class="n2">60,7%</div>
+          <div class="r">Têm <strong>até 9 colaboradores</strong>. É comércio pequeno, de dono no balcão, sem verba de mídia própria.</div></div>
+        <p class="cap" style="margin-top:12px">Pesquisa de Natal 2025 — ACIL, coleta de 3 a 5 de dezembro de 2025.</p>
+      </div>
+    </div></div>
+  </div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">10</span></div>
+</section>
+
+<!-- 11 DA BANCA À GRANDE MARCA -->
+<section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
+  <div class="in">
+    <div class="olho">A mistura que só o centro tem</div>
+    <h2 class="larga">Da loja de dono à <em>grande marca</em>, na mesma calçada.</h2>
+    <div class="corpo"><div class="g topo">
+      <div class="c4"><div class="card"><div class="k">A grande rede</div><div class="g2">Traz o fluxo</div>
+        <div class="d">Magazine, departamento, farmácia de rede e banco puxam gente para o quadrilátero todos os dias. Elas já fazem mídia nacional — e o centro inteiro pega carona nesse fluxo.</div></div></div>
+      <div class="c4"><div class="card"><div class="k">A loja local</div><div class="g2">Converte</div>
+        <div class="d">É ela que atende pelo nome, troca sem discutir e segura o cliente por 20 anos. Mas não tem verba para disputar a atenção que o shopping compra.</div></div></div>
+      <div class="c4"><div class="card" style="background:rgba(255,194,26,.1)"><div class="k" style="color:var(--amarelo)">O que falta</div><div class="g2">A ligação</div>
+        <div class="d">Hoje as duas dividem a calçada e não dividem nada mais. Ninguém sabe que o cliente da grande rede passou em frente à loja pequena — nem como convidá-lo a entrar.</div></div></div>
+      <div class="c12" style="margin-top:4px">
+        <p class="l" style="max-width:none;font-size:18.5px;color:#dbe8f5">O shopping resolveu isso há trinta anos: lá dentro, âncora e satélite operam sob o <strong>mesmo programa</strong> — mesmo horário, mesma campanha, mesmo cartão-fidelidade, mesma medição de fluxo. O centro tem o mesmo acervo de lojas e <b class="am">nenhum programa comum</b>. É esse vazio que o Club43 ocupa.</p>
+      </div>
+    </div></div>
+  </div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">11</span></div>
+</section>
+
+<!-- 12 O GARGALO DO LOJISTA -->
+<section class="s">
+  <div class="in">
+    <div class="olho">O gargalo</div>
+    <h2 class="larga">Todo mundo anunciando no mesmo lugar, e <em>ninguém com base própria</em>.</h2>
+    <div class="corpo"><div style="width:100%">
+      <div class="g" style="gap:26px">
+        <div class="c3"><div class="ind"><div class="n2">93,3%</div><div class="r">Mantêm a <strong>loja física</strong> como principal ponto de contato com o cliente.</div></div></div>
+        <div class="c3"><div class="ind q"><div class="n2">91,1%</div><div class="r">Divulgam no <strong>Instagram</strong>. É o mesmo feed, com o mesmo alcance caindo, para todo mundo.</div></div></div>
+        <div class="c3"><div class="ind"><div class="n2">50,6%</div><div class="r">Investem em <strong>marketing</strong> — metade do comércio não tem nem isso.</div></div></div>
+        <div class="c3"><div class="ind"><div class="n2">18%</div><div class="r">Usam <strong>marketplace</strong>, onde se paga comissão por venda e não se leva o cliente embora.</div></div></div>
+      </div>
+      <div class="g" style="gap:26px;margin-top:36px">
+        <div class="c6">
+          <p class="l" style="max-width:none">O lojista do centro não tem problema de produto nem de atendimento. Tem problema de <strong>audiência</strong>: depende de rede social alheia para falar com o cliente, e perde o contato no segundo em que a venda termina.</p>
+        </div>
+        <div class="c6">
+          <p class="l" style="max-width:none">O clube devolve essa audiência em forma de base: um público pagante, que escolheu o centro de propósito, com histórico de compra e origem conhecida — e <strong>sem comissão sobre a venda</strong>.</p>
+        </div>
+      </div>
+      <p class="cap" style="margin-top:26px">Pesquisa de Natal 2025 — ACIL, coleta de 3 a 5 de dezembro de 2025, com gestores do comércio de Londrina.</p>
+    </div></div>
+  </div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">12</span></div>
+</section>
+
+<!-- 13 DIVISOR 03 -->
+<section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
+  <div class="in div"><div class="n">03</div><h2>A tese.</h2>
+    <p class="sub">Por que mais um evento não resolve, por que o shopping ganha e o que exatamente precisa mudar.</p></div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">13</span></div>
+</section>
+
+<!-- 14 A PAUTA -->
 <section class="s cinza">
   <div class="in">
     <div class="olho">O que já se faz</div>
@@ -185,10 +523,10 @@ td:first-child{font-weight:800;color:#fff}
         <div class="rot">Hoje</div>
         <ul>
           <li class="x">Dias temáticos e mutirões de ocupação do calçadão</li>
-          <li class="x">Campanhas de data comemorativa</li>
+          <li class="x">Campanhas de data comemorativa e horário estendido</li>
           <li class="x">Ações de fachada e revitalização pontual</li>
         </ul>
-        <p class="l" style="margin-top:6px">Funcionam — e provam que a cidade reconhece o problema. Mas acontecem <strong>uma vez</strong> e o efeito acaba junto com o evento.</p>
+        <p class="l" style="margin-top:6px">Funcionam — e provam que a cidade reconhece o problema. Mas acontecem <strong>uma vez</strong> e o efeito acaba junto com o evento. Na própria pesquisa da ACIL, só 46% dos lojistas acreditam que o horário especial aumenta as vendas.</p>
       </div>
       <div class="c6">
         <div class="rot">O que falta</div>
@@ -196,20 +534,70 @@ td:first-child{font-weight:800;color:#fff}
           <li>Um motivo <strong>permanente</strong> para o morador vir ao centro</li>
           <li>Benefício que o lojista controla, sem depender de calendário</li>
           <li><strong>Medição</strong>: hoje ninguém sabe de que bairro vem quem compra no centro</li>
+          <li>Um <strong>programa comum</strong> entre a grande marca e a loja de dono</li>
         </ul>
       </div>
     </div></div>
   </div>
-  <div class="rod"><span class="d">club43.com.br</span><span class="p">04</span></div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">14</span></div>
 </section>
 
-<!-- 05 DIVISOR -->
+<!-- 15 POR QUE O SHOPPING GANHA -->
+<section class="s">
+  <div class="in">
+    <div class="olho">O diagnóstico</div>
+    <h2 class="larga">O shopping não ganha por ar-condicionado. Ganha porque é um <em>programa</em>.</h2>
+    <div class="corpo"><div style="width:100%">
+      <div class="vs">
+        <div class="a1">
+          <div class="h3">O centro hoje</div>
+          <ul>
+            <li class="x mini">Motivo de ida: data comemorativa</li>
+            <li class="x mini">Cada loja fala com seu cliente por conta própria</li>
+            <li class="x mini">Não existe benefício de pertencer ao centro</li>
+            <li class="x mini">Ninguém sabe quem entrou, de onde veio ou se voltou</li>
+            <li class="x mini">A conversa com o poder público é por percepção</li>
+          </ul>
+        </div>
+        <div class="a2">
+          <div class="h3">O shopping há 30 anos</div>
+          <ul>
+            <li class="mini">Motivo de ida: o lugar em si, o ano inteiro</li>
+            <li class="mini">Campanha única, calendário único, horário único</li>
+            <li class="mini">Programa de fidelidade que premia a frequência</li>
+            <li class="mini">Fluxo medido por hora, por porta, por categoria</li>
+            <li class="mini">Negocia com número na mão</li>
+          </ul>
+        </div>
+      </div>
+      <p class="l" style="max-width:none;margin-top:22px;font-size:18.5px">O centro de Londrina tem mais lojas, mais marcas e mais história que qualquer shopping da cidade. O que ele não tem é a <strong>camada que organiza tudo isso em uma experiência só</strong> — e essa camada hoje é software, não obra.</p>
+    </div></div>
+  </div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">15</span></div>
+</section>
+
+<!-- 16 MANIFESTO -->
 <section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
-  <div class="in div"><div class="n">02</div><h2>Um clube que <em>já está</em><br>funcionando.</h2></div>
-  <div class="rod"><span class="d">club43.com.br</span><span class="p">05</span></div>
+  <div class="in manif">
+    <img class="mw" src="club43-compacto-branco.svg" alt="">
+    <div class="mk">Manifesto</div>
+    <p>O centro de Londrina não está morrendo.<br>Está <em>sem convite</em>.</p>
+    <p class="f2">Ninguém deixou de gostar do calçadão. As pessoas deixaram de ter um motivo para descer até ele numa terça-feira comum.</p>
+    <p class="f2">A gente não vai pedir que o londrinense compre por bairrismo. Vamos dar a ele uma vantagem concreta, no bolso, que só existe aqui — e vamos provar, com número, quem veio, de onde e quanto gastou.</p>
+    <p class="f2">Quando a loja de dono e a grande marca passarem a jogar no mesmo time, o centro para de disputar atenção e volta a ser <b class="am">o maior shopping a céu aberto da cidade</b>.</p>
+    <div class="ass"><span></span><b>Club43, tem tudo no centro!</b></div>
+  </div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">16</span></div>
 </section>
 
-<!-- 06 O QUE É + MOCKUP -->
+<!-- 17 DIVISOR 04 -->
+<section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
+  <div class="in div"><div class="n">04</div><h2>Um clube que <em>já está</em><br>funcionando.</h2>
+    <p class="sub">Não é protótipo de tela. O sistema está no ar, com as três superfícies operando: morador, loja e administração.</p></div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">17</span></div>
+</section>
+
+<!-- 18 O QUE É + MOCKUP -->
 <section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
   <div class="in">
     <div class="corpo" style="padding-top:0"><div class="g">
@@ -217,16 +605,17 @@ td:first-child{font-weight:800;color:#fff}
         <div class="olho">O que é</div>
         <h2 style="max-width:18ch">Paga <b class="am">R$ 99,90 por ano</b> e tem desconto em dezenas de lojas — <em>só do centro</em>.</h2>
         <p class="l" style="margin-top:26px">A loja não paga comissão por venda. Não entra marketplace no meio. O dinheiro do cliente vai inteiro para o caixa dela.</p>
+        <p class="l" style="margin-top:16px">Quem não assina vê a oferta inteira e <strong>não gera o código</strong>. A isca é enxergar o que está perdendo.</p>
       </div>
       <div class="c5" style="display:flex;justify-content:flex-end">
         <div class="fone"><div class="tela"><span class="ilha"></span><img src="app-home.jpg" alt="Tela inicial do aplicativo"></div></div>
       </div>
     </div></div>
   </div>
-  <div class="rod"><span class="d">club43.com.br</span><span class="p">06</span></div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">18</span></div>
 </section>
 
-<!-- 07 COMO FUNCIONA + MOCKUP -->
+<!-- 19 COMO FUNCIONA + MOCKUP -->
 <section class="s">
   <div class="in">
     <div class="olho">Como funciona</div>
@@ -245,10 +634,10 @@ td:first-child{font-weight:800;color:#fff}
       </div>
     </div></div>
   </div>
-  <div class="rod"><span class="d">club43.com.br</span><span class="p">07</span></div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">19</span></div>
 </section>
 
-<!-- 08 PAINEL DA LOJA -->
+<!-- 20 PAINEL DA LOJA -->
 <section class="s cinza">
   <div class="in">
     <div class="corpo" style="padding-top:0"><div class="g">
@@ -264,16 +653,17 @@ td:first-child{font-weight:800;color:#fff}
       </div>
     </div></div>
   </div>
-  <div class="rod"><span class="d">club43.com.br</span><span class="p">08</span></div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">20</span></div>
 </section>
 
-<!-- 09 DIVISOR -->
+<!-- 21 DIVISOR 05 -->
 <section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
-  <div class="in div"><div class="n">03</div><h2>O que isso gera<br>para o <em>comércio</em>.</h2></div>
-  <div class="rod"><span class="d">club43.com.br</span><span class="p">09</span></div>
+  <div class="in div"><div class="n">05</div><h2>O que isso gera<br>para o <em>comércio</em>.</h2>
+    <p class="sub">O retorno para a loja, a projeção de movimento no centro e o que a entidade passa a ter nas mãos.</p></div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">21</span></div>
 </section>
 
-<!-- 10 PARA O EMPRESÁRIO -->
+<!-- 22 PARA O EMPRESÁRIO -->
 <section class="s cinza">
   <div class="in">
     <div class="olho">Para o empresário</div>
@@ -288,10 +678,10 @@ td:first-child{font-weight:800;color:#fff}
     </div></div>
     <p class="cap" style="padding-bottom:34px">O limite por cliente e por período existe de propósito: o cupom busca cliente <strong>novo</strong>, não dá desconto a quem já ia comprar de qualquer jeito.</p>
   </div>
-  <div class="rod"><span class="d">club43.com.br</span><span class="p">10</span></div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">22</span></div>
 </section>
 
-<!-- 11 PROJEÇÃO -->
+<!-- 23 PROJEÇÃO -->
 <section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
   <div class="in">
     <div class="olho">Projeção</div>
@@ -306,13 +696,13 @@ td:first-child{font-weight:800;color:#fff}
           <tr><td>Otimista</td><td>5.000</td><td>120.000</td><td class="g3">R$ 14,4 mi</td><td>250</td></tr>
         </tbody>
       </table>
-      <p class="prem"><b class="am">Premissas:</b> 40 lojas no lançamento · 2 cupons por assinante por mês · ticket médio de R$ 120 na loja · economia média de R$ 40 por cupom. No cenário base isso equivale a <b class="am">4 clientes do clube por loja por dia útil</b>. Trocar qualquer premissa muda a tabela inteira — ela está aqui para ser discutida, não para ser aceita.</p>
+      <p class="prem"><b class="am">Premissas:</b> 40 lojas no lançamento · 2 cupons por assinante por mês · ticket médio de R$ 120 na loja · economia média de R$ 40 por cupom. No cenário base isso equivale a <b class="am">4 clientes do clube por loja por dia útil</b>. Para referência de tamanho: 2.000 assinantes são 0,34% da população de Londrina. Trocar qualquer premissa muda a tabela inteira — ela está aqui para ser discutida, não para ser aceita.</p>
     </div></div>
   </div>
-  <div class="rod"><span class="d">club43.com.br</span><span class="p">11</span></div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">23</span></div>
 </section>
 
-<!-- 12 O DADO -->
+<!-- 24 O DADO -->
 <section class="s">
   <div class="in">
     <div class="olho">O que a entidade passa a ter</div>
@@ -337,10 +727,10 @@ td:first-child{font-weight:800;color:#fff}
       </div>
     </div></div>
   </div>
-  <div class="rod"><span class="d">club43.com.br</span><span class="p">12</span></div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">24</span></div>
 </section>
 
-<!-- 13 PROPOSTA -->
+<!-- 25 PROPOSTA -->
 <section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
   <div class="in">
     <div class="olho">A proposta</div>
@@ -366,10 +756,10 @@ td:first-child{font-weight:800;color:#fff}
       </div>
     </div></div>
   </div>
-  <div class="rod"><span class="d">club43.com.br</span><span class="p">13</span></div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">25</span></div>
 </section>
 
-<!-- 14 FECHO -->
+<!-- 26 FECHO -->
 <section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
   <div class="in" style="justify-content:center">
     <div class="g">
