@@ -10,14 +10,22 @@ let h=fs.readFileSync("apresentacao.src.html","utf8");
 const uri=(a,m)=>"data:"+m+";base64,"+fs.readFileSync(a).toString("base64");
 for(const [arq,mime] of [["club43-compacto-branco.svg","image/svg+xml"],
                          ["club43-compacto.svg","image/svg+xml"],
+                         ["foto-centro-londrina.jpg","image/jpeg"],
+                         ["p-multidao.jpg","image/jpeg"],
+                         ["p-consumidora.jpg","image/jpeg"],
+                         ["p-vestuario.jpg","image/jpeg"],
+                         ["p-sacolas.jpg","image/jpeg"],
+                         ["p-balcao.jpg","image/jpeg"],
                          ["app-home.jpg","image/jpeg"],
                          ["app-cupom.jpg","image/jpeg"],
                          ["app-loja.jpg","image/jpeg"]]){
   const antes=h;
-  h=h.split(`src="${arq}"`).join(`src="${uri(arq,mime)}"`);
+  const u=uri(arq,mime);
+  h=h.split(`src="${arq}"`).join(`src="${u}"`);
+  h=h.split(`url(${arq})`).join(`url(${u})`);
   if(h===antes){ console.error("NAO EMBUTIU: "+arq); process.exit(1) }
 }
-const sobrou=(h.match(/src="(?!data:)/g)||[]).length;
+const sobrou=(h.match(/src="(?!data:)/g)||[]).length+(h.match(/url\((?!data:|#)/g)||[]).length;
 if(sobrou){ console.error("sobraram "+sobrou+" referencias externas"); process.exit(1) }
 fs.writeFileSync("apresentacao.html",h);
 console.log("html autocontido: "+(h.length/1024/1024).toFixed(2)+" MB");

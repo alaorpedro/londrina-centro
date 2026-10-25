@@ -21,9 +21,11 @@ body{background:#5b6b7f;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe
 /* ---------- superfícies ---------- */
 .esc{background:linear-gradient(145deg,var(--navy2) 0%,var(--navy) 55%,var(--navy-950) 100%);color:#fff}
 .cinza{background:var(--fundo)}
-.br{position:absolute;border-radius:50%;filter:blur(100px);pointer-events:none}
-.br-v{width:420px;height:420px;background:var(--verde);opacity:.13;top:-200px;right:-140px}
-.br-a{width:360px;height:360px;background:var(--amarelo);opacity:.09;bottom:-200px;left:-150px}
+.br{position:absolute;border-radius:50%;pointer-events:none;z-index:2}
+.br-v{width:780px;height:780px;top:-340px;right:-250px;
+      background:radial-gradient(circle,rgba(112,193,52,.19) 0%,rgba(112,193,52,.10) 40%,rgba(112,193,52,0) 70%)}
+.br-a{width:700px;height:700px;bottom:-340px;left:-260px;
+      background:radial-gradient(circle,rgba(255,194,26,.15) 0%,rgba(255,194,26,.07) 40%,rgba(255,194,26,0) 70%)}
 
 /* ---------- rodapé corrido: a mesma mobília em todo slide ---------- */
 .rod{display:flex;align-items:center;justify-content:space-between;
@@ -51,6 +53,28 @@ strong{font-weight:800;color:var(--t1)}
 .corpo{flex:1;display:flex;align-items:center;padding:40px 0 10px;min-height:0}
 .corpo.topo{align-items:flex-start;padding-top:30px}
 
+/* ---------- fotografia ----------
+   Regra editorial: LUGAR só com foto real de Londrina; PESSOA só em recorte
+   onde a cidade não é identificável. Foto de rua estrangeira passando por
+   "centro de Londrina" derruba a reunião. */
+.in,.rod{position:relative;z-index:3}
+.capa-foto{background:#03192f}
+.capa-foto>img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 44%}
+.capa-foto .veu{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(103deg,rgba(3,25,47,.97) 0%,rgba(5,42,82,.9) 34%,rgba(5,42,82,.3) 64%,rgba(3,25,47,.62) 100%),
+             linear-gradient(to top,rgba(3,25,47,.8) 0%,transparent 46%)}
+.credito{position:absolute;left:var(--m);right:var(--m);bottom:62px;z-index:4;font-size:9.5px;
+         letter-spacing:.07em;color:rgba(255,255,255,.4);text-transform:uppercase;line-height:1.7}
+/* banda de foto do divisor de capítulo */
+.s.chapado{background:
+  linear-gradient(90deg,var(--navy) 0%,var(--navy) 42%,rgba(5,42,82,.97) 53%,
+    rgba(5,42,82,.86) 70%,rgba(5,42,82,.64) 90%,rgba(5,42,82,.6) 100%),
+  var(--foto) right center/54% 100% no-repeat, var(--navy)}
+.s.chapado.larga-foto{background:
+  linear-gradient(90deg,var(--navy) 0%,var(--navy) 38%,rgba(5,42,82,.97) 50%,
+    rgba(5,42,82,.9) 68%,rgba(5,42,82,.74) 90%,rgba(5,42,82,.7) 100%),
+  var(--foto) right center/60% 100% no-repeat, var(--navy)}
+
 /* ---------- capa ---------- */
 .capa{justify-content:center;align-items:flex-start;padding-bottom:var(--m)}
 .capa img.lg{height:86px;width:auto;margin-bottom:52px}
@@ -63,7 +87,7 @@ strong{font-weight:800;color:var(--t1)}
 /* ---------- divisor de capítulo ---------- */
 .div{justify-content:center}
 .div .n{font-size:150px;font-weight:800;line-height:.86;letter-spacing:-.05em;color:rgba(255,255,255,.1)}
-.div h2{font-size:52px;max-width:22ch;margin-top:-26px}
+.div h2{font-size:52px;max-width:22ch;margin-top:-12px}
 .div .sub{margin-top:26px;font-size:16px;color:#8fb2d4;max-width:56ch;line-height:1.55}
 
 /* ---------- grade de 12 ---------- */
@@ -273,7 +297,9 @@ td:first-child{font-weight:800;color:#fff}
 </style></head><body>
 
 <!-- 01 CAPA -->
-<section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
+<section class="s esc capa-foto">
+  <img class="bg" src="foto-centro-londrina.jpg" alt="Centro de Londrina">
+  <span class="veu"></span>
   <div class="in capa">
     <img class="lg" src="club43-compacto-branco.svg" alt="Club43 de Vantagens">
     <h1>Club43,<br>tem <em>tudo</em> no centro!</h1>
@@ -304,7 +330,7 @@ td:first-child{font-weight:800;color:#fff}
 </section>
 
 <!-- 03 DIVISOR 01 -->
-<section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
+<section class="s esc chapado" style="--foto:url(p-multidao.jpg)"><span class="br br-v"></span><span class="br br-a"></span>
   <div class="in div"><div class="n">01</div><h2>O que os dados dizem<br>sobre o <em>centro</em>.</h2>
     <p class="sub">Quatro leituras, todas de pesquisa pública e recente, que juntas explicam por que o calçadão esvaziou — e por que isso tem conserto.</p></div>
   <div class="rod"><span class="d">club43.com.br</span><span class="p">03</span></div>
@@ -430,7 +456,7 @@ td:first-child{font-weight:800;color:#fff}
 </section>
 
 <!-- 08 DIVISOR 02 -->
-<section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
+<section class="s esc chapado" style="--foto:url(p-consumidora.jpg)"><span class="br br-v"></span><span class="br br-a"></span>
   <div class="in div"><div class="n">02</div><h2>Quem compra<br>e o que o <em>centro</em> vende.</h2>
     <p class="sub">O perfil do consumidor londrinense, a composição do comércio central e o gargalo que a loja pequena não resolve sozinha.</p></div>
   <div class="rod"><span class="d">club43.com.br</span><span class="p">08</span></div>
@@ -555,7 +581,7 @@ td:first-child{font-weight:800;color:#fff}
 </section>
 
 <!-- 13 DIVISOR 03 -->
-<section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
+<section class="s esc chapado" style="--foto:url(p-sacolas.jpg)"><span class="br br-v"></span><span class="br br-a"></span>
   <div class="in div"><div class="n">03</div><h2>A tese.</h2>
     <p class="sub">Por que mais um evento não resolve, por que o shopping ganha e o que exatamente precisa mudar.</p></div>
   <div class="rod"><span class="d">club43.com.br</span><span class="p">13</span></div>
@@ -625,9 +651,8 @@ td:first-child{font-weight:800;color:#fff}
 </section>
 
 <!-- 16 MANIFESTO -->
-<section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
+<section class="s esc chapado larga-foto" style="--foto:url(foto-centro-londrina.jpg)"><span class="br br-v"></span><span class="br br-a"></span>
   <div class="in manif">
-    <img class="mw" src="club43-compacto-branco.svg" alt="">
     <div class="mk">Manifesto</div>
     <p>O centro de Londrina não está morrendo.<br>Está <em>sem convite</em>.</p>
     <p class="f2">Ninguém deixou de gostar do calçadão. As pessoas deixaram de ter um motivo para descer até ele numa terça-feira comum.</p>
@@ -639,7 +664,7 @@ td:first-child{font-weight:800;color:#fff}
 </section>
 
 <!-- 17 DIVISOR 04 -->
-<section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
+<section class="s esc chapado" style="--foto:url(p-balcao.jpg)"><span class="br br-v"></span><span class="br br-a"></span>
   <div class="in div"><div class="n">04</div><h2>Um clube que <em>já está</em><br>funcionando.</h2>
     <p class="sub">Não é protótipo de tela. O sistema está no ar, com as três superfícies operando: morador, loja e administração.</p></div>
   <div class="rod"><span class="d">club43.com.br</span><span class="p">17</span></div>
@@ -705,7 +730,7 @@ td:first-child{font-weight:800;color:#fff}
 </section>
 
 <!-- 21 DIVISOR 05 -->
-<section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
+<section class="s esc chapado" style="--foto:url(p-vestuario.jpg)"><span class="br br-v"></span><span class="br br-a"></span>
   <div class="in div"><div class="n">05</div><h2>O que isso gera<br>para o <em>comércio</em>.</h2>
     <p class="sub">O retorno para a loja, a projeção de movimento no centro e o que a entidade passa a ter nas mãos.</p></div>
   <div class="rod"><span class="d">club43.com.br</span><span class="p">21</span></div>
@@ -779,7 +804,7 @@ td:first-child{font-weight:800;color:#fff}
 </section>
 
 <!-- 25 DIVISOR 06 -->
-<section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
+<section class="s esc chapado" style="--foto:url(foto-centro-londrina.jpg)"><span class="br br-v"></span><span class="br br-a"></span>
   <div class="in div"><div class="n">06</div><h2>A entidade <em>dentro</em><br>do clube.</h2>
     <p class="sub">Patrocínio institucional: sem desembolso, sem exclusividade e com saída a qualquer momento. O que a entidade põe é a marca — e o que ela leva é a autoria.</p></div>
   <div class="rod"><span class="d">club43.com.br</span><span class="p">25</span></div>
@@ -919,6 +944,7 @@ td:first-child{font-weight:800;color:#fff}
       </div>
     </div>
   </div>
+  <span class="credito">Créditos · Capa e manifesto: Catedral Metropolitana de Londrina, foto da Arquidiocese de Londrina (CC BY-SA 4.0), via Wikimedia Commons. Demais fotografias: StockSnap.io (CC0).</span>
   <div class="rod"><span class="d">club43.com.br</span><span>Apresentar às lojas da base</span></div>
   <span class="skyline"></span>
 </section>

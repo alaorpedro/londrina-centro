@@ -145,6 +145,49 @@ nunca as cores do logo: o navy `#052A52` é escuro demais para empilhar e o verd
 `#70C134` não alcança contraste sobre branco. O amarelo marca sempre a mesma coisa —
 **o centro** — em todos os gráficos do deck.
 
+## Fotografia
+
+### A regra editorial (não negociável)
+
+**LUGAR só com foto real de Londrina. PESSOA só em recorte onde a cidade não
+é identificável.** Uma foto de rua estrangeira passando por "centro de Londrina"
+numa sala com a ACIL derruba a apresentação inteira.
+
+🔴 **Quase aconteceu:** o arquivo `Cena londrina.jpg` do Wikimedia Commons é
+**Covent Garden, em Londres** — "londrina" ali é adjetivo, não a cidade. Estava a
+um passo de virar capa. Conferir o conteúdo de toda foto, nunca o nome do arquivo.
+
+### O que está no deck
+
+| Arquivo | Onde | Origem e licença |
+|---|---|---|
+| `foto-centro-londrina.jpg` | capa, manifesto e divisor 06 | Catedral Metropolitana de Londrina, foto da **Arquidiocese de Londrina**, CC BY-SA 4.0, via Wikimedia Commons |
+| `p-multidao` `p-consumidora` `p-sacolas` `p-balcao` `p-vestuario` | um em cada divisor de capítulo | **StockSnap.io**, CC0 (sem exigência de crédito) |
+
+O crédito completo está no **slide 29**, o fecho. CC BY-SA 4.0 permite uso
+comercial com atribuição.
+
+🔴 **A capa pede troca.** A foto da Catedral é boa e é Londrina de verdade, mas o
+acervo livre do calçadão é fraco — o que existe no Commons é obra de
+repavimentação e fachada de farmácia. Uma foto própria do calçadão com gente
+substitui a capa em um comando: basta salvar por cima de `foto-centro-londrina.jpg`
+mantendo proporção 16:9 e rodar o `build.sh`.
+
+### Peso do PDF: a armadilha que custou 10 MB
+
+🔴 **`filter: blur()` e `filter: saturate()` obrigam o Chrome a rasterizar a camada
+inteira.** Os dois borrões decorativos dos slides escuros viravam **doze bitmaps de
+2162×2252 dentro do PDF — 7 MB só eles**. Com `radial-gradient` no lugar do
+`blur()`, o efeito é o mesmo e o custo é zero: o PDF caiu de **17 MB para 3,5 MB**.
+
+Para descobrir onde o peso está, somar os `/Subtype /Image` do PDF por dimensão —
+o `README` do commit traz o script. Vale sempre que o arquivo inchar sem motivo.
+
+🔴 **Banda de foto como elemento deixa uma linha vertical de 1px** na emenda: o
+Chrome compõe a camada à parte e o arredondamento aparece. A foto do divisor é
+`background` da própria seção (`--foto` + `background-size:54% 100%`), com o
+degradê no mesmo `background` — assim não existe borda para emendar.
+
 ## Refazer as capturas do app
 
 Entrar no app, tirar o screenshot e **recortar pelo canto superior esquerdo**.
