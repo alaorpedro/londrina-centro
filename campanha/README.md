@@ -41,8 +41,8 @@ O deck todo assina **club43.com.br**. Em 25/10/2026 estavam livres no registro.b
 
 ## A apresentação
 
-**Vinte e seis slides, sem citar entidade nenhuma** — serve para a ACIL, para o
-Sincoval ou para qualquer outra. Cinco capítulos com divisor:
+**Vinte e nove slides, sem citar entidade nenhuma** — serve para a ACIL, para o
+Sincoval ou para qualquer outra. Seis capítulos com divisor:
 
 | | Capítulo | Slides |
 |---|---|---|
@@ -51,7 +51,36 @@ Sincoval ou para qualquer outra. Cinco capítulos com divisor:
 | 02 | quem compra e o que o centro vende | 08–12 |
 | 03 | a tese (diagnóstico + manifesto) | 13–16 |
 | 04 | o clube, já funcionando | 17–20 |
-| 05 | o negócio (retorno, projeção, proposta) | 21–26 |
+| 05 | o negócio (retorno, projeção, o dado) | 21–24 |
+| 06 | **a entidade dentro do clube** — o pedido | 25–28 |
+| — | fecho | 29 |
+
+### 🎯 Para que serve o documento
+
+Pedir **patrocínio institucional**: a entidade entra com a marca dela no app e na
+campanha. **Não se pede dinheiro** — em nenhum slide, em nenhum momento.
+
+🔴 A versão anterior fechava com *"Não queremos patrocínio. Queremos acesso e
+medição conjunta."* Essa frase passou a dizer o contrário do pedido e foi
+substituída por **"Não queremos verba. Queremos a marca de vocês junto."** Se
+alguém reabrir um PDF antigo, é essa a diferença.
+
+O pedido é **anunciado no slide 02** (bloco 04, com as palavras "sem desembolso")
+e **defendido no capítulo 06**. Pedir só no fim emboscaria a entidade; pedir no
+começo faria ela avaliar a proposta antes de ouvir o argumento.
+
+🔴 **A objeção real não é preço, é risco de marca.** O logo da entidade no app
+significa que ela responde por ele. O slide 28 entrega a resposta pronta: contrato
+obriga a loja a honrar, a entidade pode remover qualquer loja sem justificar,
+reclamação entra no relatório junto com os resultados, e **saída sem ônus em 48h**.
+Oferecer a saída é o que faz entrar.
+
+🔴 **Realização compartilhada, nunca exclusiva.** Com ACIL e Sincoval na mesa, se a
+primeira travar exclusividade a segunda não entra nunca. Está escrito no slide 28.
+
+🔴 **Pedir marca muda quem decide.** Acesso o superintendente resolve na sala;
+chancela vai para a diretoria. O capítulo 06 vai ser **encaminhado sem você junto**
+— por isso ele se sustenta sozinho, com contrapartida e garantias escritas.
 
 ⚠️ **Regra que não pode ser quebrada: os números do app são fictícios.** Os resgates
 e a economia do piloto foram semeados para a demonstração não abrir vazia. Nunca

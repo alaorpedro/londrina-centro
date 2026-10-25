@@ -9,6 +9,7 @@ const fs=require("fs");
 let h=fs.readFileSync("apresentacao.src.html","utf8");
 const uri=(a,m)=>"data:"+m+";base64,"+fs.readFileSync(a).toString("base64");
 for(const [arq,mime] of [["club43-compacto-branco.svg","image/svg+xml"],
+                         ["club43-compacto.svg","image/svg+xml"],
                          ["app-home.jpg","image/jpeg"],
                          ["app-cupom.jpg","image/jpeg"],
                          ["app-loja.jpg","image/jpeg"]]){

@@ -186,6 +186,54 @@ strong{font-weight:800;color:var(--t1)}
 .sum .it p{font-size:13.5px;line-height:1.5;color:var(--t2)}
 .sum .it:last-child h4{color:var(--verde6)}
 
+/* ---------- inventário de peças: onde a marca da entidade aparece ---------- */
+.pecas{display:grid;grid-template-columns:repeat(4,1fr);gap:24px;width:100%;align-items:start}
+.peca .palco{height:246px;display:flex;align-items:center;justify-content:center;
+             background:#eceff5;border-radius:14px;margin-bottom:15px;overflow:hidden}
+.peca i.num{font-style:normal;font-size:10.5px;letter-spacing:.2em;font-weight:800;
+            color:var(--t3);display:block;margin-bottom:6px}
+.peca h4{font-size:15px;font-weight:800;color:var(--t1);line-height:1.2}
+.peca p{font-size:12.5px;line-height:1.45;color:var(--t2);margin-top:6px}
+/* o slot é o mesmo nas quatro peças — é o que faz a entidade se enxergar nelas */
+.slot{border:1.3px dashed currentColor;border-radius:4px;display:flex;align-items:center;
+      justify-content:center;letter-spacing:.09em;font-weight:800;text-align:center;line-height:1.3}
+/* peça 1 — abertura do app */
+.mfone{width:112px;height:212px;border-radius:21px;padding:6px;background:#10171f;flex-shrink:0}
+.mtela{width:100%;height:100%;border-radius:16px;background:linear-gradient(150deg,#0E3668,#052A52 60%,#03192f);
+       position:relative;display:flex;align-items:center;justify-content:center}
+.mtela>img{width:74px}
+.realiza{position:absolute;left:0;right:0;bottom:15px;display:flex;flex-direction:column;
+         align-items:center;gap:6px;color:#8fb2d4}
+.realiza b{font-size:6px;letter-spacing:.24em;font-weight:800}
+/* peça 2 — adesivo de vitrine */
+.selo-v{width:172px;height:172px;border-radius:22px;background:#fff;border:2.5px solid var(--navy);
+        display:flex;flex-direction:column;align-items:center;justify-content:center;gap:9px;padding:14px}
+.selo-v .ac{font-size:7.5px;letter-spacing:.22em;font-weight:800;color:var(--verde6)}
+.selo-v img{width:92px}
+.selo-v .reg{width:100%;border-top:1px solid var(--linha);padding-top:9px;display:flex;
+             flex-direction:column;align-items:center;gap:5px;color:var(--t3)}
+.selo-v .reg b{font-size:6px;letter-spacing:.24em;font-weight:800}
+/* peça 3 — peça de campanha */
+.ooh{width:238px;height:134px;border-radius:9px;background:linear-gradient(140deg,#0E3668,#052A52 65%,#03192f);
+     padding:15px 16px;display:flex;flex-direction:column;justify-content:space-between;position:relative;overflow:hidden}
+.ooh .ch{font-size:15.5px;font-weight:800;color:#fff;line-height:1.18;letter-spacing:-.01em}
+.ooh .ch span{color:var(--verde)}
+.ooh .rod2{display:flex;align-items:center;justify-content:space-between;gap:9px;color:#8fb2d4}
+.ooh .rod2 img{width:52px}
+/* peça 4 — relatório */
+.rel{width:152px;height:208px;border-radius:7px;background:#fff;box-shadow:0 8px 20px -10px rgba(5,42,82,.3);
+     display:flex;flex-direction:column;overflow:hidden}
+.rel .cab{background:var(--navy);padding:11px 12px}
+.rel .cab b{font-size:7px;letter-spacing:.18em;color:var(--verde);font-weight:800;display:block}
+.rel .cab span{font-size:10px;font-weight:800;color:#fff;display:block;margin-top:4px;line-height:1.25}
+.rel .mio{flex:1;padding:11px 12px;display:flex;flex-direction:column;gap:6px}
+.rel .ln{height:4px;border-radius:2px;background:#e3e9f1}
+.rel .bar{display:flex;align-items:flex-end;gap:4px;height:38px;margin-top:4px}
+.rel .bar i{flex:1;border-radius:1.5px;background:#c7d6e6;display:block}
+.rel .bar i.d{background:var(--amarelo)}
+.rel .pe{border-top:1px solid var(--linha);padding:9px 12px;display:flex;align-items:center;gap:7px;color:var(--t3)}
+.rel .pe img{width:40px}
+
 /* ---------- passos ---------- */
 .passo{position:relative;padding-top:46px}
 .passo i{position:absolute;top:0;left:0;width:32px;height:32px;border-radius:9px;background:var(--verde);
@@ -247,8 +295,8 @@ td:first-child{font-weight:800;color:#fff}
         <p>Na zona norte, 85,4% consomem dentro da própria região. Só 14,6% se deslocam para comprar.</p></div>
       <div class="it"><i>03</i><h4>E na categoria do centro, o shopping ganha</h4>
         <p>Em vestuário, 62% compram no shopping e 34,7% no comércio de rua do centro. São 27 pontos de diferença.</p></div>
-      <div class="it"><i>04</i><h4>O Club43 ataca exatamente isso</h4>
-        <p>Um benefício permanente que só vale no centro — e que mede, cupom a cupom, quem veio, de onde e quanto gastou.</p></div>
+      <div class="it"><i>04</i><h4>E as entidades assinam junto</h4>
+        <p>Um benefício permanente que só vale no centro, medido cupom a cupom — e as entidades do comércio entram como realizadoras, com a marca delas no app e na campanha, <strong>sem desembolso</strong>.</p></div>
     </div></div>
     <p class="cap" style="padding-bottom:30px">Fontes nos slides seguintes. Pesquisas ACIL / Sebrae-PR executadas pela Litz (2025) e Perfil de Londrina 2024.</p>
   </div>
@@ -730,36 +778,130 @@ td:first-child{font-weight:800;color:#fff}
   <div class="rod"><span class="d">club43.com.br</span><span class="p">24</span></div>
 </section>
 
-<!-- 25 PROPOSTA -->
+<!-- 25 DIVISOR 06 -->
 <section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
-  <div class="in">
-    <div class="olho">A proposta</div>
-    <h2>Sem custo e sem risco para a entidade.</h2>
-    <div class="corpo"><div class="g">
-      <div class="c6">
-        <div class="rot">O que oferecemos</div>
-        <ul>
-          <li>Condição diferenciada para a base associada — entra como convênio</li>
-          <li>Relatório trimestral do comércio central, exclusivo</li>
-          <li>Prioridade das lojas da base no lançamento</li>
-          <li>Nenhum custo, nenhuma exclusividade exigida</li>
-        </ul>
-      </div>
-      <div class="c6">
-        <div class="rot">O que pedimos</div>
-        <ul>
-          <li>Canal com a base para apresentar às lojas</li>
-          <li>O dado que vocês têm do centro — vacância, fluxo, perfil</li>
-          <li>Espaço para uma apresentação única aos lojistas</li>
-        </ul>
-        <p class="l" style="margin-top:20px">Não queremos patrocínio. Queremos <b class="am">acesso e medição conjunta</b>.</p>
-      </div>
-    </div></div>
-  </div>
+  <div class="in div"><div class="n">06</div><h2>A entidade <em>dentro</em><br>do clube.</h2>
+    <p class="sub">Patrocínio institucional: sem desembolso, sem exclusividade e com saída a qualquer momento. O que a entidade põe é a marca — e o que ela leva é a autoria.</p></div>
   <div class="rod"><span class="d">club43.com.br</span><span class="p">25</span></div>
 </section>
 
-<!-- 26 FECHO -->
+<!-- 26 O CONVITE -->
+<section class="s">
+  <div class="in">
+    <div class="olho">O convite</div>
+    <h2 class="larga">Não queremos verba. Queremos a <em>marca de vocês</em> junto.</h2>
+    <div class="corpo"><div class="g topo">
+      <div class="c4"><div class="card"><div class="k">Posição</div><div class="g2">Coautoria</div>
+        <div class="d">A entidade não empresta logo para o app de um terceiro. Ela <strong>coassina a ferramenta</strong> que faz o que já defende em público — fomentar o comércio central.</div></div></div>
+      <div class="c4"><div class="card"><div class="k">Alcance</div><div class="g2">O consumidor</div>
+        <div class="d">Hoje a marca da entidade vive onde a base dela já está: revista, evento, assembleia. Aqui ela aparece <strong>na mão de quem compra</strong> — território que nenhuma entidade de classe ocupa.</div></div></div>
+      <div class="c4"><div class="card" style="background:#fffaed;box-shadow:inset 0 0 0 1.5px rgba(255,194,26,.45)"><div class="k" style="color:#9b6800">Presença</div><div class="g2">40 vitrines</div>
+        <div class="d">O adesivo põe a marca da entidade na janela de cada loja do clube, no calçadão, <strong>permanentemente</strong>. São 40 pontos de mídia no endereço exato dos associados dela.</div></div></div>
+      <div class="c12" style="margin-top:4px">
+        <p class="l" style="max-width:none;font-size:18.5px">A diferença entre <strong>cessão de marca</strong> e <strong>coautoria</strong> é a diferença entre fazer um favor e ocupar uma posição. O que estamos propondo é a segunda: ser a entidade que trouxe o consumidor de volta ao centro — e ter o número para provar.</p>
+      </div>
+    </div></div>
+  </div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">26</span></div>
+</section>
+
+<!-- 27 ONDE A MARCA APARECE -->
+<section class="s cinza">
+  <div class="in">
+    <div class="olho">Inventário de presença</div>
+    <h2 class="larga">Onde a marca da entidade <em>aparece</em>.</h2>
+    <div class="corpo" style="padding:26px 0 6px"><div style="width:100%">
+      <div class="pecas">
+
+        <div class="peca">
+          <div class="palco"><div class="mfone"><div class="mtela">
+            <img src="club43-compacto-branco.svg" alt="">
+            <div class="realiza"><b>REALIZAÇÃO</b>
+              <span class="slot" style="width:80px;height:25px;font-size:6px">MARCA DA<br>ENTIDADE</span></div>
+          </div></div></div>
+          <i class="num">01</i><h4>Abertura do app</h4>
+          <p>Toda vez que o morador abre o Club43, a assinatura da entidade está na tela.</p>
+        </div>
+
+        <div class="peca">
+          <div class="palco"><div class="selo-v">
+            <span class="ac">AQUI VALE</span>
+            <img src="club43-compacto.svg" alt="">
+            <div class="reg"><b>REALIZAÇÃO</b>
+              <span class="slot" style="width:92px;height:23px;font-size:6px;color:var(--t3)">MARCA DA ENTIDADE</span></div>
+          </div></div>
+          <i class="num">02</i><h4>Adesivo de vitrine</h4>
+          <p>Nas 40 lojas do lançamento. É a peça que mais trabalha — e não sai depois.</p>
+        </div>
+
+        <div class="peca">
+          <div class="palco"><div class="ooh">
+            <div class="ch">Club43,<br>tem <span>tudo</span><br>no centro!</div>
+            <div class="rod2"><img src="club43-compacto-branco.svg" alt="">
+              <span class="slot" style="width:84px;height:24px;font-size:5.8px;color:#8fb2d4">REALIZAÇÃO<br>MARCA DA ENTIDADE</span></div>
+          </div></div>
+          <i class="num">03</i><h4>Campanha e mídia</h4>
+          <p>Assinatura em OOH, redes, influenciadores e em toda peça que for ao ar.</p>
+        </div>
+
+        <div class="peca">
+          <div class="palco"><div class="rel">
+            <div class="cab"><b>TRIMESTRAL</b><span>O comércio do centro em números</span></div>
+            <div class="mio">
+              <span class="ln" style="width:100%"></span><span class="ln" style="width:82%"></span>
+              <span class="ln" style="width:92%"></span>
+              <div class="bar"><i style="height:44%"></i><i style="height:62%"></i><i class="d" style="height:100%"></i><i style="height:71%"></i><i style="height:55%"></i><i style="height:84%"></i></div>
+              <span class="ln" style="width:76%;margin-top:4px"></span><span class="ln" style="width:88%"></span>
+            </div>
+            <div class="pe"><img src="club43-compacto.svg" alt="">
+              <span class="slot" style="flex:1;height:20px;font-size:5.4px;color:var(--t3)">MARCA DA ENTIDADE</span></div>
+          </div></div>
+          <i class="num">04</i><h4>Relatório trimestral</h4>
+          <p>Coassinado. Vai para a imprensa e para a pauta pública com as duas marcas.</p>
+        </div>
+
+      </div>
+      <p class="cap" style="margin-top:20px">Peças ilustrativas. O espaço tracejado é onde entra a marca da entidade — e é o mesmo lugar em todas elas, para que a presença seja reconhecível, não decorativa.</p>
+    </div></div>
+  </div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">27</span></div>
+</section>
+
+<!-- 28 A TROCA E AS GARANTIAS -->
+<section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
+  <div class="in">
+    <div class="olho">A troca</div>
+    <h2 class="larga">Simétrica, sem dinheiro trocando de lado.</h2>
+    <div class="corpo" style="padding-top:28px"><div class="g topo">
+      <div class="c7">
+        <table>
+          <thead><tr><th>A entidade entrega</th><th>A entidade recebe</th></tr></thead>
+          <tbody>
+            <tr><td>A chancela — marca no app e nas peças</td><td>A marca na mão do consumidor final</td></tr>
+            <tr><td>Canal com a base para apresentar às lojas</td><td>40 vitrines do calçadão, permanentes</td></tr>
+            <tr><td>O dado que já tem do centro</td><td>O relatório trimestral do comércio central</td></tr>
+            <tr><td>Espaço para uma apresentação aos lojistas</td><td>Condição de convênio para a base associada</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="c5">
+        <div class="card" style="background:rgba(255,194,26,.1);padding:28px 30px">
+          <div class="k" style="color:var(--amarelo)">Como protegemos a marca de vocês</div>
+          <ul style="margin-top:17px">
+            <li class="mini">O contrato <strong>obriga a loja a honrar</strong> a oferta publicada — descumprir é motivo de saída</li>
+            <li class="mini">A entidade pode pedir a <strong>remoção de qualquer loja</strong>, sem justificar</li>
+            <li class="mini">Reclamação entra no relatório <strong>junto com os resultados</strong>, não escondida</li>
+            <li class="mini" style="margin-bottom:0"><strong>Saída sem ônus:</strong> a marca sai de tudo em 48 horas, a pedido</li>
+          </ul>
+        </div>
+      </div>
+    </div></div>
+    <p class="cap" style="padding-bottom:30px;color:#93b4d6">Realização compartilhada: mais de uma entidade assina lado a lado, na mesma posição. <strong style="color:#fff">Nenhuma exclusividade é pedida nem concedida</strong> — se a primeira travar o espaço, a segunda nunca entra, e o centro perde as duas.</p>
+  </div>
+  <div class="rod"><span class="d">club43.com.br</span><span class="p">28</span></div>
+</section>
+
+<!-- 29 FECHO -->
 <section class="s esc"><span class="br br-v"></span><span class="br br-a"></span>
   <div class="in" style="justify-content:center">
     <div class="g">
