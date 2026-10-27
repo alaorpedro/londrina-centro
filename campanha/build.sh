@@ -11,6 +11,8 @@ const uri=(a,m)=>"data:"+m+";base64,"+fs.readFileSync(a).toString("base64");
 for(const [arq,mime] of [["club43-compacto-branco.svg","image/svg+xml"],
                          ["club43-compacto.svg","image/svg+xml"],
                          ["foto-centro-londrina.jpg","image/jpeg"],
+                         ["londrina-noturno.jpg","image/jpeg"],
+                         ["londrina-praca.jpg","image/jpeg"],
                          ["p-movimento.jpg","image/jpeg"],
                          ["p-consumidora.jpg","image/jpeg"],
                          ["p-lojista.jpg","image/jpeg"],

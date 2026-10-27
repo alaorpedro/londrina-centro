@@ -161,7 +161,9 @@ um passo de virar capa. Conferir o conteúdo de toda foto, nunca o nome do arqui
 
 | Arquivo | Divisor | O que mostra |
 |---|---|---|
-| `foto-centro-londrina.jpg` | capa · manifesto · 06 | Catedral Metropolitana + skyline do centro |
+| `foto-centro-londrina.jpg` | **capa** | Catedral Metropolitana + skyline do centro |
+| `londrina-noturno.jpg` | 16 — o manifesto | o centro à noite, com as luzes acesas |
+| `londrina-praca.jpg` | 25 — divisor 06 | rua de pedestres do centro, com gente e lojas |
 | `p-movimento.jpg` | 01 — os dados | pessoas atravessando uma rua de comércio |
 | `p-consumidora.jpg` | 02 — quem compra | mulher com sacola **e celular na mão** (o gesto do app) |
 | `p-sacolas.jpg` | 03 — a tese | consumidora saindo com as compras |
@@ -191,6 +193,17 @@ buraco de conteúdo: **não havia nenhuma imagem de lojista no deck**, e o lojis
 🔴 **`sips -c` corta pelo CENTRO e ignora `--cropOffset`.** Em foto de corpo
 inteiro isso decapita. O recorte com deslocamento (topo em 13% da altura) é feito
 em BMP por código próprio — o script fica no histórico deste commit.
+
+🔴 **`background-size: 54% 100%` FORÇA largura e altura — a foto é esticada.**
+As de pessoas são quase quadradas (730×760) no mesmo formato da banda e passaram
+despercebidas; a Catedral é 16:9 e saiu visivelmente espremida nos slides 16 e 25.
+Hoje a banda usa **`auto 100%`**: a altura manda, a largura vem pela proporção e
+qualquer foto entra sem deformar. Ao trocar uma foto de banda, **entregue na altura
+de 760px** e deixe a largura ser o que for.
+
+🔴 **A banda é ancorada em `right center`**, então o lado ESQUERDO da foto é o que
+some. Compor pensando nisso — na foto da praça, a cabine telefônica vermelha ficou
+de fora e o enquadramento melhorou.
 
 🔴 **A capa pede troca.** A foto da Catedral é boa e é Londrina de verdade, mas o
 acervo livre do calçadão é fraco — o que existe no Commons é obra de
