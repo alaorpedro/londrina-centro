@@ -1,0 +1,155 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8"><title>Club43 — Inventário</title>
+<style>
+@font-face{font-family:BS;src:url(fonts/BigShoulders-Bold.ttf);font-weight:700}
+@font-face{font-family:BS;src:url(fonts/BigShoulders-Regular.ttf);font-weight:400}
+@font-face{font-family:GM;src:url(fonts/GeistMono-Regular.ttf);font-weight:400}
+@font-face{font-family:GM;src:url(fonts/GeistMono-Bold.ttf);font-weight:700}
+@font-face{font-family:IS;src:url(fonts/InstrumentSans-Bold.ttf);font-weight:700}
+@font-face{font-family:IS;src:url(fonts/InstrumentSans-Regular.ttf);font-weight:400}
+:root{
+  --fundo:#071D33;      /* noite / tinta */
+  --alto:#0C2E52;       /* plano elevado */
+  --osso:#F4EFE4;       /* o papel dentro da composição */
+  --acento:#FFC21A;     /* usado UMA vez */
+  --verde:#70C134;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#2a3340;display:flex;flex-direction:column;align-items:center;gap:26px;padding:26px 0}
+.p{width:1080px;height:1350px;position:relative;overflow:hidden;background:var(--fundo);
+   box-shadow:0 22px 54px -22px rgba(0,0,0,.7)}
+
+/* ───────── camada 1 · o chão: módulo do petit pavé do calçadão ───────── */
+.pave{position:absolute;inset:0;z-index:1;opacity:.5;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='54' height='54'><g fill='none' stroke='%23FFFFFF' stroke-width='.6' opacity='.09'><rect x='4' y='4' width='19' height='19'/><rect x='31' y='4' width='19' height='19'/><rect x='17.5' y='17.5' width='19' height='19'/><rect x='4' y='31' width='19' height='19'/><rect x='31' y='31' width='19' height='19'/></g></svg>")}
+
+/* ───────── camada 2 · o acervo: o fundo é a lista ───────── */
+.acervo{position:absolute;left:0;right:0;top:0;bottom:0;z-index:2;overflow:hidden;
+        font-family:GM;font-size:11.5px;line-height:1.72;letter-spacing:.02em;
+        column-count:7;column-gap:20px;padding:34px 40px;color:#CFE0F2}
+.acervo b{font-weight:400;display:block;white-space:nowrap}
+
+
+/* ───────── véu: acalma o campo sob o tipo sem apagá-lo ───────── */
+.veu{position:absolute;inset:0;z-index:3;pointer-events:none;
+     background:linear-gradient(96deg,rgba(7,29,51,.90) 0%,rgba(7,29,51,.70) 24%,
+                rgba(7,29,51,.44) 44%,rgba(7,29,51,.16) 62%,rgba(7,29,51,0) 78%)}
+
+/* ───────── camada 4 · o arco: plano que separa a figura do campo ───────── */
+.arco{position:absolute;z-index:4;right:-96px;bottom:150px;width:760px;height:760px;
+      border-radius:50%;background:var(--alto)}
+.arco-fio{position:absolute;z-index:5;right:-76px;bottom:170px;width:760px;height:760px;
+      border-radius:50%;border:1px solid rgba(244,239,228,.16)}
+
+/* ───────── camada 5 · a figura atravessa os planos ───────── */
+.figura{position:absolute;z-index:6;right:-24px;bottom:150px;height:966px}
+
+/* ───────── camada 6 · marcadores sistemáticos ───────── */
+.marca{position:absolute;z-index:9;font-family:GM;color:#7FA3C9;letter-spacing:.2em;
+       text-transform:uppercase;font-size:10.5px}
+.m-tl{left:72px;top:64px;line-height:2.1}
+.m-tl s{text-decoration:none;color:var(--osso)}
+.m-tr{right:72px;top:64px;text-align:right;line-height:2.1}
+.regua{position:absolute;z-index:9;left:72px;top:140px;width:300px;height:11px}
+.regua i{position:absolute;bottom:0;width:1px;background:rgba(244,239,228,.28)}
+.coord{position:absolute;z-index:9;left:72px;bottom:268px;font-family:GM;font-size:10.5px;
+       letter-spacing:.2em;color:#5E86AE}
+.fio-h{position:absolute;z-index:9;left:72px;right:72px;height:1px;background:rgba(244,239,228,.26)}
+
+/* ───────── camada 7 · os dois registros: o monumental ───────── */
+.titulo{position:absolute;z-index:9;left:72px;top:214px;font-family:BS;font-weight:700;
+        text-transform:uppercase;color:var(--osso);font-size:168px;line-height:.84;
+        letter-spacing:-.018em}
+.aplic{display:inline-block;background:var(--acento);color:var(--fundo);
+       padding:2px 26px 16px;margin:14px 0 6px;transform:rotate(-1.6deg);position:relative}
+.aplic:before{content:"";position:absolute;left:-1px;right:-1px;top:-1px;bottom:-1px;
+              border:1px solid rgba(7,29,51,.22)}
+.idx{position:absolute;z-index:10;font-family:GM;font-size:10.5px;letter-spacing:.2em;
+     color:var(--acento)}
+
+/* ───────── camada 8 · o rodapé de papel ───────── */
+.pe{position:absolute;z-index:11;left:0;right:0;bottom:0;height:148px;background:var(--osso);
+    display:flex;align-items:center;justify-content:space-between;padding:0 72px}
+.pe .esq{display:flex;align-items:center;gap:26px}
+.pe img{height:62px;width:auto}
+.pe .sep{width:1px;height:58px;background:rgba(7,29,51,.16)}
+.pe .leg{font-family:GM;font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;
+         color:#4A6A8C;line-height:2}
+.pe .dir{text-align:right;font-family:IS;color:var(--fundo)}
+.pe .dir .l1{font-size:19px;font-weight:400;letter-spacing:-.01em}
+.pe .dir .l2{font-size:30px;font-weight:700;letter-spacing:-.02em;line-height:1.12}
+.pe .dir .l3{font-family:GM;font-size:10.5px;letter-spacing:.24em;color:#4A6A8C;margin-top:5px}
+
+/* ───────── camada 9 · o grão unifica tudo ───────── */
+.grao{position:absolute;inset:0;z-index:12;pointer-events:none;opacity:.26;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='180' height='180'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.86' numOctaves='3'/></filter><rect width='180' height='180' filter='url(%23n)' opacity='.5'/></svg>")}
+
+@media print{body{background:#fff;padding:0;gap:0}
+  .p{box-shadow:none;page-break-after:always;break-after:page}
+  @page{size:1080px 1350px;margin:0}}
+</style></head><body>
+
+<section class="p">
+  <span class="pave"></span>
+  <div class="acervo" id="acervo"></div>
+  <span class="veu"></span>
+  <span class="arco"></span><span class="arco-fio"></span>
+  <img class="figura" src="rosto-1500.png" alt="">
+
+  <div class="marca m-tl"><s>CLUB 43</s><br>CENTRO DE LONDRINA</div>
+  <div class="marca m-tr">ACERVO CORRENTE<br>40 ESTABELECIMENTOS</div>
+  <div class="regua" id="regua"></div>
+  <div class="fio-h" style="top:176px"></div>
+
+  <div class="titulo">Tem<br><span class="aplic">bolsa</span><br>no centro.</div>
+  <div class="idx" style="right:72px;bottom:268px">ÍND. 07 — 40</div>
+
+  <div class="fio-h" style="bottom:252px"></div>
+  <div class="coord">23°18′S · 51°09′O</div>
+
+  <div class="pe">
+    <div class="esq">
+      <img src="../club43-compacto.svg" alt="Club43">
+      <span class="sep"></span>
+      <div class="leg">Clube de vantagens<br>do comércio central</div>
+    </div>
+    <div class="dir">
+      <div class="l1">E agora tem desconto.</div>
+      <div class="l2">R$ 99,90 o ano</div>
+      <div class="l3">CLUB43.COM.BR</div>
+    </div>
+  </div>
+  <span class="grao"></span>
+</section>
+
+<script>
+/* O acervo é construído item a item — a densidade é o argumento. */
+const itens=["sapato","café","óculos","tinta","pão","conserto","joia","tecido","livro","bolsa",
+"relógio","cinto","camisa","vestido","sandália","brinquedo","papelaria","cortina","colchão","ferramenta",
+"tapete","perfume","esmalte","chinelo","mochila","bicicleta","celular","carregador","chave","carimbo",
+"moldura","quadro","louça","panela","toalha","lençol","meia","gravata","terno","calça",
+"blusa","saia","bermuda","pijama","roupão","luva","boné","chapéu","guarda-chuva","mala",
+"carteira","lente","armação","aliança","brinco","colar","pulseira","corrente","bateria","pilha",
+"lâmpada","fio","tomada","cadeado","dobradiça","parafuso","lixa","pincel","rolo","verniz",
+"cola","linha","agulha","botão","zíper","elástico","renda","fita","bordado","novelo",
+"remédio","vitamina","sabonete","shampoo","creme","batom","base","tesoura","pente","escova",
+"salgado","bolo","doce","torta","sorvete","suco","almoço","marmita","lanche","pastel",
+"açaí","chá","queijo","presunto","farinha","tempero","vinho","cerveja","flor","vaso",
+"semente","adubo","ração","coleira","aquário","disco","violão","corda","partitura","caderno",
+"caneta","mochila escolar","régua","cartolina","envelope","selo","presente","embrulho","laço","vela",
+"incenso","sabão","vassoura","balde","esfregão","peneira","copo","talher","jarra","bandeja"];
+const col=document.getElementById('acervo');
+let html='';
+for(let i=0;i<11;i++){                 // repetição paciente: o têxtil vem da insistência
+  for(const it of itens){
+    const o=(0.062+Math.random()*0.085).toFixed(3);
+    html+=`<b style="opacity:${o}">${it}</b>`;
+  }
+}
+col.innerHTML=html;
+/* a régua: marcações de medição, não enfeite */
+const r=document.getElementById('regua');
+let rh='';
+for(let i=0;i<=30;i++){ rh+=`<i style="left:${i*10}px;height:${i%5===0?11:5}px"></i>`; }
+r.innerHTML=rh;
+</script>
+</body></html>
