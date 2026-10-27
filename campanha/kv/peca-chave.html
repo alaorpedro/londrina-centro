@@ -1,0 +1,114 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<title>Club43 — peça-chave</title>
+<style>
+:root{--navy:#052A52;--navy2:#0E3668;--navy-950:#03192f;--verde:#70C134;--amarelo:#FFC21A;--creme:#FFF6E3}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#394657;font-family:ui-sans-serif,system-ui,sans-serif;padding:26px 0}
+.rot{width:1080px;margin:30px auto 12px;color:#fff;font-size:13px;letter-spacing:.24em;
+     text-transform:uppercase;font-weight:800;display:flex;gap:12px;align-items:baseline}
+.rot i{font-style:normal;opacity:.55;letter-spacing:.03em;text-transform:none;font-weight:500}
+.p{width:1080px;height:1350px;margin:0 auto 26px;position:relative;overflow:hidden;
+   background:var(--navy);box-shadow:0 20px 50px -20px rgba(0,0,0,.6)}
+/* ---- elementos do sistema ---- */
+.brilho{position:absolute;border-radius:50%;pointer-events:none;z-index:0}
+.b-v{width:900px;height:900px;top:-380px;right:-300px;
+     background:radial-gradient(circle,rgba(112,193,52,.22) 0%,rgba(112,193,52,.08) 42%,transparent 70%)}
+.b-a{width:820px;height:820px;bottom:-360px;left:-280px;
+     background:radial-gradient(circle,rgba(255,194,26,.17) 0%,rgba(255,194,26,.06) 42%,transparent 70%)}
+.n43{position:absolute;right:-60px;bottom:170px;font-size:430px;font-weight:900;line-height:.8;
+     color:rgba(255,255,255,.045);letter-spacing:-.05em;z-index:0;
+     font-family:"Avenir Next Condensed","Helvetica Neue",Arial,sans-serif}
+.foto{position:absolute;right:-40px;bottom:112px;height:1010px;z-index:1}
+.texto{position:absolute;left:72px;top:150px;z-index:2;
+       font-family:"Avenir Next Condensed","Helvetica Neue",Arial,sans-serif;
+       font-weight:800;text-transform:uppercase;color:#fff;letter-spacing:-.012em;line-height:.92;font-size:116px}
+.bloco{display:inline-block;background:var(--amarelo);color:var(--navy);padding:4px 22px 10px;margin:10px 0}
+.etiq{display:inline-block;background:var(--amarelo);color:var(--navy);
+      padding:6px 26px 12px 68px;margin:10px 0;position:relative;transform:rotate(-3deg);
+      clip-path:polygon(44px 0,100% 0,100% 100%,44px 100%,0 50%)}
+.etiq:before{content:"";position:absolute;left:52px;top:50%;transform:translateY(-50%);
+            width:20px;height:20px;border-radius:50%;background:var(--navy-950)}
+.rodape{position:absolute;left:0;right:0;bottom:0;height:112px;background:var(--navy-950);z-index:3;
+        display:flex;align-items:center;justify-content:space-between;padding:0 72px}
+.rodape img{height:56px;width:auto}
+.rodape .ch{text-align:right;color:#fff;font-size:22px;font-weight:700;line-height:1.32}
+.rodape .ch b{color:var(--amarelo);font-weight:800}
+.rodape .ch span{display:block;font-size:15px;color:#7FA3C9;font-weight:600;letter-spacing:.1em;margin-top:3px}
+/* ---- V3 vitrine ---- */
+.vit .foto{right:72px;bottom:190px;height:830px;z-index:1}
+.vit .moldura{position:absolute;right:72px;bottom:190px;width:620px;height:830px;z-index:0;
+  background:var(--creme);border:14px solid #0B3A6B;border-radius:6px}
+.vit .texto{top:112px;font-size:104px;color:#fff}
+.vit .selo{position:absolute;left:72px;bottom:210px;z-index:3;background:var(--verde);color:var(--navy);
+  font-weight:900;font-size:26px;letter-spacing:.04em;padding:16px 26px;transform:rotate(-2.5deg);
+  font-family:"Avenir Next Condensed","Helvetica Neue",Arial,sans-serif;text-transform:uppercase}
+@media print{body{background:#fff;padding:0}.rot{display:none}
+  .p{margin:0;box-shadow:none;page-break-after:always;break-after:page}
+  @page{size:1080px 1350px;margin:0}}
+</style></head><body>
+
+<!-- ============ V1 · BLOCO ============ -->
+<div class="rot">V1 · Bloco <i>— a palavra variável num bloco amarelo: mostra que ela troca</i></div>
+<section class="p">
+  <span class="brilho b-v"></span><span class="brilho b-a"></span>
+  <span class="n43">43</span>
+  <img class="foto" src="rosto-1500.png" alt="">
+  <div class="texto">Tem<br><span class="bloco">bolsa</span><br>no centro.</div>
+  <div class="rodape">
+    <img src="../club43-compacto-branco.svg" alt="Club43">
+    <div class="ch">E agora tem desconto.<br><b>R$ 99,90 o ano.</b><span>CLUB43.COM.BR</span></div>
+  </div>
+</section>
+
+<!-- ============ V2 · ETIQUETA ============ -->
+<div class="rot">V2 · Etiqueta <i>— a palavra numa etiqueta de preço: linguagem de varejo, conversa com o adesivo de vitrine</i></div>
+<section class="p">
+  <span class="brilho b-v"></span><span class="brilho b-a"></span>
+  <span class="n43">43</span>
+  <img class="foto" src="rosto-1500.png" alt="">
+  <div class="texto">Tem<br><span class="etiq">bolsa</span><br>no centro.</div>
+  <div class="rodape">
+    <img src="../club43-compacto-branco.svg" alt="Club43">
+    <div class="ch">E agora tem desconto.<br><b>R$ 99,90 o ano.</b><span>CLUB43.COM.BR</span></div>
+  </div>
+</section>
+
+<!-- ============ V3 · VITRINE ============ -->
+<div class="rot">V3 · Vitrine <i>— a pessoa dentro de uma vitrine; o selo verde repete o adesivo da loja</i></div>
+<section class="p vit">
+  <span class="brilho b-v"></span><span class="brilho b-a"></span>
+  <span class="moldura"></span>
+  <img class="foto" src="rosto-1500.png" alt="">
+  <div class="texto">Tem <span class="bloco">bolsa</span><br>no centro.</div>
+  <span class="selo">Aqui vale Club43</span>
+  <div class="rodape">
+    <img src="../club43-compacto-branco.svg" alt="Club43">
+    <div class="ch">E agora tem desconto.<br><b>R$ 99,90 o ano.</b><span>CLUB43.COM.BR</span></div>
+  </div>
+</section>
+
+<!-- ============ DECLINAÇÃO ============ -->
+<div class="rot">Declinação <i>— mesma estrutura, três lojas. Na produção, cada peça troca a palavra E a foto: o produto na mão tem que ser o da frase</i></div>
+<section class="p">
+  <span class="brilho b-v"></span><span class="brilho b-a"></span><span class="n43">43</span>
+  <img class="foto" src="rosto-1500.png" alt="">
+  <div class="texto">Tem<br><span class="bloco">café</span><br>no centro.</div>
+  <div class="rodape"><img src="../club43-compacto-branco.svg" alt="Club43">
+    <div class="ch">E agora tem desconto.<br><b>R$ 99,90 o ano.</b><span>CLUB43.COM.BR</span></div></div>
+</section>
+<section class="p">
+  <span class="brilho b-v"></span><span class="brilho b-a"></span><span class="n43">43</span>
+  <img class="foto" src="rosto-1500.png" alt="">
+  <div class="texto">Tem<br><span class="bloco">óculos</span><br>no centro.</div>
+  <div class="rodape"><img src="../club43-compacto-branco.svg" alt="Club43">
+    <div class="ch">E agora tem desconto.<br><b>R$ 99,90 o ano.</b><span>CLUB43.COM.BR</span></div></div>
+</section>
+<section class="p">
+  <span class="brilho b-v"></span><span class="brilho b-a"></span><span class="n43">43</span>
+  <img class="foto" src="rosto-1500.png" alt="">
+  <div class="texto">Tem<br><span class="bloco">presente</span><br>no centro.</div>
+  <div class="rodape"><img src="../club43-compacto-branco.svg" alt="Club43">
+    <div class="ch">E agora tem desconto.<br><b>R$ 99,90 o ano.</b><span>CLUB43.COM.BR</span></div></div>
+</section>
+
+</body></html>
