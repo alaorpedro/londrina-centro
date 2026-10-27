@@ -159,13 +159,38 @@ um passo de virar capa. Conferir o conteúdo de toda foto, nunca o nome do arqui
 
 ### O que está no deck
 
-| Arquivo | Onde | Origem e licença |
+| Arquivo | Divisor | O que mostra |
 |---|---|---|
-| `foto-centro-londrina.jpg` | capa, manifesto e divisor 06 | Catedral Metropolitana de Londrina, foto da **Arquidiocese de Londrina**, CC BY-SA 4.0, via Wikimedia Commons |
-| `p-multidao` `p-consumidora` `p-sacolas` `p-balcao` `p-vestuario` | um em cada divisor de capítulo | **StockSnap.io**, CC0 (sem exigência de crédito) |
+| `foto-centro-londrina.jpg` | capa · manifesto · 06 | Catedral Metropolitana + skyline do centro |
+| `p-movimento.jpg` | 01 — os dados | pessoas atravessando uma rua de comércio |
+| `p-consumidora.jpg` | 02 — quem compra | mulher com sacola **e celular na mão** (o gesto do app) |
+| `p-sacolas.jpg` | 03 — a tese | consumidora saindo com as compras |
+| `p-amigas.jpg` | 04 — o clube | três mulheres com sacolas, juntas |
+| `p-lojista.jpg` | 05 — o negócio | **comerciante atendendo pela arara** |
 
-O crédito completo está no **slide 29**, o fecho. CC BY-SA 4.0 permite uso
-comercial com atribuição.
+**Origem:** a Catedral é da Arquidiocese de Londrina, CC BY-SA 4.0, via Wikimedia
+Commons — creditada no **slide 29**. As cinco de pessoas vêm do banco
+**Freepik/Magnific** sob licença comercial do plano Premium+, que dispensa
+atribuição (o crédito no slide 29 fica por transparência, não por obrigação).
+
+🔴 **Por que trocamos as fotos de pessoas (26/10):** as anteriores eram CC0 do
+StockSnap e liam como europeias/americanas. Num pitch sobre o centro de Londrina
+isso enfraquece. As novas são mais diversas e latinas — e uma delas resolveu um
+buraco de conteúdo: **não havia nenhuma imagem de lojista no deck**, e o lojista
+é metade do público.
+
+### Como achar e recortar foto nova (MCP do Magnific)
+
+1. `stock_search` com `content_type: photo`, `orientation: portrait`,
+   `ai_generated: excluded`. 🔴 Busca por texto **não** filtra etnia — monte uma
+   folha de contato com as `previewUrl` (são públicas e de graça) e **olhe**.
+2. `stock_download` devolve URL assinada que **expira em minutos**: baixe na hora.
+   Custa 40 créditos (free) ou 150 (premium) por imagem.
+3. Recorte para **730×760** com o `crop.js` do passo a passo abaixo.
+
+🔴 **`sips -c` corta pelo CENTRO e ignora `--cropOffset`.** Em foto de corpo
+inteiro isso decapita. O recorte com deslocamento (topo em 13% da altura) é feito
+em BMP por código próprio — o script fica no histórico deste commit.
 
 🔴 **A capa pede troca.** A foto da Catedral é boa e é Londrina de verdade, mas o
 acervo livre do calçadão é fraco — o que existe no Commons é obra de
