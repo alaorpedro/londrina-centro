@@ -1,0 +1,300 @@
+<!doctype html><html lang="pt-BR"><head><meta charset="utf-8">
+<title>Club43 — três direções de design</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:#4a5565;font-family:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+     -webkit-font-smoothing:antialiased;padding:26px 0}
+.s{width:1280px;height:720px;margin:0 auto 24px;position:relative;overflow:hidden;
+   display:flex;flex-direction:column;box-shadow:0 18px 48px -20px rgba(0,0,0,.6)}
+.rotulo{width:1280px;margin:34px auto 14px;color:#fff;font-size:13px;letter-spacing:.26em;
+        text-transform:uppercase;font-weight:800;display:flex;gap:14px;align-items:baseline}
+.rotulo i{font-style:normal;opacity:.55;letter-spacing:.04em;text-transform:none;font-weight:500;font-size:13px}
+.in{flex:1;display:flex;flex-direction:column;padding:84px 84px 0;position:relative;z-index:3}
+.rod{display:flex;justify-content:space-between;padding:0 84px 30px;font-size:11.5px;
+     letter-spacing:.14em;text-transform:uppercase;position:relative;z-index:3}
+.corpo{flex:1;display:flex;align-items:center;padding:36px 0 10px}
+.bars{display:flex;flex-direction:column;gap:4px}
+.b{display:flex;align-items:center;gap:9px;height:12px}
+.b span.f{height:12px;border-radius:2px;display:block;flex-shrink:0}
+.b span.v{font-size:11.5px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}
+.cat{display:grid;grid-template-columns:184px 1fr;gap:20px;align-items:center;margin-bottom:13px}
+.cat .nome{font-size:15px;font-weight:800;line-height:1.2}
+.cat .nome small{display:block;font-size:11.5px;font-weight:600;margin-top:3px;opacity:.6}
+.tres{display:grid;grid-template-columns:repeat(3,1fr);gap:26px;width:100%;align-items:start}
+
+/* ============ A · INSTITUCIONAL (o deck de hoje) ============ */
+.A .s{background:#fff}
+.A .esc{background:linear-gradient(145deg,#0E3668,#052A52 55%,#03192f);color:#fff}
+.A .capa img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 44%}
+.A .capa .veu{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(103deg,rgba(3,25,47,.97) 0%,rgba(5,42,82,.9) 34%,rgba(5,42,82,.3) 64%,rgba(3,25,47,.62) 100%)}
+.A .capa .in{justify-content:center}
+.A .capa h1{font-size:66px;line-height:1.04;letter-spacing:-.032em;font-weight:800;color:#fff}
+.A .capa h1 em{font-style:normal;color:#70C134}
+.A .capa p{margin-top:22px;font-size:20px;color:#c2d5e9;max-width:44ch;line-height:1.5}
+.A .capa .lg{height:80px;margin-bottom:46px;width:auto}
+.A .olho{font-size:11.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:800;color:#559B1F}
+.A h2{font-size:42px;line-height:1.1;letter-spacing:-.022em;font-weight:800;color:#0b1a2b;margin-top:16px;max-width:26ch}
+.A h2 em{font-style:normal;color:#559B1F}
+.A .rod{color:#94a3b8}
+.A .cat .nome{color:#0b1a2b}
+.A .b span.v{color:#475569}
+.A .b.alvo span.v{color:#9b6800;font-weight:800}
+.A .cap{font-size:12.5px;line-height:1.55;color:#94a3b8;margin-top:18px}
+.A .card{background:#fff;border-radius:16px;padding:30px;height:100%;box-shadow:0 2px 14px -6px rgba(5,42,82,.14)}
+.A .card .k{font-size:11px;letter-spacing:.18em;text-transform:uppercase;font-weight:800;color:#94a3b8}
+.A .card .g2{font-size:34px;font-weight:800;letter-spacing:-.02em;margin:12px 0 10px;color:#052A52}
+.A .card .d{font-size:14.5px;line-height:1.5;color:#475569}
+.A .cinza{background:#f6f8fb}
+
+/* ============ B · EDITORIAL (relatório de entidade) ============ */
+.B .s{background:#F5F2EA;color:#13233B}
+.B .esc{background:#13233B;color:#F5F2EA}
+.B .capa{background:#13233B}
+.B .capa img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  object-position:center 44%;filter:grayscale(1);opacity:.42}
+.B .capa .veu{position:absolute;inset:0;z-index:1;
+  background:linear-gradient(90deg,rgba(19,35,59,.96) 0%,rgba(19,35,59,.72) 48%,rgba(19,35,59,.5) 100%)}
+.B .capa .in{justify-content:flex-end;padding-bottom:70px}
+.B .capa .fio{width:72px;height:4px;background:#C8A227;margin-bottom:30px}
+.B .capa h1{font-family:ui-serif,Georgia,"Times New Roman",serif;font-size:76px;line-height:1.02;
+  letter-spacing:-.025em;font-weight:400;color:#F5F2EA}
+.B .capa h1 em{font-style:italic;color:#C8A227}
+.B .capa p{margin-top:24px;font-size:17px;color:#A9B8CC;max-width:52ch;line-height:1.6;letter-spacing:.01em}
+.B .capa .lg{height:54px;position:absolute;top:70px;left:84px;z-index:3;width:auto}
+.B .olho{font-size:10.5px;letter-spacing:.3em;text-transform:uppercase;font-weight:700;color:#8A7320}
+.B h2{font-family:ui-serif,Georgia,serif;font-size:50px;line-height:1.12;letter-spacing:-.02em;
+  font-weight:400;margin-top:20px;max-width:24ch;color:#13233B}
+.B h2 em{font-style:italic;color:#8A7320}
+.B .rod{color:#9A9484;border-top:1px solid #DAD3C4;padding-top:16px;margin:0 84px;
+        padding-left:0;padding-right:0;font-size:10.5px;letter-spacing:.2em}
+.B .cat .nome{color:#13233B;font-weight:700}
+.B .b span.v{color:#5E6B7E}
+.B .b.alvo span.v{color:#8A7320;font-weight:800}
+.B .cap{font-size:12px;line-height:1.6;color:#8E897A;margin-top:18px;max-width:100ch}
+.B .card{background:transparent;border-top:2px solid #13233B;padding:20px 0 0;height:100%}
+.B .card .k{font-size:10.5px;letter-spacing:.26em;text-transform:uppercase;font-weight:700;color:#8E897A}
+.B .card .g2{font-family:ui-serif,Georgia,serif;font-size:42px;font-weight:400;letter-spacing:-.02em;
+  margin:10px 0 12px;color:#13233B}
+.B .card .d{font-size:14.5px;line-height:1.6;color:#4A5668}
+.B .cinza{background:#EDE8DC}
+.B .esc .olho{color:#C8A227}
+.B .esc h2{color:#F5F2EA}
+
+/* ============ C · VITRINE (energia de varejo) ============ */
+.C .s{background:#052A52;color:#fff}
+.C .capa img.bg{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 44%}
+.C .capa .veu{position:absolute;inset:0;z-index:1;background:linear-gradient(180deg,rgba(5,42,82,.55),rgba(5,42,82,.92))}
+.C .capa .in{justify-content:flex-end;padding-bottom:64px}
+.C .capa h1{font-family:"Avenir Next Condensed","Helvetica Neue",Arial,sans-serif;font-size:104px;
+  line-height:.92;letter-spacing:-.02em;font-weight:800;text-transform:uppercase;color:#fff}
+.C .capa h1 em{font-style:normal;color:#FFC21A}
+.C .capa .faixa{display:inline-block;background:#FFC21A;color:#052A52;font-weight:900;font-size:17px;
+  letter-spacing:.04em;padding:11px 20px;margin-top:26px;transform:rotate(-1.4deg)}
+.C .capa .lg{height:70px;position:absolute;top:64px;left:84px;z-index:3;width:auto}
+.C .olho{font-size:11px;letter-spacing:.24em;text-transform:uppercase;font-weight:900;color:#70C134}
+.C h2{font-family:"Avenir Next Condensed","Helvetica Neue",Arial,sans-serif;font-size:62px;line-height:.98;
+  letter-spacing:-.015em;font-weight:800;text-transform:uppercase;margin-top:14px;max-width:22ch;color:#fff}
+.C h2 em{font-style:normal;color:#FFC21A}
+.C .rod{color:#5a8abc}
+.C .cat .nome{color:#fff}
+.C .b span.v{color:#bcd3e8}
+.C .b.alvo span.v{color:#FFC21A;font-weight:900}
+.C .cap{font-size:12.5px;line-height:1.55;color:#7FA3C9;margin-top:18px}
+.C .card{background:#0B3A6B;padding:28px;height:100%;border-left:5px solid #FFC21A}
+.C .card .k{font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;font-weight:900;color:#FFC21A}
+.C .card .g2{font-family:"Avenir Next Condensed","Helvetica Neue",Arial,sans-serif;font-size:44px;
+  font-weight:800;text-transform:uppercase;margin:8px 0 10px;color:#fff;letter-spacing:-.01em}
+.C .card .d{font-size:14.5px;line-height:1.5;color:#c2d5e9}
+.C .etq{position:absolute;right:-46px;top:54px;background:#FFC21A;color:#052A52;font-weight:900;
+  font-size:15px;letter-spacing:.1em;padding:10px 60px;transform:rotate(38deg);z-index:4}
+
+@media print{ body{background:#fff;padding:0}
+  .rotulo{display:none}
+  .s{margin:0;page-break-after:always;break-after:page;box-shadow:none}
+  @page{size:1280px 720px;margin:0} }
+</style></head><body>
+
+<!-- ======================= A ======================= -->
+<div class="A">
+<div class="rotulo">Direção A · Institucional <i>— o deck de hoje: navy sóbrio, grade de 12, verde no acento</i></div>
+
+<section class="s esc capa">
+  <img class="bg" src="foto-centro-londrina.jpg" alt=""><span class="veu"></span>
+  <div class="in">
+    <img class="lg" src="club43-compacto-branco.svg" alt="">
+    <h1>Club43,<br>tem <em>tudo</em> no centro!</h1>
+    <p>Um clube de vantagens para trazer o consumidor de volta ao calçadão e ao quadrilátero central de Londrina.</p>
+  </div>
+  <div class="rod"><span>club43.com.br</span><span>Apresentação institucional</span></div>
+</section>
+
+<section class="s">
+  <div class="in">
+    <div class="olho">Índice de consumo por canal</div>
+    <h2>O centro não perdeu para a internet. Perdeu para o <em>shopping</em>.</h2>
+    <div class="corpo"><div style="width:100%">
+      <div class="cat"><div class="nome">Vestuário<small>97,3% da cidade consome</small></div>
+        <div class="bars">
+          <div class="b"><span class="f" style="width:62%;background:#5C8ABB"></span><span class="v">62,0%</span></div>
+          <div class="b"><span class="f" style="width:44.2%;background:#9DB9D6"></span><span class="v">44,2%</span></div>
+          <div class="b alvo"><span class="f" style="width:34.7%;background:#FFC21A"></span><span class="v">34,7%</span></div>
+        </div></div>
+      <div class="cat"><div class="nome">Calçados<small>96,5% da cidade consome</small></div>
+        <div class="bars">
+          <div class="b"><span class="f" style="width:51%;background:#5C8ABB"></span><span class="v">51,0%</span></div>
+          <div class="b"><span class="f" style="width:35.8%;background:#9DB9D6"></span><span class="v">35,8%</span></div>
+          <div class="b alvo"><span class="f" style="width:33.7%;background:#FFC21A"></span><span class="v">33,7%</span></div>
+        </div></div>
+      <div class="cat"><div class="nome">Eletrodomésticos<small>79,3% da cidade consome</small></div>
+        <div class="bars">
+          <div class="b"><span class="f" style="width:54.3%;background:#9DB9D6"></span><span class="v">54,3%</span></div>
+          <div class="b alvo"><span class="f" style="width:29%;background:#FFC21A"></span><span class="v">29,0%</span></div>
+          <div class="b"><span class="f" style="width:24%;background:#5C8ABB"></span><span class="v">24,0%</span></div>
+        </div></div>
+      <p class="cap">Em amarelo, o comércio de rua do centro. Pesquisa Comportamento de Consumo no Varejo — ACIL e Sebrae/PR, executada pela Litz, abril de 2025.</p>
+    </div></div>
+  </div>
+  <div class="rod"><span>club43.com.br</span><span>05</span></div>
+</section>
+
+<section class="s cinza">
+  <div class="in">
+    <div class="olho">O convite</div>
+    <h2>Não queremos verba. Queremos a <em>marca de vocês</em> junto.</h2>
+    <div class="corpo"><div class="tres">
+      <div class="card"><div class="k">Posição</div><div class="g2">Coautoria</div>
+        <div class="d">A entidade coassina a ferramenta que já defende em público — fomentar o comércio central.</div></div>
+      <div class="card"><div class="k">Alcance</div><div class="g2">O consumidor</div>
+        <div class="d">Hoje a marca dela vive onde a base já está. Aqui ela aparece na mão de quem compra.</div></div>
+      <div class="card"><div class="k">Presença</div><div class="g2">40 vitrines</div>
+        <div class="d">O adesivo põe a marca na janela de cada loja do clube, no calçadão, permanentemente.</div></div>
+    </div></div>
+  </div>
+  <div class="rod"><span>club43.com.br</span><span>26</span></div>
+</section>
+</div>
+
+<!-- ======================= B ======================= -->
+<div class="B">
+<div class="rotulo">Direção B · Editorial <i>— serifa display, papel creme, ouro no acento: cara de relatório de entidade</i></div>
+
+<section class="s capa">
+  <img class="bg" src="foto-centro-londrina.jpg" alt=""><span class="veu"></span>
+  <img class="lg" src="club43-compacto-branco.svg" alt="">
+  <div class="in">
+    <span class="fio"></span>
+    <h1>Club43,<br>tem <em>tudo</em> no centro.</h1>
+    <p>Um clube de vantagens para trazer o consumidor de volta ao calçadão e ao quadrilátero central de Londrina.</p>
+  </div>
+  <div class="rod"><span>club43.com.br</span><span>Apresentação institucional</span></div>
+</section>
+
+<section class="s">
+  <div class="in">
+    <div class="olho">Índice de consumo por canal</div>
+    <h2>O centro não perdeu para a internet. Perdeu para o <em>shopping</em>.</h2>
+    <div class="corpo"><div style="width:100%">
+      <div class="cat"><div class="nome">Vestuário<small>97,3% da cidade consome</small></div>
+        <div class="bars">
+          <div class="b"><span class="f" style="width:62%;background:#2E4664"></span><span class="v">62,0%</span></div>
+          <div class="b"><span class="f" style="width:44.2%;background:#8795A8"></span><span class="v">44,2%</span></div>
+          <div class="b alvo"><span class="f" style="width:34.7%;background:#C8A227"></span><span class="v">34,7%</span></div>
+        </div></div>
+      <div class="cat"><div class="nome">Calçados<small>96,5% da cidade consome</small></div>
+        <div class="bars">
+          <div class="b"><span class="f" style="width:51%;background:#2E4664"></span><span class="v">51,0%</span></div>
+          <div class="b"><span class="f" style="width:35.8%;background:#8795A8"></span><span class="v">35,8%</span></div>
+          <div class="b alvo"><span class="f" style="width:33.7%;background:#C8A227"></span><span class="v">33,7%</span></div>
+        </div></div>
+      <div class="cat"><div class="nome">Eletrodomésticos<small>79,3% da cidade consome</small></div>
+        <div class="bars">
+          <div class="b"><span class="f" style="width:54.3%;background:#8795A8"></span><span class="v">54,3%</span></div>
+          <div class="b alvo"><span class="f" style="width:29%;background:#C8A227"></span><span class="v">29,0%</span></div>
+          <div class="b"><span class="f" style="width:24%;background:#2E4664"></span><span class="v">24,0%</span></div>
+        </div></div>
+      <p class="cap">Em ouro, o comércio de rua do centro. Pesquisa Comportamento de Consumo no Varejo — ACIL e Sebrae/PR, executada pela Litz, abril de 2025.</p>
+    </div></div>
+  </div>
+  <div class="rod"><span>club43.com.br</span><span>05</span></div>
+</section>
+
+<section class="s cinza">
+  <div class="in">
+    <div class="olho">O convite</div>
+    <h2>Não queremos verba. Queremos a <em>marca de vocês</em> junto.</h2>
+    <div class="corpo"><div class="tres">
+      <div class="card"><div class="k">Posição</div><div class="g2">Coautoria</div>
+        <div class="d">A entidade coassina a ferramenta que já defende em público — fomentar o comércio central.</div></div>
+      <div class="card"><div class="k">Alcance</div><div class="g2">O consumidor</div>
+        <div class="d">Hoje a marca dela vive onde a base já está. Aqui ela aparece na mão de quem compra.</div></div>
+      <div class="card"><div class="k">Presença</div><div class="g2">40 vitrines</div>
+        <div class="d">O adesivo põe a marca na janela de cada loja do clube, no calçadão, permanentemente.</div></div>
+    </div></div>
+  </div>
+  <div class="rod"><span>club43.com.br</span><span>26</span></div>
+</section>
+</div>
+
+<!-- ======================= C ======================= -->
+<div class="C">
+<div class="rotulo">Direção C · Vitrine <i>— condensada caixa-alta, blocos de amarelo, linguagem de etiqueta</i></div>
+
+<section class="s capa">
+  <img class="bg" src="foto-centro-londrina.jpg" alt=""><span class="veu"></span>
+  <img class="lg" src="club43-compacto-branco.svg" alt="">
+  <span class="etq">R$ 99,90 o ano</span>
+  <div class="in">
+    <h1>Tem <em>tudo</em><br>no centro</h1>
+    <span class="faixa">Desconto em dezenas de lojas — só do centro de Londrina</span>
+  </div>
+  <div class="rod"><span>club43.com.br</span><span>Apresentação institucional</span></div>
+</section>
+
+<section class="s">
+  <div class="in">
+    <div class="olho">Índice de consumo por canal</div>
+    <h2>Perdeu para o <em>shopping</em>, não para a internet.</h2>
+    <div class="corpo"><div style="width:100%">
+      <div class="cat"><div class="nome">Vestuário<small>97,3% da cidade consome</small></div>
+        <div class="bars">
+          <div class="b"><span class="f" style="width:62%;background:#2F6FB5"></span><span class="v">62,0%</span></div>
+          <div class="b"><span class="f" style="width:44.2%;background:#1C4D83"></span><span class="v">44,2%</span></div>
+          <div class="b alvo"><span class="f" style="width:34.7%;background:#FFC21A"></span><span class="v">34,7%</span></div>
+        </div></div>
+      <div class="cat"><div class="nome">Calçados<small>96,5% da cidade consome</small></div>
+        <div class="bars">
+          <div class="b"><span class="f" style="width:51%;background:#2F6FB5"></span><span class="v">51,0%</span></div>
+          <div class="b"><span class="f" style="width:35.8%;background:#1C4D83"></span><span class="v">35,8%</span></div>
+          <div class="b alvo"><span class="f" style="width:33.7%;background:#FFC21A"></span><span class="v">33,7%</span></div>
+        </div></div>
+      <div class="cat"><div class="nome">Eletrodomésticos<small>79,3% da cidade consome</small></div>
+        <div class="bars">
+          <div class="b"><span class="f" style="width:54.3%;background:#1C4D83"></span><span class="v">54,3%</span></div>
+          <div class="b alvo"><span class="f" style="width:29%;background:#FFC21A"></span><span class="v">29,0%</span></div>
+          <div class="b"><span class="f" style="width:24%;background:#2F6FB5"></span><span class="v">24,0%</span></div>
+        </div></div>
+      <p class="cap">Em amarelo, o comércio de rua do centro. Pesquisa Comportamento de Consumo no Varejo — ACIL e Sebrae/PR, executada pela Litz, abril de 2025.</p>
+    </div></div>
+  </div>
+  <div class="rod"><span>club43.com.br</span><span>05</span></div>
+</section>
+
+<section class="s">
+  <div class="in">
+    <div class="olho">O convite</div>
+    <h2>Não queremos verba. Queremos a <em>marca de vocês</em>.</h2>
+    <div class="corpo"><div class="tres">
+      <div class="card"><div class="k">Posição</div><div class="g2">Coautoria</div>
+        <div class="d">A entidade coassina a ferramenta que já defende em público — fomentar o comércio central.</div></div>
+      <div class="card"><div class="k">Alcance</div><div class="g2">O consumidor</div>
+        <div class="d">Hoje a marca dela vive onde a base já está. Aqui ela aparece na mão de quem compra.</div></div>
+      <div class="card"><div class="k">Presença</div><div class="g2">40 vitrines</div>
+        <div class="d">O adesivo põe a marca na janela de cada loja do clube, no calçadão, permanentemente.</div></div>
+    </div></div>
+  </div>
+  <div class="rod"><span>club43.com.br</span><span>26</span></div>
+</section>
+</div>
+
+</body></html>
